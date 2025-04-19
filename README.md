@@ -41,10 +41,10 @@ Le projet est construit avec les technologies suivantes :
 
 ```bash
 # Cloner le dépôt
-git clone https://github.com/votre-username/promptcraft-rh.git
+git clone https://github.com/votre-username/rgprompt101.git
 
 # Installer les dépendances
-cd promptcraft-rh
+cd rhprompt
 npm install
 
 # Lancer l'application en mode développement
