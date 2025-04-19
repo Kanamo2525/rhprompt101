@@ -66,9 +66,8 @@ Consultez notre [guide de contribution](CONTRIBUTING.md) pour plus de détails s
 
 - [ ] Intégration d'exemples de réponses IA pour chaque prompt du catalogue
 - [ ] Ajout d'un module d'évaluation des prompts avec métriques de performance
-- [ ] Développement d'une API pour intégration avec les SIRH existants
 - [ ] Création d'un système de génération de prompts assisté par IA
-- [ ] Support multilangue pour les entreprises internationales
+- [ ] Support multilangue pour les professionnels RH internationaux
 
 ## Licence
 
