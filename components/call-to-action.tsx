@@ -11,18 +11,18 @@ export function CallToAction() {
         <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
           <div className="inline-flex rounded-md shadow">
             <Link
-              href="https://prompt101.fr/signup"
+              href="https://prompt101.fr/proposer"
               className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50"
             >
-              Créer un compte
+              Proposer un prompt
             </Link>
           </div>
           <div className="ml-3 inline-flex rounded-md shadow">
             <Link
-              href="https://prompt101.fr/newsletter"
+              href="/guide/acheter"
               className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600"
             >
-              Newsletter mensuelle
+              Achetez le guide papier
             </Link>
           </div>
         </div>

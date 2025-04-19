@@ -10,17 +10,17 @@ export const metadata = {
   description:
     "La plateforme de référence pour transformer votre fonction RH grâce aux prompts d'IA générative méthodiquement optimisés.",
   openGraph: {
-    title: "PromptCraft RH : Maîtrisez l'IA générative pour transformer votre fonction RH",
+    title: "Prompt101 RH : Maîtrisez l'IA générative pour transformer votre fonction RH",
     description:
       "Guide stratégique, techniques avancées de prompting et matrice d'opportunités pour RH. Transformez votre département avec l'IA générative - du recrutement à la formation, de l'automatisation à l'augmentation.",
     url: "https://rh.prompt101.fr",
-    siteName: "PromptCraft RH",
+    siteName: "Prompt101 RH",
     images: [
       {
         url: "https://rh.prompt101.fr/images/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "PromptCraft RH - L'IA au service de la transformation RH",
+        alt: "Prompt101 RH - L'IA au service de la transformation RH",
       },
     ],
     locale: "fr_FR",
@@ -28,9 +28,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "PromptCraft RH : Maîtrisez l'IA générative pour transformer votre fonction RH",
+    title: "Prompt101 RH : Maîtrisez l'IA générative pour transformer votre fonction RH",
     description:
-      "Guide stratégique, techniques avancées de prompting et matrice d'opportunités pour RH. Transformez votre département avec l'IA générative.",
+      "Guide stratégique, techniques avancées de prompting et matrice d'opportunités pour RH. Transformez votre fonction avec l'IA générative.",
     images: ["https://rh.prompt101.fr/images/opengraph-image.png"],
   },
     generator: 'v0.dev'
