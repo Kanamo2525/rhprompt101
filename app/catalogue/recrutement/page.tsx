@@ -159,6 +159,158 @@ Processus itératif :
 - KPIs précis et cadence optimale de relances.
 Présente ce playbook sous forme numérotée et facile à utiliser par un recruteur. »`}
               />
+              <PromptCard
+                id="redaction-offres-captivantes"
+                title="Rédaction d'offres d'emploi captivantes"
+                description="Créez des offres d'emploi engageantes qui attirent les meilleurs talents en mettant en avant votre culture d'entreprise et les opportunités de développement."
+                techniques={["Template Filling"]}
+                icon={<FileText className="h-6 w-6 text-blue-600" />}
+                opportunityType="Automatisation"
+                prompt={`Technique : Template Filling | Quadrant : Automatisation | Complexité : Modérée
+
+Rédige une offre d'emploi pour un poste de [intitulé du poste] au sein de notre entreprise [secteur/taille/culture]. 
+
+Structure l'offre selon ce template :
+
+TITRE ACCROCHEUR : [Titre engageant qui va au-delà du simple intitulé de poste]
+
+INTRODUCTION : [Paragraphe présentant la mission et l'impact du poste, utilisant un ton qui reflète notre culture d'entreprise]
+
+À PROPOS DE NOUS : [Présentation concise et distinctive de l'entreprise, sa mission et ses valeurs]
+
+MISSIONS PRINCIPALES :
+- [Mission 1 formulée avec un verbe d'action et son impact]
+- [Mission 2 formulée avec un verbe d'action et son impact]
+- [Mission 3 formulée avec un verbe d'action et son impact]
+- [Mission 4 formulée avec un verbe d'action et son impact]
+- [Mission 5 formulée avec un verbe d'action et son impact]
+
+PROFIL RECHERCHÉ :
+- Expérience : [Expérience requise, formulée de manière inclusive]
+- Compétences essentielles : [3-5 compétences véritablement indispensables]
+- Compétences appréciées : [2-3 compétences souhaitables mais non bloquantes]
+- Qualités personnelles : [3-4 soft skills pertinentes pour le poste et la culture]
+
+CE QUE NOUS OFFRONS :
+- [Avantage attractif 1]
+- [Avantage attractif 2]
+- [Avantage attractif 3]
+- [Avantage attractif 4]
+
+PROCESSUS DE RECRUTEMENT : [Description des étapes du processus, transparente et engageante]
+
+Assure-toi que l'offre soit inclusive, évite les biais de genre, met l'accent sur l'impact et les opportunités de développement plutôt que sur les contraintes, et reflète authentiquement notre culture d'entreprise [description spécifique de la culture].`}
+              />
+
+              <PromptCard
+                id="strategie-sourcing"
+                title="Stratégie de sourcing innovante pour profils pénuriques"
+                description="Développez des stratégies de sourcing innovantes pour attirer des profils rares et difficiles à recruter sur des marchés compétitifs."
+                techniques={["Expert Role-Playing", "Multi-Prompting"]}
+                icon={<Search className="h-6 w-6 text-purple-600" />}
+                opportunityType="Assistance"
+                prompt={`Technique : Expert Role-Playing + Multi-Prompting | Quadrant : Assistance | Complexité : Élevée
+
+Tu es un expert en talent acquisition spécialisé dans le sourcing innovant de profils pénuriques, avec 15 ans d'expérience dans des marchés compétitifs.
+
+Notre entreprise cherche à recruter [nombre] [profil spécifique] dans [contexte géographique/sectoriel]. Ce profil est particulièrement difficile à attirer en raison de [facteurs spécifiques].
+
+Première partie - Analyse stratégique :
+Analyse les dynamiques actuelles du marché pour ce type de profil :
+- Facteurs de motivation qui distinguent ces candidats
+- Canaux de sourcing conventionnels et leurs limitations
+- Communautés spécifiques où ces talents se rassemblent
+- Approches innovantes qui émergent pour atteindre ces profils
+
+Deuxième partie - Plan d'action :
+Développe une stratégie de sourcing en 30 jours qui transcende les approches conventionnelles :
+1. Canaux prioritaires avec approche spécifique pour chacun
+2. Messages différenciants adaptés à ce profil (ton, contenu, format)
+3. Stratégie d'activation des collaborateurs comme ambassadeurs ciblés
+4. Tactiques d'approche directe (séquencement, personnalisation)
+5. Méthodes d'évaluation adaptées à ce type de profil
+
+Troisième partie - Mesure d'efficacité :
+Propose des indicateurs pertinents pour évaluer l'efficacité de cette stratégie.`}
+              />
+
+              <PromptCard
+                id="guide-entretien"
+                title="Guide d'entretien structuré basé sur les compétences"
+                description="Créez des guides d'entretien structurés pour évaluer objectivement les candidats sur les compétences clés requises pour le poste."
+                techniques={["Chain-of-Thought", "RCT"]}
+                icon={<Users className="h-6 w-6 text-green-600" />}
+                opportunityType="Assistance"
+                prompt={`Technique : Chain-of-Thought + RCT | Quadrant : Assistance | Complexité : Élevée
+
+En tant que spécialiste des méthodes d'entretien structuré, tu conçois un guide d'entretien pour évaluer les candidats au poste de [intitulé du poste] dans notre contexte de [description du contexte organisationnel].
+
+Développe ce guide d'entretien en procédant méthodiquement :
+
+1. Identifie d'abord les 5 compétences clés requises pour exceller dans ce rôle, en précisant pour chacune :
+   - Sa définition précise dans notre contexte
+   - Son importance relative (critique/importante/souhaitable)
+   - Les comportements observables qui démontrent sa maîtrise
+
+2. Pour chaque compétence, crée 2 questions comportementales (STAR) qui permettent d'évaluer objectivement le niveau de maîtrise :
+   - Une question sur une expérience passée révélatrice
+   - Une question situationnelle liée aux défis spécifiques du poste
+
+3. Élabore une échelle d'évaluation à 5 niveaux pour chaque compétence :
+   - Décris les comportements observables à chaque niveau
+   - Inclus des exemples concrets de réponses correspondant à chaque niveau
+   - Ajoute des questions de relance pour approfondir si nécessaire
+
+4. Conçois une section d'évaluation de l'adéquation culturelle :
+   - Questions révélant l'alignement avec nos valeurs [liste des valeurs]
+   - Grille d'interprétation des réponses
+
+5. Propose une structure d'entretien chronologique optimale :
+   - Séquence logique des questions
+   - Durée recommandée pour chaque section
+   - Conseils pour les transitions entre thèmes
+
+6. Fournis des recommandations pour minimiser les biais d'évaluation.`}
+              />
+
+              <PromptCard
+                id="analyse-cv"
+                title="Analyse approfondie de CV"
+                description="Analysez objectivement les CV des candidats en fonction des critères spécifiques du poste et des priorités de recrutement."
+                techniques={["Contextual Augmentation"]}
+                icon={<FileText className="h-6 w-6 text-amber-600" />}
+                opportunityType="Assistance"
+                prompt={`Technique : Contextual Augmentation | Quadrant : Assistance | Complexité : Modérée
+
+En tenant compte de la description de poste suivante :
+[Insérer description complète du poste]
+
+Et des priorités spécifiques de notre recrutement :
+[Insérer critères prioritaires, contexte d'équipe, défis spécifiques]
+
+Analyse de façon approfondie ce CV :
+[Insérer CV complet]
+
+Ta réponse doit inclure :
+
+1. SYNTHÈSE EXÉCUTIVE :
+   Une évaluation globale de l'adéquation du candidat (sur 10) avec justification concise
+
+2. ANALYSE DÉTAILLÉE :
+   - Compétences techniques : évaluation point par point vs nos exigences
+   - Expérience pertinente : analyse qualitative des réalisations alignées avec nos besoins
+   - Parcours professionnel : cohérence et progression, indicateurs de performance
+   - Formation et certifications : pertinence et actualité
+   - Signaux d'alerte potentiels : lacunes, incohérences ou questions à explorer
+
+3. RECOMMANDATIONS D'ENTRETIEN :
+   - Décision recommandée (rejeter/entretien téléphonique/entretien complet)
+   - Questions spécifiques à poser pour clarifier les zones d'incertitude
+   - Aspects à approfondir en priorité lors de l'entretien
+
+4. POTENTIEL ÉLARGI :
+   Si ce candidat n'est pas adapté pour ce poste spécifique, identifie d'autres postes dans l'organisation qui pourraient correspondre à son profil.`}
+              />
             </div>
 
             <div className="mt-16 bg-gray-50 rounded-lg p-8">

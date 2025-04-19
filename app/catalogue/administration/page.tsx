@@ -2,7 +2,7 @@
 
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
-import { Copy, Check, FileText, BarChart2, Brain, ClipboardCheck, GitMerge } from "lucide-react"
+import { Copy, Check, FileText, BarChart2, Brain, ClipboardCheck, GitMerge, Mail } from "lucide-react"
 import { useState } from "react"
 import Link from "next/link"
 
@@ -175,6 +175,184 @@ Procédure Iterative Prompting :
 
 Cas d'usage typique :
 Workflows automatisés pour demandes complexes (mobilité internationale, formation longue durée, gestion de carrière senior) dans des structures organisationnelles matricielles.`}
+              />
+
+              <PromptCard
+                id="optimisation-processus"
+                title="Optimisation de processus RH"
+                description="Analysez et optimisez vos processus RH pour éliminer les inefficiences et améliorer l'expérience utilisateur."
+                techniques={["Contextual Augmentation", "Chain-of-Thought"]}
+                icon={<GitMerge className="h-6 w-6 text-blue-600" />}
+                opportunityType="Assistance"
+                prompt={`Technique : Contextual Augmentation + Chain-of-Thought | Quadrant : Assistance | Complexité : Élevée
+
+En tenant compte des informations suivantes sur notre processus actuel :
+[Insérer description du processus : étapes, acteurs, systèmes, volumétrie, délais actuels]
+[Insérer points de friction identifiés et objectifs d'amélioration]
+
+Réalise une optimisation complète de ce processus en procédant méthodiquement :
+
+1. Analyse diagnostique approfondie
+   - Cartographie détaillée de l'état actuel (as-is) avec points de décision et boucles
+   - Identification des inefficiences, redondances et goulots d'étranglement
+   - Analyse des causes racines des points de friction
+   - Évaluation des activités à valeur ajoutée vs non-valeur ajoutée
+
+2. Benchmarking et meilleures pratiques
+   - Standards d'excellence dans ce domaine
+   - Approches innovantes pertinentes pour notre contexte
+   - Technologies habilitantes applicables
+
+3. Reconception du processus cible (to-be)
+   - Représentation visuelle du nouveau flux
+   - Description détaillée de chaque étape optimisée
+   - Rôles et responsabilités clarifiés
+   - Points de contrôle et mécanismes d'exception
+   - Intégrations système nécessaires
+
+4. Quantification des bénéfices attendus
+   - Gains de temps/productivité estimés
+   - Amélioration de l'expérience utilisateur
+   - Réduction des erreurs et risques
+   - Impact sur les KPIs métier
+
+5. Plan d'implémentation
+   - Approche de transition (big bang vs progressive)
+   - Prérequis techniques et organisationnels
+   - Stratégie de gestion du changement
+   - Calendrier réaliste avec jalons
+   - Mécanismes d'évaluation du succès`}
+              />
+
+              <PromptCard
+                id="tableau-bord-analytique"
+                title="Création d'un tableau de bord RH analytique"
+                description="Concevez des tableaux de bord RH qui transforment les données en insights actionnables pour guider les décisions stratégiques."
+                techniques={["RCT", "Template Filling"]}
+                icon={<BarChart2 className="h-6 w-6 text-purple-600" />}
+                opportunityType="Assistance"
+                prompt={`Technique : RCT + Template Filling | Quadrant : Assistance | Complexité : Modérée
+
+En tant qu'expert en analytics RH, tu conçois des tableaux de bord qui transforment les données en insights actionnables pour guider les décisions stratégiques liées au capital humain.
+
+Tu interviens dans notre contexte [secteur/taille/priorités stratégiques] pour créer un tableau de bord RH analytique sur la thématique [recrutement/talent/performance/engagement/etc.].
+
+Utilise ce cadre pour concevoir un tableau de bord complet :
+
+SYNTHÈSE EXÉCUTIVE
+- Objectif du tableau de bord : [objectif précis et audience cible]
+- KPIs prioritaires : [3-5 indicateurs stratégiques avec cible et tendance]
+- Insights principaux : [synthèse des conclusions actionnables]
+
+SECTION 1 : [Titre de la première dimension d'analyse]
+- Visualisation principale : [Type de visualisation et données représentées]
+- Métriques complémentaires : [Liste des métriques avec formule de calcul]
+- Filtres pertinents : [Dimensions d'analyse et segmentations]
+- Questions auxquelles cette section répond : [2-3 questions business clés]
+
+SECTION 2 : [Titre de la deuxième dimension d'analyse]
+[Même structure que section 1]
+
+SECTION 3 : [Titre de la troisième dimension d'analyse]
+[Même structure que section 1]
+
+SECTION 4 : [Titre de la quatrième dimension d'analyse]
+[Même structure que section 1]
+
+ANALYSE PRÉDICTIVE
+- Indicateurs avancés : [Métriques prédictives des tendances futures]
+- Scénarios modélisés : [Projections basées sur différentes hypothèses]
+- Alertes automatisées : [Seuils et conditions déclenchant des notifications]
+
+RECOMMANDATIONS MÉTHODOLOGIQUES
+- Sources de données et intégrations : [Systèmes sources et mode d'alimentation]
+- Fréquence de mise à jour optimale : [Quotidienne/hebdomadaire/mensuelle]
+- Niveau d'accès et permissions : [Stratégie de partage par rôle]
+- Limites et précautions d'interprétation : [Points d'attention spécifiques]`}
+              />
+
+              <PromptCard
+                id="communication-interne-impactante"
+                title="Communication interne impactante"
+                description="Transformez vos messages RH complexes en communications engageantes qui suscitent adhésion et action."
+                techniques={["Expert Role-Playing", "Few-Shot"]}
+                icon={<Mail className="h-6 w-6 text-green-600" />}
+                opportunityType="Augmentation"
+                prompt={`Technique : Expert Role-Playing + Few-Shot | Quadrant : Augmentation | Complexité : Modérée
+
+Tu es un expert en communication interne stratégique, spécialisé dans la transformation de messages RH complexes en communications engageantes et impactantes qui suscitent adhésion et action.
+
+Voici deux exemples de communications particulièrement réussies sur des sujets RH :
+
+EXEMPLE 1 : LANCEMENT D'UNE NOUVELLE POLITIQUE DE TÉLÉTRAVAIL
+Titre : "Travailler autrement : votre guide vers une flexibilité qui a du sens"
+Structure :
+- Ouverture avec une vision inspirante (travail basé sur les résultats, pas la présence)
+- Présentation du cadre en trois principes clairs et mémorables
+- Bénéfices personnalisés pour différents profils de collaborateurs
+- Réponses aux questions anticipées organisées par thématiques
+- Parcours d'adoption clair avec prochaines étapes
+- Ressources d'accompagnement disponibles
+Éléments distinctifs : Ton conversationnel, utilisation d'histoires concrètes, visuels explicatifs, citation d'un dirigeant sur la vision stratégique
+
+EXEMPLE 2 : TRANSFORMATION DU PROCESSUS D'ÉVALUATION
+[Structure similaire avec détails spécifiques]
+
+En t'inspirant de ces exemples réussis mais en adaptant l'approche à notre contexte et sujet, crée une communication interne complète pour [sujet RH spécifique] qui s'adresse à [audience cible] avec les objectifs suivants :
+[Objectifs spécifiques : informer, engager, rassurer, mobiliser...]
+
+Cette communication doit refléter notre culture d'entreprise [description de la culture] tout en étant parfaitement claire sur les aspects pratiques et les actions attendues.`}
+              />
+
+              <PromptCard
+                id="politique-rh"
+                title="Politique RH complète"
+                description="Développez des politiques RH claires, complètes et conformes aux exigences réglementaires."
+                techniques={["Chain-of-Thought", "Contextual Augmentation"]}
+                icon={<FileText className="h-6 w-6 text-amber-600" />}
+                opportunityType="Automatisation"
+                prompt={`Technique : Chain-of-Thought + Contextual Augmentation | Quadrant : Automatisation | Complexité : Élevée
+
+En tenant compte de notre contexte organisationnel :
+[Insérer informations : secteur, taille, cadre réglementaire applicable, valeurs]
+
+Et des objectifs spécifiques de cette politique :
+[Insérer objectifs : conformité, clarification, harmonisation, évolution culturelle]
+
+Développe une politique RH complète et opérationnelle sur [thématique : télétravail, congés, frais professionnels, etc.] en procédant méthodiquement :
+
+1. Analyse du cadre juridique applicable
+   - Identifie les obligations légales incontournables
+   - Référence les textes précis (lois, conventions, accords)
+   - Évalue les marges de manœuvre disponibles
+   - Anticipe les évolutions réglementaires prévisibles
+
+2. Benchmarking des meilleures pratiques
+   - Standards du secteur dans ce domaine
+   - Approches innovantes pertinentes
+   - Équilibre entre générosité et soutenabilité
+
+3. Rédaction structurée de la politique
+   - Préambule explicitant l'intention et les principes directeurs
+   - Champ d'application précis (populations concernées/exclues)
+   - Dispositions détaillées organisées logiquement
+   - Procédures opérationnelles associées
+   - Rôles et responsabilités des parties prenantes
+   - Cas particuliers et exceptions prévues
+   - Mécanismes de révision et gouvernance
+
+4. Intégration à l'écosystème RH
+   - Articulation avec les autres politiques existantes
+   - Impacts sur les processus connexes
+   - Outils et formulaires associés
+   - Formation et communication nécessaires
+
+5. Anticipation des questions et objections
+   - FAQ structurée par thématique
+   - Clarifications des points potentiellement ambigus
+   - Réponses aux préoccupations anticipées
+
+La politique doit être rédigée dans un style clair, accessible et sans ambiguïté, tout en étant juridiquement précise et complète.`}
               />
             </div>
 

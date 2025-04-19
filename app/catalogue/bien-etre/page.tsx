@@ -2,7 +2,7 @@
 
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
-import { Copy, Check, Users, Shield, Star } from "lucide-react"
+import { Copy, Check, Users, Shield, Star, BarChart2, HeartPulse } from "lucide-react"
 import { useState } from "react"
 import Link from "next/link"
 
@@ -134,6 +134,124 @@ Prompt C (« Stratégie finale de fidélisation co-créée ») :
 
 Cas d'usage typique :
 Développement stratégique et opérationnel avancé pour retenir des profils critiques dans des environnements fortement concurrentiels (secteur technologique, consulting, finance).`}
+              />
+
+              <PromptCard
+                id="diagnostic-climat-social-bien-etre"
+                title="Diagnostic de climat social approfondi"
+                description="Analysez en profondeur les résultats de vos enquêtes d'engagement pour identifier les leviers d'amélioration prioritaires."
+                techniques={["Generated Knowledge", "Chain-of-Thought"]}
+                icon={<BarChart2 className="h-6 w-6 text-blue-600" />}
+                opportunityType="Assistance"
+                prompt={`Technique : Generated Knowledge + Chain-of-Thought | Quadrant : Assistance | Complexité : Élevée
+
+Avant d'analyser les données de notre enquête d'engagement, établis une synthèse des connaissances actuelles sur :
+1. Les principales dimensions de l'engagement et leur impact relatif sur la performance
+2. Les corrélations établies entre indicateurs d'engagement et métriques business
+3. Les patterns d'évolution typiques dans des contextes de transformation similaires
+4. Les méthodologies d'analyse différenciée par segments démographiques et organisationnels
+
+Maintenant, en tenant compte de ces connaissances et des résultats de notre enquête :
+[Insérer données quantitatives : scores par dimension, évolutions, benchmarks]
+[Insérer sélection de verbatims représentatifs]
+
+Réalise une analyse approfondie en procédant méthodiquement :
+
+1. Analyse quantitative multidimensionnelle
+   - Identification des points forts et axes d'amélioration principaux
+   - Analyse des évolutions significatives par rapport à la période précédente
+   - Segmentation révélatrice (par département, ancienneté, niveau, etc.)
+   - Détection des corrélations significatives entre dimensions
+
+2. Analyse qualitative des verbatims
+   - Extraction des thématiques récurrentes
+   - Analyse de sentiment par thématique
+   - Identification des irritants critiques vs améliorations remarquées
+   - Mise en perspective avec les résultats quantitatifs
+
+3. Diagnostic intégré
+   - Triangulation des données quantitatives et qualitatives
+   - Hiérarchisation des enjeux par impact et actionnabilité
+   - Analyse des causes racines potentielles
+   - Identification des leviers systémiques
+
+4. Recommandations stratégiques
+   - Actions prioritaires avec impact attendu
+   - Interventions différenciées par segment si pertinent
+   - Mécanismes de suivi et d'évaluation
+   - Communication des résultats et du plan d'action`}
+              />
+
+              <PromptCard
+                id="programme-bien-etre-holistique"
+                title="Conception d'un programme de bien-être holistique"
+                description="Développez un programme complet de bien-être qui adresse les dimensions physique, mentale et sociale de la santé au travail."
+                techniques={["RCT", "Multi-Prompting"]}
+                icon={<HeartPulse className="h-6 w-6 text-purple-600" />}
+                opportunityType="Augmentation"
+                prompt={`Technique : RCT + Multi-Prompting | Quadrant : Augmentation | Complexité : Élevée
+
+En tant qu'expert en bien-être organisationnel et santé au travail, tu interviens dans notre contexte spécifique [secteur/taille/enjeux/contraintes] pour concevoir un programme de bien-être holistique réellement impactant.
+
+Prompt 1 - Diagnostic et stratégie :
+Analyse notre situation actuelle [insérer données : indicateurs de santé, absentéisme, turnover, RPS identifiés], identifie les axes prioritaires d'intervention, et développe un cadre stratégique global aligné avec notre culture organisationnelle et nos contraintes budgétaires.
+
+Prompt 2 - Bien-être physique :
+Développe un volet complet d'initiatives favorisant la santé physique, incluant prévention, activité physique, nutrition et ergonomie. Pour chaque initiative, détaille objectifs spécifiques, modalités pratiques, ressources nécessaires et métriques d'évaluation.
+
+Prompt 3 - Bien-être mental et émotionnel :
+Conçois un écosystème de soutien à la santé mentale combinant sensibilisation, prévention, détection précoce et accompagnement. Détaille les approches à déployer, leur séquencement, et les points d'attention spécifiques à notre secteur.
+
+Prompt 4 - Bien-être social et organisationnel :
+Propose des interventions systémiques adressant les déterminants organisationnels du bien-être : pratiques managériales, organisation du travail, collaboration, inclusion. Inclus des recommandations pour l'évolution de notre culture et de nos processus.
+
+Prompt 5 - Gouvernance et implémentation :
+Développe un modèle de gouvernance du programme, un plan d'implémentation séquencé, une stratégie de communication engageante, et un framework d'évaluation de l'impact permettant l'amélioration continue.`}
+              />
+
+              <PromptCard
+                id="analyse-juridique-bien-etre"
+                title="Analyse juridique et conformité RH"
+                description="Obtenez une analyse juridique complète sur des questions spécifiques de droit social et de conformité RH."
+                techniques={["Expert Role-Playing", "Generated Knowledge"]}
+                icon={<Shield className="h-6 w-6 text-green-600" />}
+                opportunityType="Assistance"
+                prompt={`Technique : Expert Role-Playing + Generated Knowledge | Quadrant : Assistance | Complexité : Élevée
+
+Tu es un expert juridique spécialisé en droit social français et conformité RH, avec 15 ans d'expérience dans l'accompagnement d'entreprises de notre secteur [secteur d'activité].
+
+Avant d'analyser notre question spécifique, synthétise les principales sources légales et jurisprudentielles pertinentes concernant [thématique juridique précise - ex: télétravail, temps de travail, restructuration...].
+
+Sur la base de ce cadre juridique et de notre situation spécifique :
+[Insérer description détaillée de la situation, contexte et enjeux]
+
+Réalise une analyse juridique complète qui :
+
+1. CADRE JURIDIQUE APPLICABLE
+   - Textes législatifs et réglementaires précisément applicables
+   - Jurisprudence pertinente et récente
+   - Accords de branche ou conventionnels spécifiques
+   - Évolutions réglementaires anticipées
+
+2. ANALYSE DE CONFORMITÉ
+   - Évaluation de notre conformité actuelle point par point
+   - Identification des zones de risque spécifiques
+   - Hiérarchisation des enjeux par niveau de risque
+   - Analyse des potentielles conséquences (sanctions, contentieux)
+
+3. RECOMMANDATIONS PRATIQUES
+   - Actions correctives priorisées par urgence et impact
+   - Adaptations documentaires nécessaires (avec propositions concrètes)
+   - Procédures de mise en conformité recommandées
+   - Mesures préventives à implémenter
+
+4. STRATÉGIE D'IMPLÉMENTATION
+   - Séquencement recommandé des actions
+   - Points d'attention spécifiques à notre contexte
+   - Modalités de communication appropriées
+   - Mécanismes de contrôle continu
+
+Ta réponse doit être à la fois rigoureuse juridiquement et accessible pour des professionnels RH non-juristes, en distinguant clairement les obligations légales strictes des recommandations de bonnes pratiques.`}
               />
             </div>
 

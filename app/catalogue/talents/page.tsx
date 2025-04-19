@@ -2,7 +2,7 @@
 
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
-import { Copy, Check, Users, FileText, GitBranch, Star } from "lucide-react"
+import { Copy, Check, Users, FileText, GitBranch, Star, GitMerge, Brain } from "lucide-react"
 import { useState } from "react"
 import Link from "next/link"
 
@@ -134,6 +134,180 @@ Prompt B (« Analyse du profil ») :
 Prompt C (« Synthèse de recommandation ») :
 - Établis une synthèse claire et argumentée, identifiant précisément si le profil correspond aux critères d'un haut potentiel.
 - Indique explicitement (≤50 mots) quels aspects spécifiques requièrent une validation ou une appréciation humaine complémentaire avant toute décision finale.`}
+              />
+
+              <PromptCard
+                id="detection-hauts-potentiels-avance"
+                title="Détection des hauts potentiels avancée"
+                description="Développez une méthodologie complète pour identifier objectivement les hauts potentiels dans votre organisation."
+                techniques={["Chain-of-Thought", "Expert Role-Playing"]}
+                icon={<Star className="h-6 w-6 text-blue-600" />}
+                opportunityType="Assistance"
+                prompt={`Technique : Chain-of-Thought + Expert Role-Playing | Quadrant : Assistance | Complexité : Élevée
+
+En tant qu'expert en identification et développement des hauts potentiels, tu combines une compréhension approfondie de la psychologie organisationnelle avec une expertise en systèmes d'évaluation prédictive.
+
+Développe une méthodologie complète d'identification des hauts potentiels pour notre organisation [secteur/taille/contexte] en procédant par étapes structurées :
+
+1. Définition stratégique du haut potentiel dans notre contexte
+   - Analyse notre définition actuelle : [définition actuelle si disponible]
+   - Évalue sa pertinence par rapport aux exigences futures
+   - Propose une définition actualisée intégrant dimensions de potentiel, performance et valeurs
+
+2. Cadre d'évaluation multidimensionnel
+   - Identifie les dimensions prédictives du succès futur (pas seulement performances passées)
+   - Détermine les indicateurs observables pour chaque dimension
+   - Établis une pondération contextuelle des dimensions selon nos priorités stratégiques
+   - Définis des garde-fous contre les biais d'évaluation
+
+3. Processus de détection structuré
+   - Séquence optimale des étapes d'identification
+   - Combinaison de méthodes complémentaires (évaluation directe, nominations, auto-nominations)
+   - Protocole de calibration collective des évaluations
+   - Mécanismes de révision et de validation des décisions
+
+4. Intégration au cycle de gestion des talents
+   - Articulation avec les processus de performance management
+   - Fréquence et moments optimaux d'évaluation
+   - Connexion avec les plans de succession et la mobilité
+
+5. Approche de communication et d'accompagnement
+   - Stratégie de transparence vs confidentialité
+   - Mécanismes de feedback développemental
+   - Dispositifs d'accompagnement différenciés`}
+              />
+
+              <PromptCard
+                id="plan-succession"
+                title="Plan de succession stratégique"
+                description="Élaborez des plans de succession robustes pour les postes critiques de votre organisation."
+                techniques={["RCT", "Contextual Augmentation"]}
+                icon={<GitBranch className="h-6 w-6 text-purple-600" />}
+                opportunityType="Assistance"
+                prompt={`Technique : RCT + Contextual Augmentation | Quadrant : Assistance | Complexité : Élevée
+
+En tant que conseiller en planification stratégique de succession, tu dois développer un plan de succession robuste pour le poste critique suivant, en tenant compte des enjeux spécifiques de notre organisation.
+
+Contexte organisationnel :
+[Insérer données : secteur, taille, stratégie, culture, défis spécifiques]
+
+Poste concerné :
+[Insérer description : responsabilités, impact, compétences requises actuelles et futures]
+
+Titulaire actuel :
+[Insérer informations : ancienneté prévue dans le poste, caractéristiques distinctives]
+
+Ta mission est de concevoir un plan de succession complet qui :
+
+1. ANALYSE STRATÉGIQUE DU POSTE
+   - Évolution anticipée du rôle dans les 2-5 ans (nouvelles responsabilités, compétences)
+   - Risques spécifiques liés à la vacance de ce poste
+   - Options stratégiques (remplacement identique, redéfinition, redistribution)
+
+2. MAPPING DES SUCCESSEURS POTENTIELS
+   - Critères d'identification précis avec pondération
+   - Matrice de succession (successeurs immédiats, 1-2 ans, 3-5 ans)
+   - Analyse des écarts pour chaque successeur potentiel
+   - Évaluation des risques de rétention pour chaque candidat
+
+3. PLANS DE DÉVELOPPEMENT ACCÉLÉRÉ
+   - Actions de développement ciblées pour chaque successeur potentiel
+   - Expériences critiques à offrir (missions, projets, expositions)
+   - Mécanismes de mentorat et transfert de connaissances
+   - Jalons d'évaluation de la préparation
+
+4. SCÉNARIOS DE TRANSITION
+   - Options de transition selon les temporalités (urgence, planifiée, stratégique)
+   - Processus de prise de décision finale
+   - Plan de communication associé
+   - Stratégies d'onboarding du successeur
+
+5. GOUVERNANCE DU PLAN
+   - Modalités de suivi et révision
+   - Rôles et responsabilités dans l'exécution
+   - Mécanismes d'adaptation aux changements stratégiques
+
+Présente ce plan sous une forme structurée, avec une section exécutive synthétique suivie des recommandations détaillées pour chaque dimension.`}
+              />
+
+              <PromptCard
+                id="mobilite-interne"
+                title="Stratégie de mobilité interne innovante"
+                description="Développez une stratégie complète pour favoriser la mobilité interne et optimiser l'allocation des talents dans votre organisation."
+                techniques={["Generated Knowledge", "Multi-Prompting"]}
+                icon={<GitMerge className="h-6 w-6 text-green-600" />}
+                opportunityType="Augmentation"
+                prompt={`Technique : Generated Knowledge + Multi-Prompting | Quadrant : Augmentation | Complexité : Élevée
+
+Avant de concevoir notre stratégie de mobilité interne, génère une analyse des meilleures pratiques et tendances innovantes en matière de mobilité interne, en couvrant :
+1. Les évolutions récentes dans les approches de mobilité interne
+2. Les plateformes et outils technologiques transformant ce domaine
+3. Les métriques d'efficacité les plus pertinentes
+4. Les obstacles organisationnels courants et stratégies de mitigation
+5. Les modèles opérationnels et de gouvernance les plus efficaces
+
+Prompt 1 - Diagnostic de notre situation actuelle :
+Sur la base des données suivantes [insérer métriques actuelles : taux de mobilité, délai de pourvoi interne, satisfaction, freins identifiés], analyse notre maturité en matière de mobilité interne, identifie les forces à capitaliser et les obstacles systémiques à surmonter.
+
+Prompt 2 - Architecture du programme de mobilité :
+Conçois l'architecture complète d'un programme de mobilité interne innovant adapté à notre contexte [secteur/taille/culture]. Inclus les composantes technologiques, processus, gouvernance et change management nécessaires.
+
+Prompt 3 - Expérience collaborateur :
+Développe le parcours expérientiel détaillé pour un collaborateur cherchant une mobilité, depuis l'exploration des possibilités jusqu'à l'intégration dans le nouveau rôle. Détaille les points de contact, ressources et moments clés.
+
+Prompt 4 - Activation managériale :
+Élabore une stratégie d'engagement des managers comme facilitateurs plutôt que freins à la mobilité. Propose des leviers incitatifs, formations et outils pour transformer leur posture.
+
+Prompt 5 - Plan d'implémentation :
+Crée une feuille de route séquencée sur 18 mois, avec quick wins, jalons critiques, indicateurs de succès et mécanismes d'ajustement.`}
+              />
+
+              <PromptCard
+                id="cartographie-competences"
+                title="Cartographie des compétences futures"
+                description="Anticipez les compétences critiques dont votre organisation aura besoin dans les 3-5 ans et développez une stratégie d'acquisition."
+                techniques={["Chain-of-Thought", "Contextual Augmentation"]}
+                icon={<Brain className="h-6 w-6 text-amber-600" />}
+                opportunityType="Augmentation"
+                prompt={`Technique : Chain-of-Thought + Contextual Augmentation | Quadrant : Augmentation | Complexité : Très élevée
+
+En tenant compte de notre contexte organisationnel :
+[Insérer données : secteur, stratégie d'entreprise, évolutions technologiques, disruptions anticipées]
+
+Et de notre référentiel de compétences actuel :
+[Insérer structure actuelle ou principales familles de compétences]
+
+Développe une cartographie prospective des compétences critiques pour notre organisation à horizon 3-5 ans, en procédant méthodiquement :
+
+1. Analyse des forces de transformation impactant notre secteur
+   - Identifie les disruptions technologiques spécifiques à notre domaine
+   - Évalue les évolutions de marché/clients pertinentes
+   - Anticipe les changements réglementaires prévisibles
+   - Analyse les transformations des modes de travail
+
+2. Évaluation de l'impact transformationnel sur les familles de compétences
+   - Pour chaque famille existante, évalue l'évolution attendue (stabilité, évolution, disruption)
+   - Identifie les nouvelles compétences émergentes non couvertes actuellement
+   - Analyse les compétences en fin de cycle à déprioriser
+
+3. Définition des compétences futures critiques
+   - Pour chaque compétence identifiée comme critique :
+     - Formule une définition précise et opérationnelle
+     - Décris les niveaux de maîtrise attendus
+     - Projette la distribution nécessaire au sein de l'organisation
+     - Évalue le gap actuel et la difficulté d'acquisition
+
+4. Stratégie d'acquisition et développement
+   - Pour chaque compétence critique :
+     - Détermine la stratégie optimale (build vs buy)
+     - Identifie les parcours de développement possibles
+     - Évalue la transférabilité depuis d'autres domaines
+     - Propose des approches d'évaluation et certification
+
+5. Recommandations de gouvernance
+   - Framework de mise à jour continue
+   - Rôles et responsabilités dans la maintenance
+   - Intégration aux processus RH (recrutement, formation, performance)`}
               />
             </div>
 

@@ -10,7 +10,7 @@ export default function CataloguePage() {
       id: "recrutement",
       title: "Recrutement & Acquisition",
       icon: <Compass className="h-5 w-5" />,
-      count: 5,
+      count: 9,
       description:
         "Optimisez votre processus de recrutement avec des prompts spécialisés pour attirer et sélectionner les meilleurs talents.",
       color: "bg-blue-50 text-blue-700 border-blue-200",
@@ -19,7 +19,7 @@ export default function CataloguePage() {
       id: "formation",
       title: "Formation & Développement",
       icon: <Grid className="h-5 w-5" />,
-      count: 4,
+      count: 8,
       description:
         "Créez des parcours d'apprentissage personnalisés et des contenus pédagogiques innovants pour développer vos équipes.",
       color: "bg-purple-50 text-purple-700 border-purple-200",
@@ -28,7 +28,7 @@ export default function CataloguePage() {
       id: "talents",
       title: "Gestion des Talents",
       icon: <Eye className="h-5 w-5" />,
-      count: 4,
+      count: 8,
       description:
         "Identifiez et développez vos hauts potentiels avec des stratégies de rétention et des plans de carrière sur mesure.",
       color: "bg-green-50 text-green-700 border-green-200",
@@ -37,7 +37,7 @@ export default function CataloguePage() {
       id: "onboarding",
       title: "Onboarding & Intégration",
       icon: <Users className="h-5 w-5" />,
-      count: 3,
+      count: 8,
       description:
         "Facilitez l'intégration des nouveaux collaborateurs avec des programmes d'accueil personnalisés et efficaces.",
       color: "bg-amber-50 text-amber-700 border-amber-200",
@@ -46,7 +46,7 @@ export default function CataloguePage() {
       id: "administration",
       title: "Administration RH",
       icon: <BookOpen className="h-5 w-5" />,
-      count: 5,
+      count: 9,
       description: "Automatisez vos tâches administratives et optimisez vos processus RH pour gagner en efficacité.",
       color: "bg-red-50 text-red-700 border-red-200",
     },
@@ -63,7 +63,7 @@ export default function CataloguePage() {
       id: "bien-etre",
       title: "Bien-être & QVT",
       icon: <HeartPulse className="h-5 w-5" />,
-      count: 3,
+      count: 6,
       description:
         "Améliorez la qualité de vie au travail et le bien-être de vos collaborateurs avec des approches personnalisées.",
       color: "bg-pink-50 text-pink-700 border-pink-200",
@@ -72,7 +72,7 @@ export default function CataloguePage() {
       id: "support",
       title: "Support RH & Relations Collaborateurs",
       icon: <MessageCircle className="h-5 w-5" />,
-      count: 4,
+      count: 8,
       description:
         "Optimisez la communication interne et le support quotidien aux collaborateurs avec des outils d'IA adaptés.",
       color: "bg-amber-50 text-amber-700 border-amber-200",

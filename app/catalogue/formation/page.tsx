@@ -2,7 +2,7 @@
 
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
-import { Copy, Check, BookOpen, Users, FileText, Lightbulb } from "lucide-react"
+import { Copy, Check, BookOpen, Users, FileText, Lightbulb, BarChart2 } from "lucide-react"
 import { useState } from "react"
 import Link from "next/link"
 
@@ -152,6 +152,162 @@ Livrables impératifs :
 
 Conclusion :
 Avant ta réponse finale, explicite en 50 mots maximum ta logique créative et les mécanismes pédagogiques innovants retenus (Expert Role-Playing + Chain-of-Thought).`}
+              />
+
+              <PromptCard
+                id="module-formation"
+                title="Conception d'un module de formation immersif"
+                description="Créez des modules de formation innovants et immersifs basés sur les principes d'apprentissage des adultes et les neurosciences."
+                techniques={["RCT", "Few-Shot"]}
+                icon={<BookOpen className="h-6 w-6 text-blue-600" />}
+                opportunityType="Augmentation"
+                prompt={`Technique : RCT + Few-Shot | Quadrant : Augmentation | Complexité : Élevée
+
+En tant que concepteur pédagogique expert en apprentissage expérientiel pour adultes, tu conçois un module de formation innovant sur [compétence/thématique] pour [profil des apprenants].
+
+Tu as notamment conçu les modules suivants qui ont reçu des évaluations exceptionnelles :
+
+EXEMPLE 1 : MODULE "FEEDBACK CONSTRUCTIF"
+Objectifs : Transformer la culture du feedback dans l'organisation
+Approche : Apprentissage par immersion progressive
+Innovation pédagogique : Simulation vidéo interactive avec pratique graduelle
+Structure :
+1. Immersion émotionnelle : vidéo-témoignages d'impact du feedback
+2. Cadre conceptuel minimaliste : modèle COIN en 4 étapes
+3. Démonstration commentée de cas réels (succès et échecs)
+4. Pratique progressive : feedback simulé avec complexité croissante
+5. Application contextualisée : plan d'action personnalisé
+6. Suivi d'implémentation : micro-pratiques hebdomadaires
+
+EXEMPLE 2 : MODULE "PRISE DE DÉCISION AGILE"
+[Structure similaire avec détails spécifiques à ce thème]
+
+En t'inspirant de ces exemples réussis mais en innovant pour notre contexte spécifique, conçois un module de formation sur [thématique] qui :
+
+1. Transforme profondément la pratique plutôt que simplement transmettre des connaissances
+2. Intègre les principes d'apprentissage adulte (expérientiel, pertinence immédiate, autonomie)
+3. Alterne séquences courtes de concepts et pratique extensive
+4. Incorpore des éléments de neurosciences de l'apprentissage (espacé, multimodal, émotionnel)
+5. Prévoit les obstacles d'implémentation et les adresse proactivement
+6. Inclut des mécanismes de transfert et d'application post-formation
+
+Présente ton design pédagogique complet avec séquencement, activités spécifiques, supports nécessaires et méthodes d'évaluation de l'impact.`}
+              />
+
+              <PromptCard
+                id="parcours-developpement"
+                title="Parcours de développement personnalisé"
+                description="Créez des parcours de développement sur mesure qui combinent différentes modalités d'apprentissage adaptées aux besoins spécifiques de chaque collaborateur."
+                techniques={["Contextual Augmentation", "Chain-of-Thought"]}
+                icon={<Users className="h-6 w-6 text-purple-600" />}
+                opportunityType="Augmentation"
+                prompt={`Technique : Contextual Augmentation + Chain-of-Thought | Quadrant : Augmentation | Complexité : Très élevée
+
+En tenant compte du profil développemental suivant :
+[Insérer données : évaluation des compétences actuelles, aspirations, préférences d'apprentissage, contraintes]
+
+Et de notre contexte organisationnel :
+[Insérer données : compétences critiques, opportunités internes, ressources disponibles]
+
+Développe un parcours personnalisé de développement pour cette personne en procédant méthodiquement :
+
+1. Analyse d'abord l'écart entre compétences actuelles et objectifs de développement
+   - Identifie les zones de force à capitaliser
+   - Détermine les compétences prioritaires à développer
+   - Évalue le potentiel de progression dans chaque domaine
+
+2. Élabore une stratégie développementale sur 12 mois avec progression logique
+   - Séquence les compétences à développer selon leur interdépendance
+   - Alterne entre consolidation de forces et développement de nouvelles capacités
+   - Intègre des moments de réflexion et d'intégration
+
+3. Pour chaque compétence prioritaire, conçois un mix d'approches développementales
+   - Formations formelles (avec modalités adaptées aux préférences d'apprentissage)
+   - Expériences pratiques (projets, responsabilités élargies, missions transverses)
+   - Apprentissage social (mentorat, communautés de pratique, peer learning)
+   - Ressources auto-dirigées (lectures, podcasts, MOOC sélectionnés)
+
+4. Définis des jalons développementaux avec indicateurs de progression
+   - Métriques objectives d'acquisition des compétences
+   - Modalités de feedback et d'ajustement
+   - Célébration des progrès et reconnaissance
+
+5. Anticipe les obstacles potentiels et propose des stratégies préventives
+
+Présente ce plan sous forme de roadmap visuelle et de plan d'action détaillé adaptés au style d'apprentissage préférentiel de la personne.`}
+              />
+
+              <PromptCard
+                id="evaluation-competences"
+                title="Évaluation multimodale des compétences"
+                description="Développez des systèmes d'évaluation des compétences qui combinent différentes méthodes pour une mesure précise et objective."
+                techniques={["Generated Knowledge", "RCT"]}
+                icon={<BarChart2 className="h-6 w-6 text-green-600" />}
+                opportunityType="Assistance"
+                prompt={`Technique : Generated Knowledge + RCT | Quadrant : Assistance | Complexité : Élevée
+
+Tu es un expert en évaluation et développement des compétences, spécialisé dans les approches multimodales qui capturent avec précision les capacités réelles en contexte professionnel.
+
+Avant de concevoir le système d'évaluation, génère une synthèse des connaissances actuelles sur :
+1. Les limites des méthodes traditionnelles d'évaluation des compétences
+2. Les facteurs déterminants de validité prédictive des évaluations
+3. Les approches multimodales démontrant la plus forte corrélation avec la performance réelle
+4. Les méthodes efficaces pour minimiser les biais d'évaluation
+
+Sur la base de ces connaissances, conçois un système complet d'évaluation pour la compétence [compétence spécifique] dans notre contexte [contexte organisationnel].
+
+Ce système doit inclure :
+
+1. DÉFINITION OPÉRATIONNELLE
+   - Décomposition de la compétence en composantes observables
+   - Niveaux de maîtrise clairement différenciés avec comportements associés
+   - Différenciation contextuelle (comment cette compétence se manifeste dans différents rôles)
+
+2. PROTOCOLE D'ÉVALUATION MULTIMODALE
+   - Méthodes d'auto-évaluation structurée
+   - Évaluations situationnelles (simulation, mise en situation)
+   - Observations en contexte réel
+   - Approches basées sur les résultats/productions
+   - Évaluations 360° calibrées
+
+3. OUTILS SPÉCIFIQUES
+   - Grilles d'observation avec indicateurs comportementaux
+   - Scénarios de simulation avec critères d'évaluation
+   - Questionnaires calibrés pour l'auto-évaluation et l'évaluation par les pairs
+
+4. PROCESSUS D'INTÉGRATION ET D'INTERPRÉTATION
+   - Pondération des différentes modalités d'évaluation
+   - Méthodes de triangulation des résultats
+   - Cadre d'interprétation contextualisé
+
+5. MÉCANISMES DE FEEDBACK DÉVELOPPEMENTAL
+   - Format et structure des retours
+   - Connexion aux opportunités de développement
+   - Suivi longitudinal des progrès`}
+              />
+
+              <PromptCard
+                id="analyse-impact"
+                title="Analyse d'impact de formation"
+                description="Évaluez l'impact réel de vos programmes de formation sur la performance individuelle et organisationnelle."
+                techniques={["Multi-Prompting"]}
+                icon={<FileText className="h-6 w-6 text-amber-600" />}
+                opportunityType="Assistance"
+                prompt={`Technique : Multi-Prompting | Quadrant : Assistance | Complexité : Élevée
+
+Je souhaite analyser l'impact complet de notre programme de formation [nom du programme] sur l'organisation. J'ai besoin d'une approche qui dépasse les métriques de satisfaction pour capturer la valeur transformationnelle réelle.
+
+Prompt 1 - Cadre d'évaluation multiniveau :
+Développe un cadre d'évaluation complet qui capture l'impact de notre formation à quatre niveaux : réaction des participants, acquisition de compétences, application en situation de travail, et impact organisationnel. Pour chaque niveau, propose des métriques spécifiques, quantitatives et qualitatives, adaptées à notre secteur [secteur d'activité].
+
+Prompt 2 - Méthodologie de collecte de données :
+Conçois une méthodologie rigoureuse pour collecter les données d'impact à chaque niveau. Inclus un calendrier optimal de collecte (immédiat, court terme, moyen terme, long terme), les outils spécifiques à utiliser, et des stratégies pour maximiser la participation et la fiabilité des données.
+
+Prompt 3 - Calcul du ROI formatif :
+Propose une méthodologie de calcul du retour sur investissement qui intègre à la fois les bénéfices tangibles (productivité, qualité, rétention) et intangibles (engagement, culture, marque employeur). Inclus une approche d'isolation des effets de la formation par rapport à d'autres variables.
+
+Prompt 4 - Visualisation et storytelling des résultats :
+Suggère un format de présentation des résultats qui combine rigueur analytique et impact narratif pour différentes audiences (direction, managers, participants). Comment transformer les données en insights actionnables qui démontrent la valeur stratégique du développement des compétences?`}
               />
             </div>
 
