@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { RandomImage } from "./random-image"
 
 const articles = [
   {
@@ -8,7 +9,7 @@ const articles = [
     title: "La transformation des RH par l'IA générative",
     description:
       "Une analyse stratégique des opportunités et défis de l'IA générative dans la fonction ressources humaines.",
-    image: "/images/hr-technology.jpeg",
+    image: "https://picsum.photos/seed/hr-tech/800/600",
     author: "Kristy Anamoutou",
     date: "20 Avril 2025",
     readTime: "12 min de lecture",
@@ -28,7 +29,7 @@ const articles = [
     title: "Mesurer l'impact de l'IA générative en RH",
     description:
       "Au-delà des promesses, la nécessité d'une évaluation systémique pour démontrer la valeur de l'IA en RH.",
-    image: "/images/measuring-ai-impact.jpeg",
+    image: "https://picsum.photos/seed/ai-impact/800/600",
     author: "Kristy Anamoutou",
     date: "25 Avril 2025",
     readTime: "14 min de lecture",
@@ -51,11 +52,12 @@ export function BlogPreview() {
           {articles.map((article) => (
             <Card key={article.id} className="overflow-hidden flex flex-col h-full">
               <div className="h-48 overflow-hidden relative bg-gray-100">
-                <img
-                  src={article.image || "/placeholder.svg"}
+                <RandomImage
                   alt={article.title}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
+                  seed={article.id}
+                  fixedImageUrl={
+                    article.id === "competences-rh-augmente" ? "/images/enhancing-key-skills.jpeg" : undefined
+                  }
                 />
               </div>
               <CardHeader>
