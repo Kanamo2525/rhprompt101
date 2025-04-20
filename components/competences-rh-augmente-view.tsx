@@ -6,6 +6,7 @@ import Link from "next/link"
 import { ArticleImage } from "@/components/ui/article-image"
 import { ArticleSchema } from "@/components/article-schema"
 import { usePathname } from "next/navigation"
+import { ArticleHeading } from "./article-heading"
 
 export function CompetencesRhAugmenteView() {
   const [activeSection, setActiveSection] = useState("")
@@ -65,9 +66,9 @@ export function CompetencesRhAugmenteView() {
 
       <div className="container mx-auto px-4 md:px-8 lg:px-0 lg:max-w-screen-md py-10">
         {/* Article header */}
-        <h1 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight text-black">
+        <ArticleHeading level={1} className="mb-4 tracking-tight">
           Les compétences clés du RH augmenté par l'IA
-        </h1>
+        </ArticleHeading>
 
         {/* Replace avatar div here */}
         <div className="flex items-center space-x-4 mb-8">
@@ -137,9 +138,9 @@ export function CompetencesRhAugmenteView() {
 
         {/* Article content */}
         <article className="prose prose-lg max-w-none text-black">
-          <h2 id="introduction" className="scroll-mt-20">
+          <ArticleHeading level={2} id="introduction" className="scroll-mt-20 mt-8 mb-4">
             Réinventer l'expertise humaine à l'ère de l'intelligence artificielle générative
-          </h2>
+          </ArticleHeading>
           <p className="text-black">
             À l'aube de cette révolution silencieuse que constitue l'IA générative, la fonction Ressources Humaines se
             trouve à un carrefour décisif. Ce n'est pas simplement un nouvel outil qui s'offre à elle, mais bien une
@@ -163,15 +164,17 @@ export function CompetencesRhAugmenteView() {
             caption="Transformation du RH à l'Ère de l'IA"
           />
 
-          <h2 id="reconfiguration" className="scroll-mt-20">
+          <ArticleHeading level={2} id="reconfiguration" className="scroll-mt-20 mt-8 mb-4">
             I. La reconfiguration du territoire professionnel RH
-          </h2>
+          </ArticleHeading>
           <p className="text-black">
             L'émergence de l'IA générative provoque un mouvement tectonique dans le paysage des responsabilités RH. Ce
             séisme redessine les contours de la profession selon trois dynamiques simultanées.
           </p>
 
-          <h3 className="font-semibold mt-6">L'obsolescence programmée des tâches opérationnelles</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            L'obsolescence programmée des tâches opérationnelles
+          </ArticleHeading>
           <p className="text-black">
             Le premier mouvement, le plus visible, concerne l'automatisation progressive des activités standardisées.
             Les données sont éloquentes : 85% des tâches administratives documentaires peuvent désormais être
@@ -185,7 +188,9 @@ export function CompetencesRhAugmenteView() {
             consacré au conseil stratégique est passé de 16% à 38% en moins d'un an.
           </p>
 
-          <h3 className="font-semibold mt-6">La transformation qualitative des fonctions traditionnelles</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            La transformation qualitative des fonctions traditionnelles
+          </ArticleHeading>
           <p className="text-black">
             Le deuxième mouvement, plus subtil, concerne la métamorphose des fonctions traditionnelles. Les missions
             perdurent mais leur nature se transforme radicalement :
@@ -210,7 +215,9 @@ export function CompetencesRhAugmenteView() {
             contre seulement 15% auparavant.
           </p>
 
-          <h3 className="font-semibold mt-6">L'émergence de nouveaux territoires professionnels</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            L'émergence de nouveaux territoires professionnels
+          </ArticleHeading>
           <p className="text-black">
             Le troisième mouvement, peut-être le plus fascinant, concerne l'apparition de territoires professionnels
             inédits. Ces espaces d'expertise émergents n'existaient tout simplement pas dans les référentiels
@@ -236,9 +243,9 @@ export function CompetencesRhAugmenteView() {
             caption="Évolution du RH augmenté: de procédural à personnalisé"
           />
 
-          <h2 id="meta-competences" className="scroll-mt-20">
+          <ArticleHeading level={2} id="meta-competences" className="scroll-mt-20 mt-8 mb-4">
             II. Les méta-compétences du RH augmenté
-          </h2>
+          </ArticleHeading>
           <p className="text-black">
             Au-delà des compétences techniques spécifiques, trois méta-compétences émergent comme fondamentalement
             distinctives du RH augmenté. Ces capacités transcendantes redéfinissent l'expertise RH à l'ère de
@@ -253,7 +260,9 @@ export function CompetencesRhAugmenteView() {
             caption="Les trois méta-compétences fondamentales du RH augmenté"
           />
 
-          <h3 className="font-semibold mt-6">La pensée systémique augmentée</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            La pensée systémique augmentée
+          </ArticleHeading>
           <p className="text-black">
             La première méta-compétence concerne la capacité à appréhender les interconnexions complexes entre
             dimensions humaines, organisationnelles et technologiques. Cette pensée systémique augmentée permet de :
@@ -270,7 +279,9 @@ export function CompetencesRhAugmenteView() {
             nommait la "cinquième discipline", mais augmentée par les capacités analytiques de l'IA.
           </p>
 
-          <h3 className="font-semibold mt-6">L'intelligence collaborative hybride</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            L'intelligence collaborative hybride
+          </ArticleHeading>
           <p className="text-black">
             La deuxième méta-compétence concerne l'aptitude à orchestrer la collaboration optimale entre intelligences
             humaines et artificielles. Cette capacité d'hybridation cognitive permet de :
@@ -287,7 +298,9 @@ export function CompetencesRhAugmenteView() {
             se renforcent mutuellement plutôt que de se concurrencer.
           </p>
 
-          <h3 className="font-semibold mt-6">Le leadership transformationnel éthique</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            Le leadership transformationnel éthique
+          </ArticleHeading>
           <p className="text-black">
             La troisième méta-compétence concerne la capacité à guider les transformations organisationnelles tout en
             garantissant leur alignement éthique. Ce leadership augmenté permet de :
@@ -304,9 +317,9 @@ export function CompetencesRhAugmenteView() {
             l'ère de l'intelligence artificielle.
           </p>
 
-          <h2 id="taxonomie" className="scroll-mt-20">
+          <ArticleHeading level={2} id="taxonomie" className="scroll-mt-20 mt-8 mb-4">
             III. La taxonomie des compétences en prompting
-          </h2>
+          </ArticleHeading>
           <p className="text-black">
             Au cœur de ces méta-compétences se trouve une capacité technique fondamentale : la maîtrise du prompting.
             Cette compétence, comparable à ce que fut la programmation SQL dans les années 1990, s'articule autour de
@@ -321,7 +334,9 @@ export function CompetencesRhAugmenteView() {
             caption="Les quatre niveaux de maîtrise du prompting en RH"
           />
 
-          <h3 className="font-semibold mt-6">Niveau 1 : L'utilisateur fonctionnel</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            Niveau 1 : L'utilisateur fonctionnel
+          </ArticleHeading>
           <p className="text-black">
             Le premier niveau correspond à la capacité à formuler des requêtes simples et directes, en utilisant
             principalement les techniques Zero-Shot et One-Shot Prompting. L'utilisateur fonctionnel comprend les
@@ -334,7 +349,9 @@ export function CompetencesRhAugmenteView() {
             d'entrée indispensable qui permet de libérer du temps pour des tâches à plus forte valeur ajoutée.
           </p>
 
-          <h3 className="font-semibold mt-6">Niveau 2 : Le praticien méthodique</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            Niveau 2 : Le praticien méthodique
+          </ArticleHeading>
           <p className="text-black">
             Le deuxième niveau correspond à la maîtrise de techniques structurées comme le Few-Shot Prompting et le
             Template Filling. Le praticien méthodique sait adapter les prompts selon le contexte et itérer pour affiner
@@ -347,7 +364,9 @@ export function CompetencesRhAugmenteView() {
             les processus existants sans les transformer radicalement.
           </p>
 
-          <h3 className="font-semibold mt-6">Niveau 3 : L'expert contextuel</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            Niveau 3 : L'expert contextuel
+          </ArticleHeading>
           <p className="text-black">
             Le troisième niveau correspond à l'application fluide de techniques avancées comme le RCT (Rôle, Contexte,
             Tâche), le Chain-of-Thought et le Contextual Augmentation. L'expert contextuel intègre profondément le
@@ -360,7 +379,9 @@ export function CompetencesRhAugmenteView() {
             véritable partenaire créatif plutôt qu'un simple outil.
           </p>
 
-          <h3 className="font-semibold mt-6">Niveau 4 : L'architecte systémique</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            Niveau 4 : L'architecte systémique
+          </ArticleHeading>
           <p className="text-black">
             Le quatrième niveau correspond à l'orchestration de techniques multiples et à la conception de systèmes
             prompts interdépendants. L'architecte systémique optimise continuellement ses approches basées sur l'analyse
@@ -373,9 +394,9 @@ export function CompetencesRhAugmenteView() {
             d'inventer de nouvelles modalités de gestion du capital humain plutôt que simplement d'optimiser l'existant.
           </p>
 
-          <h2 id="profils" className="scroll-mt-20">
+          <ArticleHeading level={2} id="profils" className="scroll-mt-20 mt-8 mb-4">
             IV. L'émergence de nouveaux profils hybrides
-          </h2>
+          </ArticleHeading>
           <p className="text-black">
             Cette reconfiguration des compétences s'incarne progressivement dans l'émergence de nouveaux profils
             professionnels hybrides. Ces "archétypes" du RH augmenté préfigurent la cristallisation institutionnelle de
@@ -390,7 +411,9 @@ export function CompetencesRhAugmenteView() {
             caption="Les quatre profils émergents du RH augmenté par l'IA"
           />
 
-          <h3 className="font-semibold mt-6">L'architecte RH augmenté</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            L'architecte RH augmenté
+          </ArticleHeading>
           <p className="text-black">
             Positionné au niveau de la direction RH et des comités stratégiques, ce profil conçoit les systèmes
             sociotechniques RH et gouverne la transformation organisationnelle. Ses compétences distinctives incluent la
@@ -402,7 +425,9 @@ export function CompetencesRhAugmenteView() {
             travers le prisme des possibilités augmentées.
           </p>
 
-          <h3 className="font-semibold mt-6">L'orchestrateur d'expériences collaborateurs</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            L'orchestrateur d'expériences collaborateurs
+          </ArticleHeading>
           <p className="text-black">
             Situé à l'interface entre RH et métiers, ce profil conçoit et déploie des expériences collaborateurs
             personnalisées et augmentées. Ses compétences distinctives incluent le design thinking, la psychologie
@@ -414,7 +439,9 @@ export function CompetencesRhAugmenteView() {
             l'intelligence artificielle.
           </p>
 
-          <h3 className="font-semibold mt-6">L'ingénieur de processus RH augmentés</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            L'ingénieur de processus RH augmentés
+          </ArticleHeading>
           <p className="text-black">
             Positionné dans les centres d'expertise RH, ce profil conçoit et optimise les processus intégrant dimensions
             humaines et IA. Ses compétences distinctives incluent la modélisation de processus complexes, la
@@ -425,7 +452,9 @@ export function CompetencesRhAugmenteView() {
             traditionnels, transformant leur maîtrise technique en capacité d'orchestration augmentée.
           </p>
 
-          <h3 className="font-semibold mt-6">Le facilitateur d'intelligence collective</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            Le facilitateur d'intelligence collective
+          </ArticleHeading>
           <p className="text-black">
             Évoluant au sein des communautés de pratique et réseaux transversaux, ce profil amplifie les capacités
             collectives via l'orchestration humain-IA. Ses compétences distinctives incluent l'animation de réseaux, la
@@ -436,9 +465,9 @@ export function CompetencesRhAugmenteView() {
             les conditions d'une intelligence augmentée distribuée plutôt que centralisée.
           </p>
 
-          <h2 id="developpement" className="scroll-mt-20">
+          <ArticleHeading level={2} id="developpement" className="scroll-mt-20 mt-8 mb-4">
             V. Le développement systématique des compétences
-          </h2>
+          </ArticleHeading>
           <p className="text-black">
             Comment développer méthodiquement ces nouvelles compétences ? L'analyse des organisations performantes
             révèle une approche structurée articulée autour de quatre piliers complémentaires.
@@ -452,7 +481,9 @@ export function CompetencesRhAugmenteView() {
             caption="Parcours de développement des compétences en IA pour les professionnels RH"
           />
 
-          <h3 className="font-semibold mt-6">Le parcours de formation séquentiel</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            Le parcours de formation séquentiel
+          </ArticleHeading>
           <p className="text-black">
             Un curriculum progressif permet une montée en compétence cohérente à travers les différents niveaux de
             maîtrise. Ce parcours s'articule typiquement en modules de 3 à 4 semaines chacun :
@@ -475,7 +506,9 @@ export function CompetencesRhAugmenteView() {
             appropriation durable.
           </p>
 
-          <h3 className="font-semibold mt-6">La communauté de pratique institutionnalisée</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            La communauté de pratique institutionnalisée
+          </ArticleHeading>
           <p className="text-black">
             L'établissement d'un réseau d'apprentissage entre pairs transcende l'approche traditionnelle de formation
             pour instaurer une dynamique d'intelligence collective autour de l'IA. Cette communauté remplit trois
@@ -492,7 +525,9 @@ export function CompetencesRhAugmenteView() {
             pratique "IA & RH" a contribué à un taux d'adoption de 93% en seulement trois mois.
           </p>
 
-          <h3 className="font-semibold mt-6">La bibliothèque organisationnelle de prompts</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            La bibliothèque organisationnelle de prompts
+          </ArticleHeading>
           <p className="text-black">
             La constitution d'un référentiel partagé et commenté de prompts efficaces permet d'accélérer
             considérablement la courbe d'apprentissage collective. Cette bibliothèque :
@@ -508,7 +543,9 @@ export function CompetencesRhAugmenteView() {
             une externalisation de l'intelligence collective augmentée de l'organisation.
           </p>
 
-          <h3 className="font-semibold mt-6">La pratique réflexive institutionnalisée</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            La pratique réflexive institutionnalisée
+          </ArticleHeading>
           <p className="text-black">
             L'instauration de routines organisationnelles favorisant l'analyse métacognitive des pratiques constitue un
             facteur critique d'amélioration continue. Ces pratiques incluent :
@@ -524,9 +561,9 @@ export function CompetencesRhAugmenteView() {
             collectif, créant un cercle vertueux d'amélioration continue.
           </p>
 
-          <h2 id="transformation" className="scroll-mt-20">
+          <ArticleHeading level={2} id="transformation" className="scroll-mt-20 mt-8 mb-4">
             VI. La transformation identitaire : au-delà des compétences
-          </h2>
+          </ArticleHeading>
           <p className="text-black">
             Au-delà des compétences techniques et organisationnelles, la transformation la plus profonde touche à
             l'identité même du professionnel RH. Cette métamorphose identitaire s'articule autour de cinq évolutions
@@ -541,7 +578,9 @@ export function CompetencesRhAugmenteView() {
             caption="Les cinq évolutions paradigmatiques du RH augmenté"
           />
 
-          <h3 className="font-semibold mt-6">Du procédural au conceptuel</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            Du procédural au conceptuel
+          </ArticleHeading>
           <p className="text-black">
             La première évolution concerne le passage d'une logique procédurale à une posture conceptuelle. Le RH
             augmenté n'est plus exécutant de procédures standardisées mais concepteur d'expériences humaines
@@ -552,7 +591,9 @@ export function CompetencesRhAugmenteView() {
             organique, où les processus ne sont plus figés mais adaptables et centrés sur l'expérience humaine.
           </p>
 
-          <h3 className="font-semibold mt-6">De l'opérationnel au stratégique</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            De l'opérationnel au stratégique
+          </ArticleHeading>
           <p className="text-black">
             La deuxième évolution concerne l'élévation du positionnement RH dans la hiérarchie décisionnelle. Libéré des
             contraintes administratives, le RH augmenté devient architecte du capital humain et social, influençant
@@ -564,7 +605,9 @@ export function CompetencesRhAugmenteView() {
             globale.
           </p>
 
-          <h3 className="font-semibold mt-6">Du fragmenté au systémique</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            Du fragmenté au systémique
+          </ArticleHeading>
           <p className="text-black">
             La troisième évolution concerne la dissolution des silos fonctionnels traditionnels. Les frontières entre
             recrutement, formation, performance et autres sous-domaines s'estompent au profit d'une approche intégrative
@@ -575,7 +618,9 @@ export function CompetencesRhAugmenteView() {
             dernières décennies, pour revenir à une vision holistique augmentée par les capacités intégratives de l'IA.
           </p>
 
-          <h3 className="font-semibold mt-6">Du réactif à l'anticipatif</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            Du réactif à l'anticipatif
+          </ArticleHeading>
           <p className="text-black">
             La quatrième évolution concerne le rapport au temps et à l'action. La libération capacitaire couplée aux
             outils d'analyse prédictive permet un basculement d'une posture réactive à une approche anticipative des
@@ -587,7 +632,9 @@ export function CompetencesRhAugmenteView() {
             émergentes.
           </p>
 
-          <h3 className="font-semibold mt-6">De la standardisation à la personnalisation</h3>
+          <ArticleHeading level={3} className="mt-6 mb-3">
+            De la standardisation à la personnalisation
+          </ArticleHeading>
           <p className="text-black">
             La cinquième évolution concerne le passage d'une logique industrielle standardisée à une approche hautement
             personnalisée. L'IA générative permet enfin de résoudre le dilemme historique entre standardisation
@@ -598,9 +645,9 @@ export function CompetencesRhAugmenteView() {
             tout en maintenant la cohérence organisationnelle grâce à une orchestration algorithmique sophistiquée.
           </p>
 
-          <h2 id="conclusion" className="scroll-mt-20">
+          <ArticleHeading level={2} id="conclusion" className="scroll-mt-20 mt-8 mb-4">
             Conclusion : Le RH comme architecte de l'avenir du travail
-          </h2>
+          </ArticleHeading>
           <p className="text-black">
             À l'horizon 2030, la fonction RH "augmentée" ne sera pas simplement une version optimisée de l'existant,
             mais une réinvention fondamentale de sa nature et de sa contribution à l'organisation. Cette métamorphose la

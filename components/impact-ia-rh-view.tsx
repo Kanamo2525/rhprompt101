@@ -13,6 +13,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 // Dans la partie initiale du fichier, ajoutons le schéma structuré
 import { ArticleSchema } from "@/components/article-schema"
 import { usePathname } from "next/navigation"
+import { ArticleHeading } from "./article-heading"
 
 export function ImpactIaRhView() {
   const pathname = usePathname()
@@ -207,9 +208,9 @@ export function ImpactIaRhView() {
 
       <div className="container mx-auto px-4 md:px-8 lg:px-0 lg:max-w-screen-md py-10">
         {/* Article header */}
-        <h1 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight text-black">
+        <ArticleHeading level={1} className="mb-4 tracking-tight">
           Mesurer l'impact de l'IA générative en RH : Au-delà des promesses, la nécessité d'une évaluation systémique
-        </h1>
+        </ArticleHeading>
 
         {/* Article header */}
         <div className="flex items-center space-x-4 mb-8">
@@ -280,9 +281,9 @@ export function ImpactIaRhView() {
             hauteur des enjeux?
           </p>
 
-          <h2 id="mirage-metrique" className="scroll-mt-20">
+          <ArticleHeading level={2} id="mirage-metrique" className="scroll-mt-20">
             Du mirage métrique à l'évaluation transformationnelle
-          </h2>
+          </ArticleHeading>
           <p className="text-black">
             La tentation est grande, face à l'IA générative, de répliquer les approches évaluatives traditionnelles –
             économies réalisées, temps gagné, volumes traités. Cette perspective, bien que nécessaire, s'avère
@@ -302,16 +303,18 @@ export function ImpactIaRhView() {
             paradigmatique.
           </p>
 
-          <h2 id="cadre-evaluation" className="scroll-mt-20">
+          <ArticleHeading level={2} id="cadre-evaluation" className="scroll-mt-20">
             Un cadre d'évaluation à la hauteur des transformations
-          </h2>
+          </ArticleHeading>
           <p className="text-black">
             L'analyse des organisations pionnières révèle une approche évaluative multidimensionnelle qui transcende les
             métriques opérationnelles simples. Ce cadre intègre quatre dimensions complémentaires qui, ensemble,
             permettent d'appréhender l'impact systémique de l'IA générative en RH.
           </p>
 
-          <h3 className="font-semibold mt-6">1. Efficience opérationnelle quantifiable</h3>
+          <ArticleHeading level={3} className="font-semibold mt-6">
+            1. Efficience opérationnelle quantifiable
+          </ArticleHeading>
           <p className="text-black">
             Cette dimension, la plus immédiatement mesurable, concerne l'optimisation des ressources et la productivité
             directe :
@@ -332,7 +335,9 @@ export function ImpactIaRhView() {
             </li>
           </ul>
 
-          <h3 className="font-semibold mt-6">2. Valeur qualitative générée</h3>
+          <ArticleHeading level={3} className="font-semibold mt-6">
+            2. Valeur qualitative générée
+          </ArticleHeading>
           <p className="text-black">
             Cette dimension, plus subtile mais stratégiquement décisive, concerne l'amélioration de la qualité des
             livrables et services RH :
@@ -352,7 +357,9 @@ export function ImpactIaRhView() {
             </li>
           </ul>
 
-          <h3 className="font-semibold mt-6">3. Redistribution de la valeur temps</h3>
+          <ArticleHeading level={3} className="font-semibold mt-6">
+            3. Redistribution de la valeur temps
+          </ArticleHeading>
           <p className="text-black">
             Cette dimension transformationnelle concerne la réallocation des capacités humaines vers des activités à
             plus forte valeur ajoutée :
@@ -372,7 +379,9 @@ export function ImpactIaRhView() {
             </li>
           </ul>
 
-          <h3 className="font-semibold mt-6">4. Impact organisationnel systémique</h3>
+          <ArticleHeading level={3} className="font-semibold mt-6">
+            4. Impact organisationnel systémique
+          </ArticleHeading>
           <p className="text-black">
             Cette dimension, la plus stratégique, concerne la contribution aux objectifs fondamentaux de l'organisation
             :
@@ -408,9 +417,9 @@ export function ImpactIaRhView() {
             caption="Les quatre dimensions d'évaluation de l'impact de l'IA générative en RH"
           />
 
-          <h2 id="methodologie" className="scroll-mt-20">
+          <ArticleHeading level={2} id="methodologie" className="scroll-mt-20">
             Une méthodologie d'évaluation scientifique plutôt qu'anecdotique
-          </h2>
+          </ArticleHeading>
           <p className="text-black">
             La crédibilité des gains revendiqués repose fondamentalement sur la rigueur méthodologique de leur
             évaluation. Trop souvent, l'enthousiasme technologique engendre des affirmations d'impact fondées sur des
@@ -418,7 +427,9 @@ export function ImpactIaRhView() {
             de quatre principes fondamentaux :
           </p>
 
-          <h3 className="font-semibold mt-6">1. Établissement de baselines robustes</h3>
+          <ArticleHeading level={3} className="font-semibold mt-6">
+            1. Établissement de baselines robustes
+          </ArticleHeading>
           <ul>
             <li>Documentation détaillée des processus avant transformation</li>
             <li>Collecte systématique des métriques opérationnelles sur période significative</li>
@@ -426,7 +437,9 @@ export function ImpactIaRhView() {
             <li>Analyse des coûts directs et indirects complets</li>
           </ul>
 
-          <h3 className="font-semibold mt-6">2. Approche expérimentale contrôlée</h3>
+          <ArticleHeading level={3} className="font-semibold mt-6">
+            2. Approche expérimentale contrôlée
+          </ArticleHeading>
           <ul>
             <li>Déploiements par phases avec groupes témoins quand possible</li>
             <li>Contrôle méthodique des variables contextuelles</li>
@@ -434,7 +447,9 @@ export function ImpactIaRhView() {
             <li>Analyses contrefactuelles documentées</li>
           </ul>
 
-          <h3 className="font-semibold mt-6">3. Triangulation méthodologique</h3>
+          <ArticleHeading level={3} className="font-semibold mt-6">
+            3. Triangulation méthodologique
+          </ArticleHeading>
           <ul>
             <li>Combinaison de données quantitatives et qualitatives</li>
             <li>Croisement des perspectives (utilisateurs, bénéficiaires, parties prenantes)</li>
@@ -442,7 +457,9 @@ export function ImpactIaRhView() {
             <li>Évaluations subjectives et objectives</li>
           </ul>
 
-          <h3 className="font-semibold mt-6">4. Temporalité adaptée aux effets mesurés</h3>
+          <ArticleHeading level={3} className="font-semibold mt-6">
+            4. Temporalité adaptée aux effets mesurés
+          </ArticleHeading>
           <ul>
             <li>Mesures immédiates pour l'efficience opérationnelle</li>
             <li>Évaluations à moyen terme pour les transformations qualitatives</li>
@@ -458,9 +475,9 @@ export function ImpactIaRhView() {
             caption="Approche méthodologique pour une évaluation scientifique de l'impact de l'IA"
           />
 
-          <h2 id="tableaux-bord" className="scroll-mt-20">
+          <ArticleHeading level={2} id="tableaux-bord" className="scroll-mt-20">
             Tableaux de bord différenciés selon les quadrants d'opportunité
-          </h2>
+          </ArticleHeading>
           <p className="text-black">
             L'évaluation pertinente d'une initiative d'IA générative dépend fondamentalement de son positionnement
             stratégique. Notre matrice d'opportunités identifie quatre quadrants – Automatisation, Assistance,
@@ -468,7 +485,9 @@ export function ImpactIaRhView() {
             stratégiques différenciées.
           </p>
 
-          <h3 className="font-semibold mt-6">Quadrant Automatisation : L'excellence opérationnelle</h3>
+          <ArticleHeading level={3} className="font-semibold mt-6">
+            Quadrant Automatisation : L'excellence opérationnelle
+          </ArticleHeading>
           <EnhancedTable id="tableau-automatisation" title="Quadrant Automatisation : L'excellence opérationnelle">
             <table id="tableau-automatisation" className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -518,7 +537,9 @@ export function ImpactIaRhView() {
             </table>
           </EnhancedTable>
 
-          <h3 className="font-semibold mt-6">Quadrant Assistance : L'excellence analytique et décisionnelle</h3>
+          <ArticleHeading level={3} className="font-semibold mt-6">
+            Quadrant Assistance : L'excellence analytique et décisionnelle
+          </ArticleHeading>
           <EnhancedTable id="tableau-assistance" title="Quadrant Assistance : L'excellence analytique et décisionnelle">
             <table id="tableau-assistance" className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -568,7 +589,9 @@ export function ImpactIaRhView() {
             </table>
           </EnhancedTable>
 
-          <h3 className="font-semibold mt-6">Quadrant Augmentation : L'excellence transformationnelle</h3>
+          <ArticleHeading level={3} className="font-semibold mt-6">
+            Quadrant Augmentation : L'excellence transformationnelle
+          </ArticleHeading>
           <EnhancedTable id="tableau-augmentation" title="Quadrant Augmentation : L'excellence transformationnelle">
             <table id="tableau-augmentation" className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -618,7 +641,9 @@ export function ImpactIaRhView() {
             </table>
           </EnhancedTable>
 
-          <h3 className="font-semibold mt-6">Quadrant Avant-Garde : L'excellence disruptive</h3>
+          <ArticleHeading level={3} className="font-semibold mt-6">
+            Quadrant Avant-Garde : L'excellence disruptive
+          </ArticleHeading>
           <EnhancedTable id="tableau-avant-garde" title="Quadrant Avant-Garde : L'excellence disruptive">
             <table id="tableau-avant-garde" className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -668,9 +693,9 @@ export function ImpactIaRhView() {
             </table>
           </EnhancedTable>
 
-          <h2 id="cas-formation" className="scroll-mt-20">
+          <ArticleHeading level={2} id="cas-formation" className="scroll-mt-20">
             La formation : un cas d'application révélateur
-          </h2>
+          </ArticleHeading>
           <p className="text-black">
             Le domaine de la formation illustre parfaitement la nécessité d'une approche évaluative multidimensionnelle.
             Dans ce secteur, les organisations performantes ont développé un tableau de bord intégré qui permet de
@@ -791,15 +816,17 @@ export function ImpactIaRhView() {
             compétences de +29%).
           </p>
 
-          <h2 id="communiquer" className="scroll-mt-20">
+          <ArticleHeading level={2} id="communiquer" className="scroll-mt-20">
             Communiquer stratégiquement sur les résultats
-          </h2>
+          </ArticleHeading>
           <p className="text-black">
             La mesure rigoureuse des impacts ne suffit pas – encore faut-il les valoriser efficacement auprès des
             parties prenantes. Les organisations performantes développent une stratégie de communication différenciée :
           </p>
 
-          <h3 className="font-semibold mt-6">1. Segmentation stratégique des audiences</h3>
+          <ArticleHeading level={3} className="font-semibold mt-6">
+            1. Segmentation stratégique des audiences
+          </ArticleHeading>
 
           <EnhancedTable id="tableau-communication" title="Stratégie de communication par audience">
             <table id="tableau-communication" className="min-w-full divide-y divide-gray-200">
@@ -890,7 +917,9 @@ export function ImpactIaRhView() {
             </table>
           </EnhancedTable>
 
-          <h3 className="font-semibold mt-6">2. Narration transformationnelle</h3>
+          <ArticleHeading level={3} className="font-semibold mt-6">
+            2. Narration transformationnelle
+          </ArticleHeading>
           <p className="text-black">
             La construction d'un récit cohérent transcendant les chiffres bruts donne sens à la transformation :
           </p>
@@ -901,7 +930,9 @@ export function ImpactIaRhView() {
             <li>Équilibre entre résultats tangibles et potentiel futur</li>
           </ul>
 
-          <h3 className="font-semibold mt-6">3. Matérialisation expérientielle</h3>
+          <ArticleHeading level={3} className="font-semibold mt-6">
+            3. Matérialisation expérientielle
+          </ArticleHeading>
           <p className="text-black">
             La traduction des gains abstraits en expériences concrètes facilite l'appropriation :
           </p>
@@ -920,9 +951,9 @@ export function ImpactIaRhView() {
             caption="Les trois niveaux de la stratégie de communication des résultats d'impact de l'IA en RH"
           />
 
-          <h2 id="conclusion" className="scroll-mt-20">
+          <ArticleHeading level={2} id="conclusion" className="scroll-mt-20">
             Conclusion : Vers une culture de l'évaluation transformationnelle
-          </h2>
+          </ArticleHeading>
           <p className="text-black">
             L'IA générative en RH ne représente pas simplement une évolution technologique, mais bien une mutation
             paradigmatique de la fonction ressources humaines. Son évaluation exige donc une approche qui transcende les
@@ -1015,5 +1046,3 @@ export function ImpactIaRhView() {
     </div>
   )
 }
-
-export default ImpactIaRhView
