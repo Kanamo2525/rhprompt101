@@ -4,6 +4,7 @@ import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { useState, useMemo } from "react"
 import { Search, ChevronDown, ChevronUp, Info } from "lucide-react"
+import OpportunityMatrix from "@/components/opportunity-matrix"
 
 // Données
 const casUsageData = [
@@ -119,7 +120,7 @@ const casUsageData = [
     usageCase: "Détection des hauts potentiels",
     opportunityType: "Assistance",
     promptingTechniques: ["Generated Knowledge", "Multi-Prompting"],
-    justification: "Outil d'aide à la décision pour identifier les talents, jugement final reste humain",
+    justification: "Outil d'aide à la décision pour identifier les talents  ",
   },
   {
     category: "Support RH et relations collaborateurs",
@@ -356,6 +357,14 @@ export default function MatricePage() {
             </div>
           </div>
         </div>
+
+        {/* Ajout de la matrice d'opportunités dynamique */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <OpportunityMatrix casUsageData={casUsageData} />
+        </div>
+
+        {/* Espace pour séparer les sections */}
+        <div className="py-6"></div>
 
         <div className="bg-white rounded-lg shadow-xl overflow-hidden max-w-7xl mx-auto my-8">
           {/* Header & Stats */}

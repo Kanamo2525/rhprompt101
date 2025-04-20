@@ -4,6 +4,7 @@ import { KeyFeatures } from "@/components/key-features"
 import { CataloguePreview } from "@/components/catalogue-preview"
 import { MatrixPreview } from "@/components/matrix-preview"
 import { GuidePreview } from "@/components/guide-preview"
+import { BlogPreview } from "@/components/blog-preview"
 import { CallToAction } from "@/components/call-to-action"
 import { Footer } from "@/components/footer"
 import type { Metadata } from "next"
@@ -29,6 +30,9 @@ export default function Home() {
         </section>
         <section aria-labelledby="matrix-heading">
           <MatrixPreview />
+        </section>
+        <section aria-labelledby="blog-heading">
+          <BlogPreview />
         </section>
         <section aria-labelledby="guide-heading">
           <GuidePreview />
