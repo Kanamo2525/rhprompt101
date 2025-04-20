@@ -979,12 +979,12 @@ export function ImpactIaRhView() {
           <p className="text-black">
             Dans un contexte où le déploiement de l'IA générative s'accélère, la capacité à mesurer rigoureusement et
             communiquer stratégiquement sur sa valeur constituera un différenciateur concurrentiel majeur. Car comme le
-            soulignait Peter Drucker, "ce qui se mesure s'améliore" – à condition de mesurer ce qui compte vraiment.
+            soulignait W. Edward Deming, "ce qui ne se mesure pas, ne s'améliore pas" – à condition de mesurer ce qui compte vraiment.
           </p>
 
           <div className="mt-8 p-4 bg-gray-50 border border-gray-200 rounded-lg">
             <p className="text-sm text-gray-600 italic">
-              Cet article s'inspire des recherches menées pour l'élaboration du "Guide : L'Art du Prompting pour les
+              Cet article s'inspire des recherches menées pour l'élaboration du "Guide pratique de l'IA pour les
               RH", synthétisant les meilleures pratiques des organisations pionnières dans l'intégration de l'IA
               générative au sein de leur fonction ressources humaines.
             </p>

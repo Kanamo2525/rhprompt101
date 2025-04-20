@@ -142,11 +142,11 @@ export function CompetencesRhAugmenteView() {
             Réinventer l'expertise humaine à l'ère de l'intelligence artificielle générative
           </ArticleHeading>
           <p className="text-black">
-            À l'aube de cette révolution silencieuse que constitue l'IA générative, la fonction Ressources Humaines se
+            À l'aube de cette transformation que constitue l'IA générative, la fonction Ressources Humaines se
             trouve à un carrefour décisif. Ce n'est pas simplement un nouvel outil qui s'offre à elle, mais bien une
-            reconfiguration fondamentale de son essence et de sa contribution stratégique. En 2025, alors que plus de
-            40% des départements RH ont déjà intégré l'IA dans leurs processus et réalisent des gains de productivité
-            atteignant 40%, la question n'est plus de savoir <em>si</em> cette transformation aura lieu, mais{" "}
+            reconfiguration fondamentale de son essence et de sa contribution stratégique. En 2025, alors que de nombreux
+            départements RH ont déjà intégré l'IA dans leurs processus et réalisent des premiers gains de productivité
+            , la question n'est plus de savoir <em>si</em> cette transformation aura lieu, mais{" "}
             <em>comment</em> les professionnels RH peuvent se réinventer pour l'orchestrer.
           </p>
           <p className="text-black">
@@ -177,15 +177,13 @@ export function CompetencesRhAugmenteView() {
           </ArticleHeading>
           <p className="text-black">
             Le premier mouvement, le plus visible, concerne l'automatisation progressive des activités standardisées.
-            Les données sont éloquentes : 85% des tâches administratives documentaires peuvent désormais être
+            Les données sont éloquentes : 65% des tâches administratives documentaires pourraient désormais être
             automatisées, tandis que la rédaction procédurale (offres d'emploi, contrats types, communications
             standardisées) s'effectue en quelques secondes plutôt qu'en heures.
           </p>
           <p className="text-black">
             Cette obsolescence ne constitue pas une menace, mais une libération. Elle signale l'érosion des activités à
             faible valeur ajoutée qui, historiquement, ont consumé l'essentiel du temps et de l'énergie des équipes RH.
-            Les chiffres parlent d'eux-mêmes : la redistribution temporelle mesurée chez Michelin montre que le temps
-            consacré au conseil stratégique est passé de 16% à 38% en moins d'un an.
           </p>
 
           <ArticleHeading level={3} className="mt-6 mb-3">
@@ -210,9 +208,7 @@ export function CompetencesRhAugmenteView() {
           </ul>
           <p className="text-black">
             Cette transformation qualitative exige non pas l'abandon des expertises existantes, mais leur
-            reconfiguration fondamentale. Le cas d'Orange illustre cette dynamique : les professionnels formation
-            consacrent désormais 70% de leur temps à la conception d'expériences d'apprentissage transformationnelles,
-            contre seulement 15% auparavant.
+            reconfiguration fondamentale.
           </p>
 
           <ArticleHeading level={3} className="mt-6 mb-3">
@@ -322,7 +318,7 @@ export function CompetencesRhAugmenteView() {
           </ArticleHeading>
           <p className="text-black">
             Au cœur de ces méta-compétences se trouve une capacité technique fondamentale : la maîtrise du prompting.
-            Cette compétence, comparable à ce que fut la programmation SQL dans les années 1990, s'articule autour de
+            Cette compétence, comparable à ce que fut l'utilisation du pack Office dans les années 2000, s'articule autour de
             quatre niveaux de maîtrise qui correspondent à des seuils qualitatifs distincts.
           </p>
 
@@ -521,8 +517,7 @@ export function CompetencesRhAugmenteView() {
           </ul>
           <p className="text-black">
             Cette dimension sociale de l'apprentissage s'avère particulièrement cruciale face à l'anxiété identitaire
-            que peut susciter la transformation. Le cas de CDC Habitat illustre cette approche : leur communauté de
-            pratique "IA & RH" a contribué à un taux d'adoption de 93% en seulement trois mois.
+            que peut susciter la transformation.
           </p>
 
           <ArticleHeading level={3} className="mt-6 mb-3">
@@ -673,7 +668,7 @@ export function CompetencesRhAugmenteView() {
             condition d'embrasser sa métamorphose plutôt que de s'y opposer.
           </p>
           <p className="text-black">
-            Le futur appartient aux RH augmentés qui sauront incarner cette transformation paradigmatique – non comme
+            Le futur appartient aux responsables RH augmentés qui sauront incarner cette transformation paradigmatique – non comme
             une menace à leur identité professionnelle, mais comme son accomplissement le plus élevé.
           </p>
         </article>
