@@ -201,7 +201,7 @@ export function ImpactIaRhView() {
         datePublished="2025-04-25"
         authorName="Kristy Anamoutou"
         authorImage="/images/kristy-anamoutou.jpeg"
-        imageUrl="/images/cadre-evaluation-ia-rh.png"
+        imageUrl="/images/measuring-ai-impact.jpeg"
         url={fullUrl}
       />
 
@@ -272,8 +272,8 @@ export function ImpactIaRhView() {
         </div>
 
         {/* Article content */}
-        <article className="prose prose-lg max-w-none">
-          <p className="lead italic">
+        <article className="prose prose-lg max-w-none text-black">
+          <p className="lead italic text-black">
             Dans un monde où l'enthousiasme technologique précède souvent la démonstration de valeur, l'évaluation
             rigoureuse de l'impact de l'IA générative en ressources humaines devient un impératif stratégique. Entre
             réduction des coûts et transformation paradigmatique, comment construire une méthodologie d'évaluation à la
@@ -283,19 +283,19 @@ export function ImpactIaRhView() {
           <h2 id="mirage-metrique" className="scroll-mt-20">
             Du mirage métrique à l'évaluation transformationnelle
           </h2>
-          <p>
+          <p className="text-black">
             La tentation est grande, face à l'IA générative, de répliquer les approches évaluatives traditionnelles –
             économies réalisées, temps gagné, volumes traités. Cette perspective, bien que nécessaire, s'avère
             dramatiquement insuffisante. Elle occulte la nature profondément transformationnelle de ces technologies qui
             ne se contentent pas d'optimiser l'existant, mais reconfigurèrent fondamentalement la pratique RH elle-même.
           </p>
-          <p>
+          <p className="text-black">
             L'histoire des transformations technologiques majeures nous enseigne une leçon invariable : les
             organisations qui extraient le maximum de valeur ne sont pas celles qui mesurent avec le plus de précision
             l'amélioration d'indicateurs traditionnels, mais celles qui perçoivent et évaluent la métamorphose
             qualitative des possibles qu'elles engendrent.
           </p>
-          <p>
+          <p className="text-black">
             Comme l'expliquait brillamment le philosophe des techniques Gilbert Simondon, toute technologie
             véritablement disruptive ne se limite jamais à faire mieux ce qui existait déjà – elle rend possible ce qui
             était auparavant inconcevable. La véritable mesure d'impact doit capturer cette dimension d'ouverture
@@ -305,14 +305,14 @@ export function ImpactIaRhView() {
           <h2 id="cadre-evaluation" className="scroll-mt-20">
             Un cadre d'évaluation à la hauteur des transformations
           </h2>
-          <p>
+          <p className="text-black">
             L'analyse des organisations pionnières révèle une approche évaluative multidimensionnelle qui transcende les
             métriques opérationnelles simples. Ce cadre intègre quatre dimensions complémentaires qui, ensemble,
             permettent d'appréhender l'impact systémique de l'IA générative en RH.
           </p>
 
           <h3 className="font-semibold mt-6">1. Efficience opérationnelle quantifiable</h3>
-          <p>
+          <p className="text-black">
             Cette dimension, la plus immédiatement mesurable, concerne l'optimisation des ressources et la productivité
             directe :
           </p>
@@ -333,7 +333,7 @@ export function ImpactIaRhView() {
           </ul>
 
           <h3 className="font-semibold mt-6">2. Valeur qualitative générée</h3>
-          <p>
+          <p className="text-black">
             Cette dimension, plus subtile mais stratégiquement décisive, concerne l'amélioration de la qualité des
             livrables et services RH :
           </p>
@@ -353,7 +353,7 @@ export function ImpactIaRhView() {
           </ul>
 
           <h3 className="font-semibold mt-6">3. Redistribution de la valeur temps</h3>
-          <p>
+          <p className="text-black">
             Cette dimension transformationnelle concerne la réallocation des capacités humaines vers des activités à
             plus forte valeur ajoutée :
           </p>
@@ -373,7 +373,7 @@ export function ImpactIaRhView() {
           </ul>
 
           <h3 className="font-semibold mt-6">4. Impact organisationnel systémique</h3>
-          <p>
+          <p className="text-black">
             Cette dimension, la plus stratégique, concerne la contribution aux objectifs fondamentaux de l'organisation
             :
           </p>
@@ -393,7 +393,7 @@ export function ImpactIaRhView() {
             </li>
           </ul>
 
-          <p>
+          <p className="text-black">
             La puissance de ce cadre réside moins dans chaque mesure isolée que dans leur articulation systémique. Les
             organisations performantes construisent progressivement une chaîne d'impact depuis l'efficience
             opérationnelle jusqu'aux résultats stratégiques, validant ainsi la contribution fondamentale de l'IA
@@ -411,7 +411,7 @@ export function ImpactIaRhView() {
           <h2 id="methodologie" className="scroll-mt-20">
             Une méthodologie d'évaluation scientifique plutôt qu'anecdotique
           </h2>
-          <p>
+          <p className="text-black">
             La crédibilité des gains revendiqués repose fondamentalement sur la rigueur méthodologique de leur
             évaluation. Trop souvent, l'enthousiasme technologique engendre des affirmations d'impact fondées sur des
             anecdotes plutôt que sur une méthodologie robuste. Une approche véritablement scientifique s'articule autour
@@ -461,7 +461,7 @@ export function ImpactIaRhView() {
           <h2 id="tableaux-bord" className="scroll-mt-20">
             Tableaux de bord différenciés selon les quadrants d'opportunité
           </h2>
-          <p>
+          <p className="text-black">
             L'évaluation pertinente d'une initiative d'IA générative dépend fondamentalement de son positionnement
             stratégique. Notre matrice d'opportunités identifie quatre quadrants – Automatisation, Assistance,
             Augmentation, Avant-Garde – chacun impliquant des critères d'évaluation distincts reflétant leurs finalités
@@ -495,24 +495,24 @@ export function ImpactIaRhView() {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Efficience</td>
-                  <td className="px-6 py-4">Réduction du temps de traitement</td>
-                  <td className="px-6 py-4">50-70% pour les tâches standardisées</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Efficience</td>
+                  <td className="px-6 py-4 text-black">Réduction du temps de traitement</td>
+                  <td className="px-6 py-4 text-black">50-70% pour les tâches standardisées</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Consistance</td>
-                  <td className="px-6 py-4">Taux d'erreur avant/après</td>
-                  <td className="px-6 py-4">Réduction {">"}80% des erreurs d'exécution</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Consistance</td>
+                  <td className="px-6 py-4 text-black">Taux d'erreur avant/après</td>
+                  <td className="px-6 py-4 text-black">Réduction {">"}80% des erreurs d'exécution</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Volumétrie</td>
-                  <td className="px-6 py-4">Capacité de traitement maximale</td>
-                  <td className="px-6 py-4">Multiplication par 3-5 des volumes</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Volumétrie</td>
+                  <td className="px-6 py-4 text-black">Capacité de traitement maximale</td>
+                  <td className="px-6 py-4 text-black">Multiplication par 3-5 des volumes</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">ROI opérationnel</td>
-                  <td className="px-6 py-4">Libération de capacité RH</td>
-                  <td className="px-6 py-4">25-35% du temps réorienté</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">ROI opérationnel</td>
+                  <td className="px-6 py-4 text-black">Libération de capacité RH</td>
+                  <td className="px-6 py-4 text-black">25-35% du temps réorienté</td>
                 </tr>
               </tbody>
             </table>
@@ -545,24 +545,24 @@ export function ImpactIaRhView() {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Pertinence</td>
-                  <td className="px-6 py-4">Taux d'adoption par les professionnels RH</td>
-                  <td className="px-6 py-4">{">"}70% d'adoption volontaire</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Pertinence</td>
+                  <td className="px-6 py-4 text-black">Taux d'adoption par les professionnels RH</td>
+                  <td className="px-6 py-4 text-black">{">"}70% d'adoption volontaire</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Contextualisation</td>
-                  <td className="px-6 py-4">Utilité perçue des recommandations</td>
-                  <td className="px-6 py-4">Amélioration de 40-60% de la satisfaction</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Contextualisation</td>
+                  <td className="px-6 py-4 text-black">Utilité perçue des recommandations</td>
+                  <td className="px-6 py-4 text-black">Amélioration de 40-60% de la satisfaction</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Accessibilité</td>
-                  <td className="px-6 py-4">Temps de formation à la maîtrise</td>
-                  <td className="px-6 py-4">{"<"}5h pour maîtrise fonctionnelle</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Accessibilité</td>
+                  <td className="px-6 py-4 text-black">Temps de formation à la maîtrise</td>
+                  <td className="px-6 py-4 text-black">{"<"}5h pour maîtrise fonctionnelle</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Complémentarité</td>
-                  <td className="px-6 py-4">Impact sur la qualité décisionnelle</td>
-                  <td className="px-6 py-4">30-40% d'amélioration des décisions</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Complémentarité</td>
+                  <td className="px-6 py-4 text-black">Impact sur la qualité décisionnelle</td>
+                  <td className="px-6 py-4 text-black">30-40% d'amélioration des décisions</td>
                 </tr>
               </tbody>
             </table>
@@ -595,24 +595,24 @@ export function ImpactIaRhView() {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Personnalisation</td>
-                  <td className="px-6 py-4">Degré de granularité adaptative</td>
-                  <td className="px-6 py-4">Facteur x10-x100 vs approche standard</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Personnalisation</td>
+                  <td className="px-6 py-4 text-black">Degré de granularité adaptative</td>
+                  <td className="px-6 py-4 text-black">Facteur x10-x100 vs approche standard</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Co-création</td>
-                  <td className="px-6 py-4">Émergence de solutions inédites</td>
-                  <td className="px-6 py-4">25-40% de solutions non anticipées</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Co-création</td>
+                  <td className="px-6 py-4 text-black">Émergence de solutions inédites</td>
+                  <td className="px-6 py-4 text-black">25-40% de solutions non anticipées</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Innovation</td>
-                  <td className="px-6 py-4">Indices d'innovation des solutions</td>
-                  <td className="px-6 py-4">Génération de brevets/méthodes</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Innovation</td>
+                  <td className="px-6 py-4 text-black">Indices d'innovation des solutions</td>
+                  <td className="px-6 py-4 text-black">Génération de brevets/méthodes</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Engagement</td>
-                  <td className="px-6 py-4">Impact sur expérience collaborateur</td>
-                  <td className="px-6 py-4">+15-25pts Net Promoter Score</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Engagement</td>
+                  <td className="px-6 py-4 text-black">Impact sur expérience collaborateur</td>
+                  <td className="px-6 py-4 text-black">+15-25pts Net Promoter Score</td>
                 </tr>
               </tbody>
             </table>
@@ -645,24 +645,24 @@ export function ImpactIaRhView() {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Disruption</td>
-                  <td className="px-6 py-4">Potentiel de redéfinition procédurale</td>
-                  <td className="px-6 py-4">Création de nouveaux standards</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Disruption</td>
+                  <td className="px-6 py-4 text-black">Potentiel de redéfinition procédurale</td>
+                  <td className="px-6 py-4 text-black">Création de nouveaux standards</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Scalabilité</td>
-                  <td className="px-6 py-4">Capacité de généralisation</td>
-                  <td className="px-6 py-4">Adoption cross-divisions {">"}50%</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Scalabilité</td>
+                  <td className="px-6 py-4 text-black">Capacité de généralisation</td>
+                  <td className="px-6 py-4 text-black">Adoption cross-divisions {">"}50%</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Adaptabilité</td>
-                  <td className="px-6 py-4">Flexibilité aux contextes émergents</td>
-                  <td className="px-6 py-4">Auto-adaptation sans recodage</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Adaptabilité</td>
+                  <td className="px-6 py-4 text-black">Flexibilité aux contextes émergents</td>
+                  <td className="px-6 py-4 text-black">Auto-adaptation sans recodage</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Avantage compétitif</td>
-                  <td className="px-6 py-4">Différentiation sur marché talents</td>
-                  <td className="px-6 py-4">Positionnement pionnier reconnu</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Avantage compétitif</td>
+                  <td className="px-6 py-4 text-black">Différentiation sur marché talents</td>
+                  <td className="px-6 py-4 text-black">Positionnement pionnier reconnu</td>
                 </tr>
               </tbody>
             </table>
@@ -671,7 +671,7 @@ export function ImpactIaRhView() {
           <h2 id="cas-formation" className="scroll-mt-20">
             La formation : un cas d'application révélateur
           </h2>
-          <p>
+          <p className="text-black">
             Le domaine de la formation illustre parfaitement la nécessité d'une approche évaluative multidimensionnelle.
             Dans ce secteur, les organisations performantes ont développé un tableau de bord intégré qui permet de
             capturer la valeur holistique créée par l'IA générative.
@@ -709,72 +709,72 @@ export function ImpactIaRhView() {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Efficience opérationnelle</td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Efficience opérationnelle</td>
+                  <td className="px-6 py-4 text-black">
                     • Temps de production pédagogique
                     <br />• Coût par heure de formation
                     <br />• Ratio personnalisation/ressources
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 text-black">
                     Données projets
                     <br />
                     Données financières
                     <br />
                     Analytics formation
                   </td>
-                  <td className="px-6 py-4">50-70% d'amélioration vs processus traditionnels</td>
+                  <td className="px-6 py-4 text-black">50-70% d'amélioration vs processus traditionnels</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Efficacité pédagogique</td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Efficacité pédagogique</td>
+                  <td className="px-6 py-4 text-black">
                     • Taux d'acquisition des compétences
                     <br />• Profondeur d'apprentissage
                     <br />• Taux de transfert en situation
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 text-black">
                     Évaluations
                     <br />
                     Observations
                     <br />
                     Entretiens managers
                   </td>
-                  <td className="px-6 py-4">25-40% d'amélioration vs formats standardisés</td>
+                  <td className="px-6 py-4 text-black">25-40% d'amélioration vs formats standardisés</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Expérience apprenant</td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Expérience apprenant</td>
+                  <td className="px-6 py-4 text-black">
                     • Engagement (temps, interactions)
                     <br />• Satisfaction NPS
                     <br />• Auto-efficacité perçue
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 text-black">
                     LMS analytics
                     <br />
                     Enquêtes
                     <br />
                     Données comportementales
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 text-black">
                     NPS {">"} 45
                     <br />
                     Engagement +40% vs formations traditionnelles
                   </td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Impact organisationnel</td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Impact organisationnel</td>
+                  <td className="px-6 py-4 text-black">
                     • Évolution des indicateurs de performance
                     <br />• Contribution aux objectifs stratégiques
                     <br />• ROI formatif
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 text-black">
                     KPIs business
                     <br />
                     Enquêtes climat
                     <br />
                     Analyses longitudinales
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 text-black">
                     ROI {">"} 300%
                     <br />
                     Impact mesurable sur KPIs métier
@@ -784,7 +784,7 @@ export function ImpactIaRhView() {
             </table>
           </EnhancedTable>
 
-          <p>
+          <p className="text-black">
             Cette approche intégrée permet de démontrer non seulement les gains d'efficience (réduction de 70% du temps
             de conception pédagogique), mais également l'amélioration qualitative (score d'applicabilité perçue de 4,7/5
             vs 3,2/5 pour les formations traditionnelles) et l'impact transformationnel (amélioration mesurée des
@@ -794,7 +794,7 @@ export function ImpactIaRhView() {
           <h2 id="communiquer" className="scroll-mt-20">
             Communiquer stratégiquement sur les résultats
           </h2>
-          <p>
+          <p className="text-black">
             La mesure rigoureuse des impacts ne suffit pas – encore faut-il les valoriser efficacement auprès des
             parties prenantes. Les organisations performantes développent une stratégie de communication différenciée :
           </p>
@@ -833,65 +833,67 @@ export function ImpactIaRhView() {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Direction générale</td>
-                  <td className="px-6 py-4">Contribution stratégique</td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Direction générale</td>
+                  <td className="px-6 py-4 text-black">Contribution stratégique</td>
+                  <td className="px-6 py-4 text-black">
                     Impact organisationnel
                     <br />
                     ROI quantifié
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 text-black">
                     Synthèse exécutive
                     <br />
                     Visualisations
                   </td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Managers opérationnels</td>
-                  <td className="px-6 py-4">Bénéfices concrets</td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Managers opérationnels</td>
+                  <td className="px-6 py-4 text-black">Bénéfices concrets</td>
+                  <td className="px-6 py-4 text-black">
                     Gains de temps
                     <br />
                     Amélioration qualitative
                   </td>
-                  <td className="px-6 py-4">Cas d'usage concrets</td>
+                  <td className="px-6 py-4 text-black">Cas d'usage concrets</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Équipes RH</td>
-                  <td className="px-6 py-4">Évolution du rôle</td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Équipes RH</td>
+                  <td className="px-6 py-4 text-black">Évolution du rôle</td>
+                  <td className="px-6 py-4 text-black">
                     Valorisation professionnelle
                     <br />
                     Nouvelles compétences
                   </td>
-                  <td className="px-6 py-4">Parcours transformation</td>
+                  <td className="px-6 py-4 text-black">Parcours transformation</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Collaborateurs</td>
-                  <td className="px-6 py-4">Expérience utilisateur</td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Collaborateurs</td>
+                  <td className="px-6 py-4 text-black">Expérience utilisateur</td>
+                  <td className="px-6 py-4 text-black">
                     Personnalisation
                     <br />
                     Accessibilité services
                   </td>
-                  <td className="px-6 py-4">Démonstrations interactives</td>
+                  <td className="px-6 py-4 text-black">Démonstrations interactives</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium">Partenaires sociaux</td>
-                  <td className="px-6 py-4">Éthique et gouvernance</td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-black">Partenaires sociaux</td>
+                  <td className="px-6 py-4 text-black">Éthique et gouvernance</td>
+                  <td className="px-6 py-4 text-black">
                     Transparence processus
                     <br />
                     Impact sur l'emploi
                   </td>
-                  <td className="px-6 py-4">Documentation complète</td>
+                  <td className="px-6 py-4 text-black">Documentation complète</td>
                 </tr>
               </tbody>
             </table>
           </EnhancedTable>
 
           <h3 className="font-semibold mt-6">2. Narration transformationnelle</h3>
-          <p>La construction d'un récit cohérent transcendant les chiffres bruts donne sens à la transformation :</p>
+          <p className="text-black">
+            La construction d'un récit cohérent transcendant les chiffres bruts donne sens à la transformation :
+          </p>
           <ul>
             <li>Articulation autour d'une vision aspirationnelle claire</li>
             <li>Mise en perspective historique et évolutive</li>
@@ -900,7 +902,9 @@ export function ImpactIaRhView() {
           </ul>
 
           <h3 className="font-semibold mt-6">3. Matérialisation expérientielle</h3>
-          <p>La traduction des gains abstraits en expériences concrètes facilite l'appropriation :</p>
+          <p className="text-black">
+            La traduction des gains abstraits en expériences concrètes facilite l'appropriation :
+          </p>
           <ul>
             <li>Démonstrations immersives avant/après</li>
             <li>Visualisations d'impact dynamiques</li>
@@ -919,12 +923,14 @@ export function ImpactIaRhView() {
           <h2 id="conclusion" className="scroll-mt-20">
             Conclusion : Vers une culture de l'évaluation transformationnelle
           </h2>
-          <p>
+          <p className="text-black">
             L'IA générative en RH ne représente pas simplement une évolution technologique, mais bien une mutation
             paradigmatique de la fonction ressources humaines. Son évaluation exige donc une approche qui transcende les
             métriques conventionnelles pour capturer sa dimension transformationnelle.
           </p>
-          <p>Les organisations qui réussissent cette évaluation partagent trois caractéristiques fondamentales :</p>
+          <p className="text-black">
+            Les organisations qui réussissent cette évaluation partagent trois caractéristiques fondamentales :
+          </p>
           <ol>
             <li>
               Elles <strong>adoptent une vision multidimensionnelle de la valeur</strong>, intégrant efficience
@@ -939,7 +945,7 @@ export function ImpactIaRhView() {
               parties prenantes tout en maintenant une vision d'ensemble
             </li>
           </ol>
-          <p>
+          <p className="text-black">
             Dans un contexte où le déploiement de l'IA générative s'accélère, la capacité à mesurer rigoureusement et
             communiquer stratégiquement sur sa valeur constituera un différenciateur concurrentiel majeur. Car comme le
             soulignait Peter Drucker, "ce qui se mesure s'améliore" – à condition de mesurer ce qui compte vraiment.

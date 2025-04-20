@@ -18,12 +18,14 @@ const articles = {
     description:
       "Une analyse stratégique des opportunités et défis de l'IA générative dans la fonction ressources humaines.",
     component: ArticleView,
+    image: "/images/hr-technology.jpeg",
   },
   "competences-rh-augmente": {
     title: "Les compétences clés du RH augmenté par l'IA",
     description:
       "Comment les professionnels RH peuvent développer les compétences nécessaires pour tirer parti de l'IA générative.",
     component: CompetencesRhAugmenteView,
+    image: "/images/enhancing-key-skills.jpeg",
   },
   "impact-ia-rh": {
     title:
@@ -31,6 +33,7 @@ const articles = {
     description:
       "Comment évaluer rigoureusement l'impact de l'IA générative en RH avec un cadre multidimensionnel intégrant efficience opérationnelle, valeur qualitative, et transformation organisationnelle.",
     component: ImpactIaRhView,
+    image: "/images/measuring-ai-impact.jpeg",
   },
 }
 
@@ -51,6 +54,14 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
       title: article.title,
       description: article.description,
       type: "article",
+      images: [
+        {
+          url: article.image,
+          width: 1200,
+          height: 630,
+          alt: article.title,
+        },
+      ],
     },
   }
 }
