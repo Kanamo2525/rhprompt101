@@ -35,8 +35,11 @@ export function GuidePreview() {
 
             <div className="mt-10">
               <Link
-                href="/guide/telecharger"
+                href="/guides/bibliotheque-prompts-rh.pdf"
                 className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="Bibliotheque-Prompts-RH-Prompt101.pdf"
               >
                 Télécharger gratuitement
                 <Download className="ml-2 -mr-1 h-5 w-5" />
