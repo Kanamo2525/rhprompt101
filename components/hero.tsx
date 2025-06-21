@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight, Download } from "lucide-react"
+import { ArrowRight, ExternalLink } from "lucide-react"
 
 export function Hero() {
   return (
@@ -26,11 +26,13 @@ export function Hero() {
             </div>
             <div className="mt-3 sm:mt-0 sm:ml-3">
               <Link
-                href="/guide"
+                href="https://prompt101.aflip.in/guideIARH.html"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"
               >
-                Télécharger le guide
-                <Download className="ml-2 h-5 w-5" />
+                Consulter le guide
+                <ExternalLink className="ml-2 h-5 w-5" />
               </Link>
             </div>
           </div>

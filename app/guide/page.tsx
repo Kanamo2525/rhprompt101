@@ -1,6 +1,6 @@
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
-import { Download, BookOpen, BarChart2, Compass, Users, Brain, CheckCircle } from "lucide-react"
+import { ArrowUpRight, BookOpen, BarChart2, Compass, Users, Brain, CheckCircle, ShoppingCart } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -53,11 +53,22 @@ export default function GuidePage() {
 
                 <div className="mt-10">
                   <Link
-                    href="/guide/telecharger"
+                    href="https://prompt101.aflip.in/guideIARH.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                   >
-                    Télécharger gratuitement
-                    <Download className="ml-2 -mr-1 h-5 w-5" />
+                    Consulter le guide
+                    <ArrowUpRight className="ml-2 -mr-1 h-5 w-5" />
+                  </Link>
+                  <Link
+                    href="https://www.thebookedition.com/fr/l-ia-generative-pour-les-rh-p-419084.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ml-4 inline-flex items-center px-6 py-3 border border-blue-600 text-base font-medium rounded-md shadow-sm text-blue-600 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  >
+                    Acheter la version papier
+                    <ShoppingCart className="ml-2 -mr-1 h-5 w-5" />
                   </Link>
                 </div>
               </div>
@@ -66,22 +77,12 @@ export default function GuidePage() {
                 <div className="relative lg:pl-10">
                   <div className="aspect-w-3 aspect-h-4 overflow-hidden rounded-lg shadow-lg relative bg-white p-4 transform -rotate-1">
                     <Image
-                      src="/placeholder.svg?height=520&width=400"
+                      src="/images/guide-cover-ia-rh.jpeg"
                       width={400}
                       height={520}
-                      alt="Couverture du guide"
+                      alt="Couverture du guide 'Le Guide de l'IA Générative pour les RH' par Kristy Anamoutou, montrant des astronautes marchant dans un paysage futuriste."
                       className="w-full object-cover"
                     />
-                    <div className="absolute inset-0 ring-1 ring-inset ring-gray-900/10"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent">
-                      <div className="text-white">
-                        <h3 className="font-bold text-lg">L'Art du Prompting pour les RH</h3>
-                        <p className="text-gray-300 text-sm mt-1">Guide stratégique 2025</p>
-                      </div>
-                    </div>
-                    <div className="absolute top-6 right-6 bg-blue-600 rounded-full py-2 px-4 text-white text-xs font-bold shadow-lg transform rotate-12">
-                      Édition 2025
-                    </div>
                   </div>
                   <div className="absolute bottom-4 right-4 w-80 h-96 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-lg transform rotate-3 -z-10"></div>
                 </div>
@@ -90,17 +91,17 @@ export default function GuidePage() {
 
             <div className="mt-16 border-t border-gray-200 pt-10">
               <h3 className="text-2xl font-bold text-gray-900">Structure du guide</h3>
-              <div className="mt-6 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-6 grid gap-x-6 gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <div>
                   <h4 className="font-semibold text-blue-700">PARTIE 1: FONDAMENTAUX ET ÉTAT DE L'ART</h4>
                   <ul className="mt-2 space-y-2 text-gray-600">
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-blue-500">•</span>
-                      <span className="ml-1">Comprendre l'IA générative pour les RH</span>
+                      <span className="ml-1">Chapitre 1: Comprendre l'IA générative pour les RH</span>
                     </li>
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-blue-500">•</span>
-                      <span className="ml-1">Le prompting, un nouveau langage à maîtriser</span>
+                      <span className="ml-1">Chapitre 2: La fondation data – Prérequis stratégique</span>
                     </li>
                   </ul>
                 </div>
@@ -109,15 +110,23 @@ export default function GuidePage() {
                   <ul className="mt-2 space-y-2 text-gray-600">
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-indigo-500">•</span>
-                      <span className="ml-1">Cartographie des opportunités RH</span>
+                      <span className="ml-1">Chapitre 3: Cartographie des opportunités RH</span>
                     </li>
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-indigo-500">•</span>
-                      <span className="ml-1">Les quatre quadrants stratégiques</span>
+                      <span className="ml-1">Chapitre 4: Automatisation - Transcender les processus</span>
                     </li>
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-indigo-500">•</span>
-                      <span className="ml-1">Automatisation, Assistance, Augmentation, Avant-garde</span>
+                      <span className="ml-1">Chapitre 5: Assistance - Améliorer l'efficacité</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="flex-shrink-0 h-5 w-5 text-indigo-500">•</span>
+                      <span className="ml-1">Chapitre 6: Augmentation - Cocréer avec l'IA</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="flex-shrink-0 h-5 w-5 text-indigo-500">•</span>
+                      <span className="ml-1">Chapitre 7: Avant-garde - Créer de nouvelles solutions</span>
                     </li>
                   </ul>
                 </div>
@@ -126,15 +135,19 @@ export default function GuidePage() {
                   <ul className="mt-2 space-y-2 text-gray-600">
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-purple-500">•</span>
-                      <span className="ml-1">Les techniques fondamentales</span>
+                      <span className="ml-1">Chapitre 8: Les techniques fondamentales</span>
                     </li>
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-purple-500">•</span>
-                      <span className="ml-1">Les techniques avancées</span>
+                      <span className="ml-1">Chapitre 9: Les techniques avancées</span>
                     </li>
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-purple-500">•</span>
-                      <span className="ml-1">Les techniques spécialisées</span>
+                      <span className="ml-1">Chapitre 10: Les techniques spécialisées</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="flex-shrink-0 h-5 w-5 text-purple-500">•</span>
+                      <span className="ml-1">Considérations éthiques et gouvernance</span>
                     </li>
                   </ul>
                 </div>
@@ -143,19 +156,19 @@ export default function GuidePage() {
                   <ul className="mt-2 space-y-2 text-gray-600">
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-green-500">•</span>
-                      <span className="ml-1">Recrutement et acquisition de talents</span>
+                      <span className="ml-1">Chapitre 11: Recrutement et acquisition de talents</span>
                     </li>
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-green-500">•</span>
-                      <span className="ml-1">Formation et développement des compétences</span>
+                      <span className="ml-1">Chapitre 12: Formation et développement</span>
                     </li>
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-green-500">•</span>
-                      <span className="ml-1">Gestion des talents et mobilité</span>
+                      <span className="ml-1">Chapitre 13: Gestion des talents et mobilité</span>
                     </li>
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-green-500">•</span>
-                      <span className="ml-1">Support RH et administration</span>
+                      <span className="ml-1">Chapitre 14: Support RH et administration</span>
                     </li>
                   </ul>
                 </div>
@@ -164,40 +177,40 @@ export default function GuidePage() {
                   <ul className="mt-2 space-y-2 text-gray-600">
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-amber-500">•</span>
-                      <span className="ml-1">Stratégie d'adoption de l'IA générative en RH</span>
+                      <span className="ml-1">Chapitre 15: Stratégie d'adoption de l'IA</span>
                     </li>
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-amber-500">•</span>
-                      <span className="ml-1">Éthique et conformité</span>
+                      <span className="ml-1">Chapitre 16: Éthique et conformité</span>
                     </li>
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-amber-500">•</span>
-                      <span className="ml-1">Gestion du changement et montée en compétences</span>
+                      <span className="ml-1">Chapitre 17: Gestion du changement</span>
                     </li>
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-amber-500">•</span>
-                      <span className="ml-1">Ressources et boîte à outils</span>
+                      <span className="ml-1">Chapitre 18: Ressources et boîte à outils</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="flex-shrink-0 h-5 w-5 text-amber-500">•</span>
+                      <span className="ml-1">Chapitre 19: Agents IA et IA Agentique</span>
                     </li>
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-red-700">ANNEXES ET RESSOURCES</h4>
+                  <h4 className="font-semibold text-red-700">CONCLUSION ET RESSOURCES</h4>
                   <ul className="mt-2 space-y-2 text-gray-600">
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-red-500">•</span>
-                      <span className="ml-1">Glossaire des termes techniques</span>
+                      <span className="ml-1">Conclusion et perspectives d'avenir</span>
                     </li>
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-red-500">•</span>
-                      <span className="ml-1">Modèles de prompts par cas d'usage</span>
+                      <span className="ml-1">Tendances émergentes de l'IA en RH</span>
                     </li>
                     <li className="flex items-start">
                       <span className="flex-shrink-0 h-5 w-5 text-red-500">•</span>
-                      <span className="ml-1">Ressources complémentaires</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="flex-shrink-0 h-5 w-5 text-red-500">•</span>
-                      <span className="ml-1">Index</span>
+                      <span className="ml-1">Bibliothèque de prompts RH</span>
                     </li>
                   </ul>
                 </div>
@@ -297,13 +310,26 @@ export default function GuidePage() {
               </div>
 
               <div className="mt-10 text-center">
-                <Link
-                  href="/guide/telecharger"
-                  className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                >
-                  Télécharger le guide complet
-                  <Download className="ml-2 -mr-1 h-5 w-5" />
-                </Link>
+                <div className="inline-flex flex-col sm:flex-row items-center">
+                  <Link
+                    href="https://prompt101.aflip.in/guideIARH.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  >
+                    Consulter le guide
+                    <ArrowUpRight className="ml-2 -mr-1 h-5 w-5" />
+                  </Link>
+                  <Link
+                    href="https://www.thebookedition.com/fr/l-ia-generative-pour-les-rh-p-419084.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 sm:mt-0 sm:ml-4 inline-flex items-center px-6 py-3 border border-blue-600 text-base font-medium rounded-md shadow-sm text-blue-600 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  >
+                    Acheter la version papier
+                    <ShoppingCart className="ml-2 -mr-1 h-5 w-5" />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

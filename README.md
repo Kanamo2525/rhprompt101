@@ -39,7 +39,7 @@ Le projet est construit avec les technologies suivantes :
 
 ## Installation et démarrage
 
-```bash
+\`\`\`bash
 # Cloner le dépôt
 git clone https://github.com/votre-username/rgprompt101.git
 
@@ -49,7 +49,7 @@ npm install
 
 # Lancer l'application en mode développement
 npm run dev
-```
+\`\`\`
 
 ## Contribuer au projet
 
