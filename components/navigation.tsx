@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { LanguageSelector } from "./language-selector"
 
 export function Navigation() {
   const pathname = usePathname()
@@ -53,7 +54,8 @@ export function Navigation() {
               </Link>
             </div>
           </div>
-          <div className="hidden sm:ml-6 sm:flex sm:items-center">
+          <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
+            <LanguageSelector />
             <Link
               href="https://prompt101.fr/"
               className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"

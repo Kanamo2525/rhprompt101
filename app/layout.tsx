@@ -2,6 +2,7 @@ import type React from "react"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { TranslationProvider } from "@/contexts/translation-context"
 import Script from "next/script"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -56,7 +57,7 @@ export const metadata = {
   verification: {
     google: "à_remplacer_par_votre_code_de_vérification_google",
   },
-    generator: 'v0.dev'
+  generator: "v0.dev",
 }
 
 export default function RootLayout({
@@ -71,7 +72,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
+          <TranslationProvider>{children}</TranslationProvider>
         </ThemeProvider>
         <Script
           id="structured-data"
