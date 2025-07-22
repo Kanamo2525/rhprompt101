@@ -1,6 +1,7 @@
 interface TranslationResponse {
   translatedText: string
   detectedSourceLanguage?: string
+  isMockTranslation?: boolean
 }
 
 interface TranslationRequest {
@@ -31,6 +32,11 @@ export class TranslationService {
     targetLanguage,
     sourceLanguage = "fr",
   }: TranslationRequest): Promise<TranslationResponse> {
+    // If target language is the same as source, return original text
+    if (targetLanguage === sourceLanguage) {
+      return { translatedText: text }
+    }
+
     const cacheKey = this.getCacheKey(text, targetLanguage, sourceLanguage)
 
     if (this.cache.has(cacheKey)) {
@@ -51,7 +57,7 @@ export class TranslationService {
       })
 
       if (!response.ok) {
-        throw new Error("Translation failed")
+        throw new Error(`Translation API returned ${response.status}`)
       }
 
       const result: TranslationResponse = await response.json()
@@ -60,7 +66,8 @@ export class TranslationService {
       return result
     } catch (error) {
       console.error("Translation error:", error)
-      return { translatedText: text } // Fallback to original text
+      // Return original text as fallback
+      return { translatedText: text }
     }
   }
 

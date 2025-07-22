@@ -1,7 +1,7 @@
 "use client"
-import { Globe, ChevronDown } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+
+import { useState } from "react"
+import { ChevronDown, Globe } from "lucide-react"
 import { useTranslation } from "@/contexts/translation-context"
 
 const languages = [
@@ -11,48 +11,53 @@ const languages = [
   { code: "de", name: "Deutsch", flag: "🇩🇪" },
   { code: "it", name: "Italiano", flag: "🇮🇹" },
   { code: "pt", name: "Português", flag: "🇵🇹" },
-  { code: "nl", name: "Nederlands", flag: "🇳🇱" },
-  { code: "ru", name: "Русский", flag: "🇷🇺" },
-  { code: "zh", name: "中文", flag: "🇨🇳" },
-  { code: "ja", name: "日本語", flag: "🇯🇵" },
-  { code: "ar", name: "العربية", flag: "🇸🇦" },
 ]
 
 export function LanguageSelector() {
-  const { currentLanguage, setLanguage, isTranslating } = useTranslation()
+  const { currentLanguage, setCurrentLanguage, isTranslating } = useTranslation()
+  const [isOpen, setIsOpen] = useState(false)
 
   const currentLang = languages.find((lang) => lang.code === currentLanguage) || languages[0]
 
+  const handleLanguageChange = (languageCode: string) => {
+    setCurrentLanguage(languageCode)
+    setIsOpen(false)
+  }
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          className="flex items-center gap-2 min-w-[120px] bg-transparent"
-          disabled={isTranslating}
-        >
-          <Globe className="h-4 w-4" />
-          <span className="hidden sm:inline">
-            {currentLang.flag} {currentLang.name}
-          </span>
-          <span className="sm:hidden">{currentLang.flag}</span>
-          <ChevronDown className="h-4 w-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-48">
-        {languages.map((language) => (
-          <DropdownMenuItem
-            key={language.code}
-            onClick={() => setLanguage(language.code)}
-            className={`flex items-center gap-2 ${currentLanguage === language.code ? "bg-blue-50 text-blue-700" : ""}`}
-          >
-            <span>{language.flag}</span>
-            <span>{language.name}</span>
-            {currentLanguage === language.code && <span className="ml-auto text-blue-600">✓</span>}
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="relative">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md"
+        disabled={isTranslating}
+      >
+        <Globe className="h-4 w-4" />
+        <span className="hidden sm:inline">
+          {currentLang.flag} {currentLang.name}
+        </span>
+        <span className="sm:hidden">{currentLang.flag}</span>
+        <ChevronDown className="h-4 w-4" />
+        {isTranslating && <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-blue-600"></div>}
+      </button>
+
+      {isOpen && (
+        <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+          <div className="py-1">
+            {languages.map((language) => (
+              <button
+                key={language.code}
+                onClick={() => handleLanguageChange(language.code)}
+                className={`flex items-center w-full px-4 py-2 text-sm hover:bg-gray-100 ${
+                  currentLanguage === language.code ? "bg-blue-50 text-blue-700" : "text-gray-700"
+                }`}
+              >
+                <span className="mr-3">{language.flag}</span>
+                {language.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   )
 }

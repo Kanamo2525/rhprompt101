@@ -2,39 +2,42 @@
 
 import { useState, useEffect } from "react"
 import { useTranslation } from "@/contexts/translation-context"
+import { translationService } from "@/lib/translation-service"
 
 export function useTranslatedText(originalText: string) {
+  const { currentLanguage, setIsTranslating } = useTranslation()
   const [translatedText, setTranslatedText] = useState(originalText)
-  const { translateText, currentLanguage } = useTranslation()
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    if (currentLanguage === "fr") {
-      setTranslatedText(originalText)
-      return
-    }
-
-    let isCancelled = false
-
     const performTranslation = async () => {
+      if (currentLanguage === "fr" || !originalText.trim()) {
+        setTranslatedText(originalText)
+        return
+      }
+
+      setIsLoading(true)
+      setIsTranslating(true)
+
       try {
-        const result = await translateText(originalText)
-        if (!isCancelled) {
-          setTranslatedText(result)
-        }
+        const result = await translationService.translateText({
+          text: originalText,
+          targetLanguage: currentLanguage,
+          sourceLanguage: "fr",
+        })
+
+        setTranslatedText(result.translatedText)
       } catch (error) {
         console.error("Translation failed:", error)
-        if (!isCancelled) {
-          setTranslatedText(originalText)
-        }
+        setTranslatedText(originalText) // Fallback to original text
+      } finally {
+        setIsLoading(false)
+        setIsTranslating(false)
       }
     }
 
     performTranslation()
+  }, [originalText, currentLanguage, setIsTranslating])
 
-    return () => {
-      isCancelled = true
-    }
-  }, [originalText, translateText, currentLanguage])
-
-  return translatedText
+  return { translatedText, isLoading }
 }

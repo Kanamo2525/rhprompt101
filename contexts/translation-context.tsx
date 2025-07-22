@@ -1,75 +1,52 @@
 "use client"
 
 import type React from "react"
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react"
-import { translationService } from "@/lib/translation-service"
+import { createContext, useContext, useState, useEffect } from "react"
 
 interface TranslationContextType {
   currentLanguage: string
+  setCurrentLanguage: (language: string) => void
   isTranslating: boolean
-  setLanguage: (language: string) => void
-  translateText: (text: string) => Promise<string>
-  resetToOriginal: () => void
+  setIsTranslating: (translating: boolean) => void
 }
 
 const TranslationContext = createContext<TranslationContextType | undefined>(undefined)
 
-export const useTranslation = () => {
-  const context = useContext(TranslationContext)
-  if (!context) {
-    throw new Error("useTranslation must be used within a TranslationProvider")
-  }
-  return context
-}
-
-interface TranslationProviderProps {
-  children: ReactNode
-}
-
-export const TranslationProvider: React.FC<TranslationProviderProps> = ({ children }) => {
+export function TranslationProvider({ children }: { children: React.ReactNode }) {
   const [currentLanguage, setCurrentLanguage] = useState("fr")
   const [isTranslating, setIsTranslating] = useState(false)
 
-  const setLanguage = useCallback((language: string) => {
-    setCurrentLanguage(language)
+  // Load saved language preference
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("preferred-language")
+    if (savedLanguage && savedLanguage !== currentLanguage) {
+      setCurrentLanguage(savedLanguage)
+    }
   }, [])
 
-  const translateText = useCallback(
-    async (text: string): Promise<string> => {
-      if (currentLanguage === "fr" || !text.trim()) {
-        return text
-      }
+  // Save language preference
+  useEffect(() => {
+    localStorage.setItem("preferred-language", currentLanguage)
+  }, [currentLanguage])
 
-      try {
-        setIsTranslating(true)
-        const result = await translationService.translateText({
-          text,
-          targetLanguage: currentLanguage,
-          sourceLanguage: "fr",
-        })
-        return result.translatedText
-      } catch (error) {
-        console.error("Translation error:", error)
-        return text
-      } finally {
-        setIsTranslating(false)
-      }
-    },
-    [currentLanguage],
+  return (
+    <TranslationContext.Provider
+      value={{
+        currentLanguage,
+        setCurrentLanguage,
+        isTranslating,
+        setIsTranslating,
+      }}
+    >
+      {children}
+    </TranslationContext.Provider>
   )
+}
 
-  const resetToOriginal = useCallback(() => {
-    setCurrentLanguage("fr")
-    translationService.clearCache()
-  }, [])
-
-  const value: TranslationContextType = {
-    currentLanguage,
-    isTranslating,
-    setLanguage,
-    translateText,
-    resetToOriginal,
+export function useTranslation() {
+  const context = useContext(TranslationContext)
+  if (context === undefined) {
+    throw new Error("useTranslation must be used within a TranslationProvider")
   }
-
-  return <TranslationContext.Provider value={value}>{children}</TranslationContext.Provider>
+  return context
 }

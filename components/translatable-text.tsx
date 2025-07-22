@@ -1,6 +1,7 @@
 "use client"
+
 import { useTranslatedText } from "@/hooks/use-translated-text"
-import { useTranslation } from "@/contexts/translation-context"
+import type { JSX } from "react"
 
 interface TranslatableTextProps {
   children: string
@@ -8,9 +9,19 @@ interface TranslatableTextProps {
   as?: keyof JSX.IntrinsicElements
 }
 
-export function TranslatableText({ children, className, as: Component = "span" }: TranslatableTextProps) {
-  const translatedText = useTranslatedText(children)
-  const { isTranslating } = useTranslation()
+export function TranslatableText({ children, className = "", as: Component = "span" }: TranslatableTextProps) {
+  const { translatedText, isLoading } = useTranslatedText(children)
 
-  return <Component className={`${className} ${isTranslating ? "opacity-70" : ""}`}>{translatedText}</Component>
+  return (
+    <Component className={className}>
+      {isLoading ? (
+        <span className="inline-flex items-center">
+          {children}
+          <span className="ml-2 animate-pulse text-blue-500">...</span>
+        </span>
+      ) : (
+        translatedText
+      )}
+    </Component>
+  )
 }
