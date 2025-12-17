@@ -100,14 +100,46 @@ export default function RootLayout({
     <html lang="fr" suppressHydrationWarning>
       <head>
         <link rel="alternate" hrefLang="fr-FR" href="https://rh.prompt101.fr" />
+        {/* Hide Google Translate Bar and UI elements */}
         <style
           dangerouslySetInnerHTML={{
             __html: `
-            /* Hide Google Translate Bar */
-            body { top: 0 !important; }
-            .goog-te-banner-frame { display: none !important; }
-            .skiptranslate iframe { display: none !important; }
-            body.translated-ltr, body.translated-rtl { top: 0 !important; }
+            /* Hide Google Translate Bar and UI elements */
+            body { 
+              top: 0 !important; 
+              position: static !important;
+            }
+            .goog-te-banner-frame { 
+              display: none !important; 
+              visibility: hidden !important;
+            }
+            .goog-te-banner-frame.skiptranslate { 
+              display: none !important; 
+            }
+            body > .skiptranslate {
+              display: none !important;
+            }
+            .skiptranslate iframe { 
+              display: none !important; 
+              visibility: hidden !important;
+              height: 0 !important;
+            }
+            body.translated-ltr, body.translated-rtl { 
+              top: 0 !important; 
+            }
+            #google_translate_element {
+              display: none !important;
+            }
+            .goog-te-gadget {
+              display: none !important;
+            }
+            #goog-gt-tt, .goog-te-balloon-frame {
+              display: none !important;
+            }
+            .goog-text-highlight {
+              background: none !important;
+              box-shadow: none !important;
+            }
           `,
           }}
         />
@@ -120,22 +152,31 @@ export default function RootLayout({
 
         <Script
           id="google-translate-script"
-          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-          strategy="lazyOnload"
+          src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="beforeInteractive"
         />
 
         <Script
           id="google-translate-init"
-          strategy="lazyOnload"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               function googleTranslateElementInit() {
-                new google.translate.TranslateElement({
-                  pageLanguage: 'fr',
-                  includedLanguages: 'en,es,de,it,pt,nl,ru,zh-CN,ja,ar',
-                  layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                  autoDisplay: false
-                }, 'google_translate_element');
+                if (typeof google !== 'undefined' && google.translate) {
+                  new google.translate.TranslateElement({
+                    pageLanguage: 'fr',
+                    includedLanguages: 'en,es,de,it,pt,nl,ru,zh-CN,ja,ar',
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                    autoDisplay: false,
+                    multilanguagePage: true
+                  }, 'google_translate_element');
+                  console.log('[v0] Google Translate initialized');
+                }
+              }
+              
+              // Auto-init if script is already loaded
+              if (typeof google !== 'undefined' && google.translate) {
+                googleTranslateElementInit();
               }
             `,
           }}

@@ -6,31 +6,38 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 const languages = [
-  { code: "fr", name: "Français", flag: "🇫🇷" },
+  { code: "fr", name: "French", flag: "🇫🇷" },
   { code: "en", name: "English", flag: "🇬🇧" },
-  { code: "es", name: "Español", flag: "🇪🇸" },
-  { code: "de", name: "Deutsch", flag: "🇩🇪" },
+  { code: "es", name: "Spanish", flag: "🇪🇸" },
+  { code: "de", name: "German", flag: "🇩🇪" },
   { code: "it", name: "Italiano", flag: "🇮🇹" },
-  { code: "pt", name: "Português", flag: "🇵🇹" },
-  { code: "nl", name: "Nederlands", flag: "🇳🇱" },
+  { code: "pt", name: "Portuguese", flag: "🇵🇹" },
+  { code: "nl", name: "Dutch", flag: "🇳🇱" },
   { code: "ru", name: "Русский", flag: "🇷🇺" },
   { code: "zh-CN", name: "中文", flag: "🇨🇳" },
   { code: "ja", name: "日本語", flag: "🇯🇵" },
-  { code: "ar", name: "العربية", flag: "🇸🇦" },
+  { code: "ar", name: "Arabic", flag: "🇸🇦" },
 ]
 
 export function LanguageSelector() {
   const [currentLang, setCurrentLang] = useState("fr")
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   const getLanguageFromCookie = () => {
+    if (typeof document === "undefined") return "fr"
+
     const cookies = document.cookie.split(";")
     for (const cookie of cookies) {
       const [name, value] = cookie.trim().split("=")
       if (name === "googtrans") {
-        // Format du cookie: /fr/en (de français vers anglais)
-        const parts = value.split("/")
-        if (parts.length === 3) {
-          return parts[2] || "fr"
+        const parts = decodeURIComponent(value).split("/")
+        if (parts.length >= 3) {
+          const targetLang = parts[2]
+          return targetLang && targetLang !== "auto" ? targetLang : "fr"
         }
       }
     }
@@ -38,29 +45,46 @@ export function LanguageSelector() {
   }
 
   const changeLanguage = (langCode: string) => {
-    // Définir les cookies Google Translate
+    if (typeof window === "undefined") return
+
+    console.log("[v0] Changing language to:", langCode)
+
+    const cookieValue = `/auto/${langCode}`
     const domain = window.location.hostname
-    const cookieValue = langCode === "fr" ? "/fr/fr" : `/fr/${langCode}`
+    const path = "/"
+    const maxAge = 31536000 // 1 year
 
-    // Supprimer les anciens cookies
-    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
-    document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${domain};`
+    const cookiesToClear = ["googtrans", "googtrans"]
+    cookiesToClear.forEach((name) => {
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path};`
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}; domain=${domain};`
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}; domain=.${domain};`
+    })
 
-    // Définir les nouveaux cookies
-    document.cookie = `googtrans=${cookieValue}; path=/; max-age=31536000`
-    document.cookie = `googtrans=${cookieValue}; path=/; domain=${domain}; max-age=31536000`
+    document.cookie = `googtrans=${cookieValue}; path=${path}; max-age=${maxAge}`
+    document.cookie = `googtrans=${cookieValue}; path=${path}; domain=${domain}; max-age=${maxAge}`
 
-    // Recharger la page immédiatement
-    window.location.reload()
+    console.log("[v0] Cookies set, reloading page")
+
+    setTimeout(() => {
+      window.location.reload()
+    }, 100)
   }
 
   useEffect(() => {
-    const detectedLang = getLanguageFromCookie()
-    setCurrentLang(detectedLang)
-  }, [])
+    if (isClient) {
+      const detectedLang = getLanguageFromCookie()
+      console.log("[v0] Detected language from cookie:", detectedLang)
+      setCurrentLang(detectedLang)
+    }
+  }, [isClient])
 
   const getCurrentLanguage = () => {
     return languages.find((lang) => lang.code === currentLang) || languages[0]
+  }
+
+  if (!isClient) {
+    return null
   }
 
   return (
@@ -69,23 +93,30 @@ export function LanguageSelector() {
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="sm" className="h-8 px-2 text-sm">
-            <Globe className="h-4 w-4 mr-1" />
+          <Button
+            variant="outline"
+            size="sm"
+            className="h-9 px-3 text-sm font-medium border-2 border-gray-300 hover:border-blue-500 hover:bg-blue-50 transition-colors bg-transparent"
+          >
+            <Globe className="h-4 w-4 mr-2" />
             <span className="hidden sm:inline">
               {getCurrentLanguage().flag} {getCurrentLanguage().name}
             </span>
             <span className="sm:hidden">{getCurrentLanguage().flag}</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-48">
+        <DropdownMenuContent align="end" className="w-48 bg-white border-2 border-gray-200 shadow-lg">
           {languages.map((lang) => (
             <DropdownMenuItem
               key={lang.code}
               onClick={() => changeLanguage(lang.code)}
-              className={`cursor-pointer ${currentLang === lang.code ? "bg-accent" : ""}`}
+              className={`cursor-pointer py-2.5 px-3 text-sm font-medium transition-colors ${
+                currentLang === lang.code ? "bg-blue-100 text-blue-900" : "hover:bg-gray-100"
+              }`}
             >
-              <span className="mr-2">{lang.flag}</span>
-              {lang.name}
+              <span className="mr-2 text-base">{lang.flag}</span>
+              <span className="flex-1">{lang.name}</span>
+              {currentLang === lang.code && <span className="ml-2 text-blue-600">✓</span>}
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>
