@@ -1,63 +1,95 @@
 "use client"
 
-import { useState } from "react"
-import { ChevronDown, Globe } from "lucide-react"
-import { useTranslation } from "@/contexts/translation-context"
+import { useState, useEffect } from "react"
+import { Globe } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 const languages = [
   { code: "fr", name: "Français", flag: "🇫🇷" },
-  { code: "en", name: "English", flag: "🇺🇸" },
+  { code: "en", name: "English", flag: "🇬🇧" },
   { code: "es", name: "Español", flag: "🇪🇸" },
   { code: "de", name: "Deutsch", flag: "🇩🇪" },
   { code: "it", name: "Italiano", flag: "🇮🇹" },
   { code: "pt", name: "Português", flag: "🇵🇹" },
+  { code: "nl", name: "Nederlands", flag: "🇳🇱" },
+  { code: "ru", name: "Русский", flag: "🇷🇺" },
+  { code: "zh-CN", name: "中文", flag: "🇨🇳" },
+  { code: "ja", name: "日本語", flag: "🇯🇵" },
+  { code: "ar", name: "العربية", flag: "🇸🇦" },
 ]
 
 export function LanguageSelector() {
-  const { currentLanguage, setCurrentLanguage, isTranslating } = useTranslation()
-  const [isOpen, setIsOpen] = useState(false)
+  const [currentLang, setCurrentLang] = useState("fr")
 
-  const currentLang = languages.find((lang) => lang.code === currentLanguage) || languages[0]
+  const getLanguageFromCookie = () => {
+    const cookies = document.cookie.split(";")
+    for (const cookie of cookies) {
+      const [name, value] = cookie.trim().split("=")
+      if (name === "googtrans") {
+        // Format du cookie: /fr/en (de français vers anglais)
+        const parts = value.split("/")
+        if (parts.length === 3) {
+          return parts[2] || "fr"
+        }
+      }
+    }
+    return "fr"
+  }
 
-  const handleLanguageChange = (languageCode: string) => {
-    setCurrentLanguage(languageCode)
-    setIsOpen(false)
+  const changeLanguage = (langCode: string) => {
+    // Définir les cookies Google Translate
+    const domain = window.location.hostname
+    const cookieValue = langCode === "fr" ? "/fr/fr" : `/fr/${langCode}`
+
+    // Supprimer les anciens cookies
+    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+    document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${domain};`
+
+    // Définir les nouveaux cookies
+    document.cookie = `googtrans=${cookieValue}; path=/; max-age=31536000`
+    document.cookie = `googtrans=${cookieValue}; path=/; domain=${domain}; max-age=31536000`
+
+    // Recharger la page immédiatement
+    window.location.reload()
+  }
+
+  useEffect(() => {
+    const detectedLang = getLanguageFromCookie()
+    setCurrentLang(detectedLang)
+  }, [])
+
+  const getCurrentLanguage = () => {
+    return languages.find((lang) => lang.code === currentLang) || languages[0]
   }
 
   return (
-    <div className="relative">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md"
-        disabled={isTranslating}
-      >
-        <Globe className="h-4 w-4" />
-        <span className="hidden sm:inline">
-          {currentLang.flag} {currentLang.name}
-        </span>
-        <span className="sm:hidden">{currentLang.flag}</span>
-        <ChevronDown className="h-4 w-4" />
-        {isTranslating && <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-blue-600"></div>}
-      </button>
+    <div className="flex items-center">
+      <div id="google_translate_element" className="hidden" />
 
-      {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50">
-          <div className="py-1">
-            {languages.map((language) => (
-              <button
-                key={language.code}
-                onClick={() => handleLanguageChange(language.code)}
-                className={`flex items-center w-full px-4 py-2 text-sm hover:bg-gray-100 ${
-                  currentLanguage === language.code ? "bg-blue-50 text-blue-700" : "text-gray-700"
-                }`}
-              >
-                <span className="mr-3">{language.flag}</span>
-                {language.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="sm" className="h-8 px-2 text-sm">
+            <Globe className="h-4 w-4 mr-1" />
+            <span className="hidden sm:inline">
+              {getCurrentLanguage().flag} {getCurrentLanguage().name}
+            </span>
+            <span className="sm:hidden">{getCurrentLanguage().flag}</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-48">
+          {languages.map((lang) => (
+            <DropdownMenuItem
+              key={lang.code}
+              onClick={() => changeLanguage(lang.code)}
+              className={`cursor-pointer ${currentLang === lang.code ? "bg-accent" : ""}`}
+            >
+              <span className="mr-2">{lang.flag}</span>
+              {lang.name}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   )
 }

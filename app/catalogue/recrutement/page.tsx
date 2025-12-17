@@ -5,13 +5,37 @@ import { CategorySchema } from "@/components/category-schema"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { BookOpen, Users, FileText, Mail, Search } from "lucide-react"
+import Script from "next/script"
+import { Breadcrumbs } from "@/components/breadcrumbs"
 
 export const metadata: Metadata = {
-  title: "Prompts IA pour le Recrutement et l'Acquisition de Talents | RH.Prompt101.fr",
+  title: "9 Prompts IA Recrutement - Rédaction d'offres, sourcing, entretiens | RH.Prompt101.fr",
   description:
-    "Optimisez votre processus de recrutement avec nos prompts d'IA spécialisés pour la rédaction d'offres, le sourcing, les entretiens et l'évaluation des candidats.",
-  keywords:
-    "prompts recrutement, IA recrutement, sourcing candidats, rédaction offres emploi, entretiens IA, évaluation CV",
+    "9 prompts d'IA prêts à l'emploi pour optimiser votre recrutement : rédaction d'offres engageantes, sourcing innovant, préparation d'entretiens structurés, évaluation objective de CV et communication candidats.",
+  keywords: [
+    "prompts recrutement IA",
+    "rédaction offres emploi IA",
+    "sourcing candidats IA",
+    "entretiens structurés",
+    "évaluation CV automatisée",
+    "communication candidats",
+    "acquisition talents IA",
+    "ChatGPT recrutement",
+    "template offre emploi",
+    "questions entretien IA",
+  ],
+  openGraph: {
+    title: "9 Prompts IA pour Recrutement et Acquisition de Talents",
+    description: "Optimisez votre processus de recrutement avec des prompts d'IA spécialisés",
+    url: "https://rh.prompt101.fr/catalogue/recrutement",
+    images: [
+      {
+        url: "https://rh.prompt101.fr/images/opengraph-image.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
 }
 
 export default function RecrutementPage() {
@@ -21,8 +45,44 @@ export default function RecrutementPage() {
   const categoryUrl = "https://rh.prompt101.fr/catalogue/recrutement"
   const promptCount = 9
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Prompts IA pour le Recrutement et Acquisition de Talents",
+    description: categoryDescription,
+    numberOfItems: promptCount,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Rédaction avancée d'offres d'emploi",
+        description:
+          "Créez des offres d'emploi engageantes, attractives et conformes au RGPD qui reflètent authentiquement votre culture d'entreprise.",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Préparation structurée d'entretiens RH",
+        description:
+          "Générez des questions d'entretien pertinentes basées sur les compétences critiques pour évaluer efficacement les candidats.",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Évaluation objective automatisée des CV",
+        description:
+          "Analysez et évaluez objectivement un grand nombre de CV selon des critères pondérés pour identifier les meilleurs candidats.",
+      },
+    ],
+  }
+
   return (
     <div className="min-h-screen bg-white">
+      <Script
+        id="recrutement-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <CategorySchema
         categoryName={categoryName}
         categoryDescription={categoryDescription}
@@ -31,6 +91,15 @@ export default function RecrutementPage() {
       />
       <Navigation />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="mb-8">
+          <Breadcrumbs
+            items={[
+              { label: "Catalogue", href: "/catalogue" },
+              { label: "Recrutement & Acquisition", href: "/catalogue/recrutement" },
+            ]}
+          />
+        </div>
+
         <div className="text-center mb-12">
           <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Prompts IA pour le {categoryName}</h1>
           <p className="mt-4 text-lg text-gray-500 max-w-3xl mx-auto">

@@ -19,7 +19,8 @@ const articles = [
     title: "Les compétences clés du RH augmenté par l'IA",
     description:
       "Comment les professionnels RH peuvent développer les compétences nécessaires pour tirer parti de l'IA générative.",
-    image: "/images/enhancing-key-skills.jpeg",
+    image:
+      "https://images.unsplash.com/photo-1703785977558-37bcbbf3a1e1?q=80&w=4343&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     author: "Kristy Anamoutou",
     date: "22 Avril 2025",
     readTime: "15 min de lecture",
@@ -52,13 +53,7 @@ export function BlogPreview() {
           {articles.map((article) => (
             <Card key={article.id} className="overflow-hidden flex flex-col h-full">
               <div className="h-48 overflow-hidden relative bg-gray-100">
-                <RandomImage
-                  alt={article.title}
-                  seed={article.id}
-                  fixedImageUrl={
-                    article.id === "competences-rh-augmente" ? "/images/enhancing-key-skills.jpeg" : undefined
-                  }
-                />
+                <RandomImage alt={article.title} seed={article.id} fixedImageUrl={article.image} />
               </div>
               <CardHeader>
                 <CardTitle className="line-clamp-2 text-black">{article.title}</CardTitle>
@@ -73,7 +68,7 @@ export function BlogPreview() {
               </CardContent>
               <CardFooter>
                 <Link href={`/article/${article.id}`} className="w-full">
-                  <Button variant="outline" className="w-full">
+                  <Button variant="outline" className="w-full bg-transparent">
                     Lire l'article
                   </Button>
                 </Link>

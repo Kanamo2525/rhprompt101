@@ -5,11 +5,25 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import type { Metadata } from "next"
 import { RandomImage } from "@/components/random-image"
+import Script from "next/script"
 
 export const metadata: Metadata = {
-  title: "Articles - RH.Prompt101.fr",
+  title: "Articles & Blog RH - Analyses sur l'IA générative en ressources humaines",
   description:
-    "Découvrez nos analyses et réflexions sur l'impact de l'IA générative dans le domaine des ressources humaines.",
+    "Découvrez nos analyses approfondies et réflexions sur l'impact de l'IA générative dans les ressources humaines. Transformation RH, compétences, mesure d'impact et stratégie.",
+  keywords: [
+    "blog RH IA",
+    "articles intelligence artificielle RH",
+    "transformation RH",
+    "compétences RH augmenté",
+    "impact IA RH",
+    "analyses RH",
+  ],
+  openGraph: {
+    title: "Articles & Blog RH - Analyses IA générative",
+    description: "Analyses approfondies sur l'IA générative en ressources humaines",
+    url: "https://rh.prompt101.fr/article",
+  },
 }
 
 const articles = [
@@ -46,8 +60,37 @@ const articles = [
 ]
 
 export default function ArticlesPage() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "Blog RH Prompt101",
+    description: "Analyses et réflexions sur l'IA générative en ressources humaines",
+    url: "https://rh.prompt101.fr/article",
+    publisher: {
+      "@type": "Organization",
+      name: "Prompt101",
+    },
+    blogPost: articles.map((article) => ({
+      "@type": "BlogPosting",
+      headline: article.title,
+      description: article.description,
+      url: `https://rh.prompt101.fr/article/${article.id}`,
+      datePublished: article.date,
+      author: {
+        "@type": "Person",
+        name: article.author,
+      },
+      image: article.image,
+    })),
+  }
+
   return (
     <div className="min-h-screen bg-white">
+      <Script
+        id="blog-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <Navigation />
       <main>
         <section className="py-16">
@@ -85,7 +128,7 @@ export default function ArticlesPage() {
                   </CardContent>
                   <CardFooter>
                     <Link href={`/article/${article.id}`} className="w-full">
-                      <Button variant="outline" className="w-full">
+                      <Button variant="outline" className="w-full bg-transparent">
                         Lire l'article
                       </Button>
                     </Link>

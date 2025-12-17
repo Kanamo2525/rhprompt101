@@ -1,8 +1,37 @@
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import Link from "next/link"
-// Ajouter l'import pour MessageCircle
 import { ArrowRight, Compass, Grid, Eye, Users, BookOpen, Brain, HeartPulse, MessageCircle } from "lucide-react"
+import type { Metadata } from "next"
+import Script from "next/script"
+
+export const metadata: Metadata = {
+  title: "Catalogue de Prompts RH - Plus de 50 prompts optimisés pour l'IA",
+  description:
+    "Explorez notre bibliothèque complète de prompts IA optimisés pour RH : recrutement, formation, gestion des talents, onboarding, administration, bien-être et support RH. Prêts à l'emploi.",
+  keywords: [
+    "catalogue prompts RH",
+    "prompts recrutement",
+    "prompts formation",
+    "prompts gestion talents",
+    "prompts onboarding",
+    "prompts administration RH",
+    "prompts bien-être",
+    "bibliothèque prompts IA",
+  ],
+  openGraph: {
+    title: "Catalogue de Prompts RH - Plus de 50 prompts optimisés",
+    description: "Bibliothèque complète de prompts IA pour transformer votre fonction RH",
+    url: "https://rh.prompt101.fr/catalogue",
+    images: [
+      {
+        url: "https://rh.prompt101.fr/images/opengraph-image.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+}
 
 export default function CataloguePage() {
   const categories = [
@@ -79,8 +108,31 @@ export default function CataloguePage() {
     },
   ]
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Catalogue de Prompts RH",
+    description: "Bibliothèque complète de prompts IA optimisés pour les professionnels RH",
+    url: "https://rh.prompt101.fr/catalogue",
+    publisher: {
+      "@type": "Organization",
+      name: "Prompt101",
+    },
+    hasPart: categories.map((category) => ({
+      "@type": "CreativeWork",
+      name: category.title,
+      description: category.description,
+      url: `https://rh.prompt101.fr/catalogue/${category.id}`,
+    })),
+  }
+
   return (
     <div className="min-h-screen bg-white flex flex-col">
+      <Script
+        id="catalogue-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <Navigation />
       <main className="flex-grow">
         <div className="bg-gradient-to-r from-blue-600 to-indigo-700 py-16">
