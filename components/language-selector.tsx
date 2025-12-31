@@ -1,190 +1,196 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
-import { Globe, Check, Loader2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useEffect, useState, useCallback } from "react"
+import { Globe, Check } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Button } from "@/components/ui/button"
 
 const languages = [
-  { code: "fr", name: "Français", nativeName: "Français", flag: "🇫🇷" },
-  { code: "en", name: "English", nativeName: "English", flag: "🇬🇧" },
-  { code: "es", name: "Español", nativeName: "Español", flag: "🇪🇸" },
-  { code: "de", name: "Deutsch", nativeName: "Deutsch", flag: "🇩🇪" },
-  { code: "it", name: "Italiano", nativeName: "Italiano", flag: "🇮🇹" },
-  { code: "pt", name: "Português", nativeName: "Português", flag: "🇵🇹" },
-  { code: "nl", name: "Nederlands", nativeName: "Nederlands", flag: "🇳🇱" },
-  { code: "ru", name: "Русский", nativeName: "Русский", flag: "🇷🇺" },
-  { code: "zh-CN", name: "中文", nativeName: "中文", flag: "🇨🇳" },
-  { code: "ja", name: "日本語", nativeName: "日本語", flag: "🇯🇵" },
-  { code: "ar", name: "العربية", nativeName: "العربية", flag: "🇸🇦" },
+  { code: "fr", label: "Français", flag: "🇫🇷" },
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "es", label: "Español", flag: "🇪🇸" },
+  { code: "de", label: "Deutsch", flag: "🇩🇪" },
+  { code: "it", label: "Italiano", flag: "🇮🇹" },
+  { code: "pt", label: "Português", flag: "🇵🇹" },
+  { code: "nl", label: "Nederlands", flag: "🇳🇱" },
+  { code: "ru", label: "Русский", flag: "🇷🇺" },
+  { code: "zh-CN", label: "中文", flag: "🇨🇳" },
+  { code: "ja", label: "日本語", flag: "🇯🇵" },
+  { code: "ar", label: "العربية", flag: "🇸🇦" },
 ]
 
-function changeLanguageViaCombo(langCode: string): boolean {
-  const combo = document.querySelector(".goog-te-combo") as HTMLSelectElement
-  if (!combo) return false
-
-  // Set value and trigger change
-  combo.value = langCode
-  combo.dispatchEvent(new Event("change", { bubbles: true }))
-  return true
-}
-
-function detectCurrentLanguage(): string {
-  // Check combo value first (most reliable)
-  const combo = document.querySelector(".goog-te-combo") as HTMLSelectElement
-  if (combo && combo.value) {
-    return combo.value === "" ? "fr" : combo.value
+declare global {
+  interface Window {
+    google: {
+      translate: {
+        TranslateElement: new (options: object, elementId: string) => void
+      }
+    }
+    googleTranslateElementInit: () => void
   }
-
-  // Check cookie as fallback
-  const match = document.cookie.match(/googtrans=\/[^/]*\/([^;]+)/)
-  if (match) return match[1]
-
-  return "fr"
 }
 
 export function LanguageSelector() {
   const [currentLang, setCurrentLang] = useState("fr")
-  const [isOpen, setIsOpen] = useState(false)
   const [isReady, setIsReady] = useState(false)
-  const [isClient, setIsClient] = useState(false)
 
-  useEffect(() => {
-    setIsClient(true)
-
-    // Wait for Google Translate to be ready
-    const checkReady = () => {
-      const combo = document.querySelector(".goog-te-combo") as HTMLSelectElement
-      if (combo) {
-        setIsReady(true)
-        setCurrentLang(detectCurrentLanguage())
-        return true
-      }
-      return false
+  const triggerTranslation = useCallback((langCode: string) => {
+    const selectElement = document.querySelector(".goog-te-combo") as HTMLSelectElement
+    if (selectElement) {
+      selectElement.value = langCode
+      selectElement.dispatchEvent(new Event("change", { bubbles: true }))
+      setCurrentLang(langCode)
+      return true
     }
-
-    // Check immediately
-    if (checkReady()) return
-
-    // Check periodically
-    const interval = setInterval(() => {
-      if (checkReady()) {
-        clearInterval(interval)
-      }
-    }, 500)
-
-    // Timeout after 10 seconds - mark as ready anyway
-    const timeout = setTimeout(() => {
-      setIsReady(true)
-      clearInterval(interval)
-    }, 10000)
-
-    return () => {
-      clearInterval(interval)
-      clearTimeout(timeout)
-    }
+    return false
   }, [])
 
   useEffect(() => {
-    if (!isClient) return
+    window.googleTranslateElementInit = () => {
+      new window.google.translate.TranslateElement(
+        {
+          pageLanguage: "fr",
+          includedLanguages: "en,es,de,it,pt,nl,ru,zh-CN,ja,ar",
+          autoDisplay: false,
+          multilanguagePage: true,
+        },
+        "google_translate_element",
+      )
 
-    const interval = setInterval(() => {
-      const detected = detectCurrentLanguage()
-      if (detected !== currentLang) {
-        setCurrentLang(detected)
+      // Wait for the select to be ready
+      const checkReady = setInterval(() => {
+        const selectElement = document.querySelector(".goog-te-combo") as HTMLSelectElement
+        if (selectElement) {
+          setIsReady(true)
+          clearInterval(checkReady)
+
+          // Get current language from the select
+          const currentValue = selectElement.value
+          if (currentValue) {
+            setCurrentLang(currentValue)
+          }
+        }
+      }, 100)
+
+      // Timeout after 5 seconds
+      setTimeout(() => clearInterval(checkReady), 5000)
+    }
+
+    if (!document.getElementById("google-translate-script")) {
+      const script = document.createElement("script")
+      script.id = "google-translate-script"
+      script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+      script.async = true
+      document.body.appendChild(script)
+    }
+
+    // Get language from cookie if exists
+    const match = document.cookie.match(/googtrans=\/[^/]+\/([^;]+)/)
+    if (match && match[1]) {
+      setCurrentLang(match[1])
+    }
+  }, [])
+
+  const handleLanguageChange = (langCode: string) => {
+    if (langCode === currentLang) return
+
+    if (langCode === "fr") {
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+      document.cookie =
+        "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + window.location.hostname + ";"
+      // Also clear on parent domain for subdomains
+      const parts = window.location.hostname.split(".")
+      if (parts.length > 2) {
+        const parentDomain = parts.slice(-2).join(".")
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." + parentDomain + ";"
       }
-    }, 1000)
-
-    return () => clearInterval(interval)
-  }, [isClient, currentLang])
-
-  const handleChangeLanguage = useCallback(
-    (langCode: string) => {
-      if (langCode === currentLang) return
-      setIsOpen(false)
-
-      const success = changeLanguageViaCombo(langCode)
-
-      if (success) {
-        // Update state immediately
-        setCurrentLang(langCode)
-      } else {
-        // Fallback: set cookie and reload
-        const cookieValue = langCode === "fr" ? "" : `/fr/${langCode}`
-        if (cookieValue) {
-          document.cookie = `googtrans=${cookieValue}; path=/; max-age=31536000`
-        } else {
-          document.cookie = "googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC"
+      setCurrentLang("fr")
+      window.location.reload()
+    } else {
+      if (!triggerTranslation(langCode)) {
+        // If select not ready, set cookie and reload
+        document.cookie = `googtrans=/fr/${langCode}; path=/;`
+        document.cookie = `googtrans=/fr/${langCode}; path=/; domain=${window.location.hostname};`
+        // Also set on parent domain for subdomains
+        const parts = window.location.hostname.split(".")
+        if (parts.length > 2) {
+          const parentDomain = parts.slice(-2).join(".")
+          document.cookie = `googtrans=/fr/${langCode}; path=/; domain=.${parentDomain};`
         }
         window.location.reload()
       }
-    },
-    [currentLang],
-  )
-
-  const getCurrentLanguageData = () => {
-    return languages.find((lang) => lang.code === currentLang) || languages[0]
+    }
   }
 
-  if (!isClient) {
-    return <div className="h-10 w-32 bg-muted rounded-lg animate-pulse" />
-  }
-
-  const currentLanguageData = getCurrentLanguageData()
+  const currentLanguage = languages.find((l) => l.code === currentLang) || languages[0]
 
   return (
-    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          className="h-10 px-3 text-sm font-medium border-2 border-primary/30 bg-background hover:border-primary hover:bg-primary/5 transition-all duration-200 shadow-sm rounded-lg"
-          aria-label={`Langue actuelle: ${currentLanguageData.name}. Cliquez pour changer de langue.`}
-        >
-          <Globe className="h-4 w-4 mr-2 text-primary" />
-          <span className="hidden sm:inline-flex items-center gap-2">
-            <span className="text-lg leading-none">{currentLanguageData.flag}</span>
-            <span className="font-semibold">{currentLanguageData.nativeName}</span>
-          </span>
-          <span className="sm:hidden text-lg">{currentLanguageData.flag}</span>
-        </Button>
-      </DropdownMenuTrigger>
+    <>
+      <div id="google_translate_element" className="fixed opacity-0 pointer-events-none -z-50 top-0 left-0" />
 
-      <DropdownMenuContent
-        align="end"
-        className="w-56 bg-background border-2 border-border shadow-xl rounded-xl p-1.5 z-[9999]"
-        sideOffset={8}
-      >
-        <div className="px-3 py-2 text-xs font-bold text-muted-foreground uppercase tracking-wider border-b border-border mb-1">
-          Choisir une langue
-        </div>
-
-        {languages.map((lang) => {
-          const isSelected = currentLang === lang.code
-          return (
+      {/* Custom dropdown */}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="outline"
+            size="sm"
+            className="h-10 px-3 gap-2 border-2 border-primary/30 hover:border-primary bg-transparent"
+          >
+            <Globe className="h-4 w-4" />
+            <span className="text-lg">{currentLanguage.flag}</span>
+            <span className="hidden sm:inline font-medium">{currentLanguage.label}</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-48 z-[9999]">
+          <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wide border-b mb-1">
+            Choisir une langue
+          </div>
+          {languages.map((lang) => (
             <DropdownMenuItem
               key={lang.code}
-              onClick={() => handleChangeLanguage(lang.code)}
-              className={`
-                cursor-pointer py-3 px-3 rounded-lg my-0.5 text-sm font-medium transition-all duration-150
-                flex items-center
-                ${isSelected ? "bg-primary/10 text-primary border border-primary/20" : "hover:bg-muted text-foreground"}
-              `}
+              onClick={() => handleLanguageChange(lang.code)}
+              className={`flex items-center gap-2 cursor-pointer ${
+                currentLang === lang.code ? "bg-primary/10 text-primary" : ""
+              }`}
             >
-              <span className="mr-3 text-xl leading-none">{lang.flag}</span>
-              <span className="flex-1 font-semibold">{lang.nativeName}</span>
-              {isSelected && <Check className="h-5 w-5 ml-2 text-primary" strokeWidth={3} />}
+              <span className="text-lg">{lang.flag}</span>
+              <span className="flex-1">{lang.label}</span>
+              {currentLang === lang.code && <Check className="h-4 w-4 text-primary" />}
             </DropdownMenuItem>
-          )
-        })}
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
 
-        {!isReady && (
-          <div className="px-3 py-2.5 text-xs text-amber-700 bg-amber-50 rounded-lg mt-2 flex items-center gap-2 border border-amber-200">
-            <Loader2 className="h-3.5 w-3.5 animate-spin" />
-            <span>Chargement du traducteur...</span>
-          </div>
-        )}
-      </DropdownMenuContent>
-    </DropdownMenu>
+      <style jsx global>{`
+        .goog-te-banner-frame,
+        .skiptranslate,
+        #goog-gt-tt,
+        .goog-te-balloon-frame,
+        .goog-te-menu-frame,
+        .goog-te-gadget,
+        .goog-te-spinner-pos,
+        .goog-tooltip,
+        .goog-tooltip:hover,
+        .goog-te-ftab-float {
+          display: none !important;
+          visibility: hidden !important;
+        }
+        body {
+          top: 0 !important;
+          position: static !important;
+        }
+        .goog-text-highlight {
+          background: none !important;
+          box-shadow: none !important;
+        }
+        #google_translate_element {
+          height: 0 !important;
+          overflow: hidden !important;
+        }
+        .VIpgJd-ZVi9od-ORHb-OEVmcd {
+          display: none !important;
+        }
+      `}</style>
+    </>
   )
 }
