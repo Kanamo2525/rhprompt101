@@ -134,8 +134,8 @@ export function LanguageSelector() {
             <span className="hidden sm:inline font-medium">{currentLanguage.label}</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-48 z-[9999]">
-          <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wide border-b mb-1">
+        <DropdownMenuContent align="end" className="w-48 z-[9999] bg-white border border-gray-200 shadow-xl">
+          <div className="px-2 py-1.5 text-xs font-semibold text-gray-500 uppercase tracking-wide border-b border-gray-200 mb-1 bg-gray-50">
             Choisir une langue
           </div>
           {languages.map((lang) => (
@@ -143,7 +143,7 @@ export function LanguageSelector() {
               key={lang.code}
               onClick={() => handleLanguageChange(lang.code)}
               className={`flex items-center gap-2 cursor-pointer ${
-                currentLang === lang.code ? "bg-primary/10 text-primary" : ""
+                currentLang === lang.code ? "bg-primary/10 text-primary" : "text-gray-900 hover:bg-gray-100"
               }`}
             >
               <span className="text-lg">{lang.flag}</span>
