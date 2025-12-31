@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "RH.Prompt101.fr",
+  "name_for_model": "rh_prompt101",
+  "description_for_human": "Plateforme de prompts IA optimisés pour les professionnels des ressources humaines.",
+  "description_for_model": "RH.Prompt101.fr provides optimized AI prompts for HR professionals. The platform offers 50+ prompts for recruitment, training, talent management, onboarding, administration, well-being, and HR support. It also features an opportunity matrix and a comprehensive strategic guide.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://rh.prompt101.fr/api/openapi.json"
+  },
+  "logo_url": "https://rh.prompt101.fr/images/opengraph-image.png",
+  "contact_email": "contact@prompt101.fr",
+  "legal_info_url": "https://rh.prompt101.fr/mentions-legales"
+}

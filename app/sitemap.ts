@@ -4,7 +4,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://rh.prompt101.fr"
   const currentDate = new Date().toISOString()
 
-  // Static pages with high priority
   const staticPages = [
     {
       url: baseUrl,
@@ -16,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/catalogue`,
       lastModified: currentDate,
       changeFrequency: "weekly" as const,
-      priority: 0.9,
+      priority: 0.95,
     },
     {
       url: `${baseUrl}/matrice`,
@@ -34,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/guide/telecharger`,
       lastModified: currentDate,
       changeFrequency: "monthly" as const,
-      priority: 0.8,
+      priority: 0.85,
     },
     {
       url: `${baseUrl}/article`,
@@ -46,28 +45,38 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/mentions-legales`,
       lastModified: currentDate,
       changeFrequency: "yearly" as const,
-      priority: 0.3,
+      priority: 0.2,
     },
   ]
 
-  // Catalogue category pages
-  const categories = ["recrutement", "formation", "talents", "onboarding", "administration", "bien-etre", "support"]
+  const categories = [
+    { slug: "recrutement", priority: 0.9 },
+    { slug: "formation", priority: 0.85 },
+    { slug: "talents", priority: 0.85 },
+    { slug: "onboarding", priority: 0.8 },
+    { slug: "administration", priority: 0.75 },
+    { slug: "bien-etre", priority: 0.8 },
+    { slug: "support", priority: 0.75 },
+  ]
 
   const categoryPages = categories.map((category) => ({
-    url: `${baseUrl}/catalogue/${category}`,
+    url: `${baseUrl}/catalogue/${category.slug}`,
     lastModified: currentDate,
     changeFrequency: "weekly" as const,
-    priority: 0.8,
+    priority: category.priority,
   }))
 
-  // Article pages
-  const articles = ["transformation-rh-ia", "competences-rh-augmente", "impact-ia-rh"]
+  const articles = [
+    { slug: "transformation-rh-ia", priority: 0.85 },
+    { slug: "competences-rh-augmente", priority: 0.85 },
+    { slug: "impact-ia-rh", priority: 0.8 },
+  ]
 
   const articlePages = articles.map((article) => ({
-    url: `${baseUrl}/article/${article}`,
+    url: `${baseUrl}/article/${article.slug}`,
     lastModified: currentDate,
     changeFrequency: "monthly" as const,
-    priority: 0.7,
+    priority: article.priority,
   }))
 
   return [...staticPages, ...categoryPages, ...articlePages]

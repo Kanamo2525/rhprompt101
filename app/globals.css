@@ -9,45 +9,67 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-/* Reste du contenu existant */
+/* Improved Google Translate styles - keep combo accessible but hidden */
 
-/* Styles pour Google Translate */
-/* Hide the Google Translate top frame/bar */
-.goog-te-banner-frame {
-  display: none !important;
-}
-
+/* Reset body positioning - prevents Google bar from pushing content down */
+html,
 body {
   top: 0 !important;
   position: static !important;
+  margin-top: 0 !important;
 }
 
-.skiptranslate {
+/* Hide the Google Translate top banner frame */
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-te-menu-frame,
+.goog-te-gadget-icon,
+.goog-tooltip,
+.goog-tooltip:hover,
+body > .skiptranslate:not(#google_translate_element),
+body > .skiptranslate > iframe {
   display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
 }
 
-/* Hide the frame that Google Translate creates */
-iframe.skiptranslate {
-  display: none !important;
-}
-
-/* Hide all Google Translate frames */
-.goog-te-banner-frame.skiptranslate {
-  display: none !important;
-}
-
-/* Prevent body from being pushed down */
-body.translated-ltr {
-  top: 0 !important;
-}
-
-body.translated-rtl {
-  top: 0 !important;
-}
-
-/* Hide the Google Translate element container */
+/* Keep #google_translate_element accessible but invisible - REQUIRED for API */
 #google_translate_element {
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  /* DO NOT use display: none - it breaks the API */
+}
+
+/* Make sure the combo inside is still functional */
+#google_translate_element .goog-te-combo {
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* Hide any skip translate elements at body level */
+body > .skiptranslate {
   display: none !important;
+  height: 0 !important;
+}
+
+/* Prevent body from being pushed down when translated */
+body.translated-ltr,
+body.translated-rtl,
+html.translated-ltr,
+html.translated-rtl {
+  top: 0 !important;
+  margin-top: 0 !important;
 }
 
 /* Remove text highlighting from Google Translate */
@@ -56,6 +78,38 @@ body.translated-rtl {
   box-shadow: none !important;
 }
 
+/* Fix font elements inserted by Google Translate */
+font[style*="background"] {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Hide Google branding/attribution that might appear */
+.goog-te-gadget {
+  color: transparent !important;
+  font-size: 0 !important;
+}
+
+.goog-te-gadget span {
+  display: none !important;
+}
+
+.goog-te-gadget .goog-te-combo {
+  display: block !important;
+  visibility: visible !important;
+}
+
 .goog-te-menu-value:hover {
   text-decoration: none !important;
+}
+
+/* VT323 animation fix */
+.VIpgJd-ZVi9od-ORHb-OEVmcd {
+  display: none !important;
+}
+
+/* Fix for iframe overlay */
+iframe.goog-te-menu-frame {
+  display: none !important;
+  box-shadow: none !important;
 }

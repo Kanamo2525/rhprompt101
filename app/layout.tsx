@@ -34,10 +34,14 @@ export const metadata: Metadata = {
   authors: [{ name: "Kristy Anamoutou" }],
   creator: "Prompt101",
   publisher: "Prompt101",
+  manifest: "/manifest.json",
   alternates: {
     canonical: "https://rh.prompt101.fr",
     languages: {
       "fr-FR": "https://rh.prompt101.fr",
+      en: "https://rh.prompt101.fr",
+      es: "https://rh.prompt101.fr",
+      de: "https://rh.prompt101.fr",
     },
   },
   openGraph: {
@@ -68,15 +72,26 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
+      noimageindex: false,
       "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
     },
   },
+  verification: {
+    google: "votre-code-verification-google",
+    // yandex: "votre-code-yandex",
+    // bing: "votre-code-bing",
+  },
   category: "Technology",
+  other: {
+    "ai-content-declaration": "human-created",
+    "content-language": "fr-FR",
+  },
     generator: 'v0.app'
 }
 
@@ -86,8 +101,8 @@ export const viewport: Viewport = {
   maximumScale: 5,
   userScalable: true,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: light)", color: "#4F46E5" },
+    { media: "(prefers-color-scheme: dark)", color: "#4F46E5" },
   ],
 }
 
@@ -99,70 +114,42 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <head>
-        <link rel="alternate" hrefLang="fr-FR" href="https://rh.prompt101.fr" />
-        {/* Hide Google Translate Bar and UI elements */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://translate.google.com" />
+        <link rel="preconnect" href="https://translate.googleapis.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+        <link rel="alternate" hrefLang="fr" href="https://rh.prompt101.fr" />
+        <link rel="alternate" hrefLang="en" href="https://rh.prompt101.fr" />
+        <link rel="alternate" hrefLang="es" href="https://rh.prompt101.fr" />
+        <link rel="alternate" hrefLang="de" href="https://rh.prompt101.fr" />
+        <link rel="alternate" hrefLang="x-default" href="https://rh.prompt101.fr" />
+
+        <link rel="canonical" href="https://rh.prompt101.fr" />
+
         <style
           dangerouslySetInnerHTML={{
             __html: `
-            /* Hide Google Translate Bar and UI elements */
-            body { 
-              top: 0 !important; 
-              position: static !important;
-            }
-            .goog-te-banner-frame { 
-              display: none !important; 
-              visibility: hidden !important;
-            }
-            .goog-te-banner-frame.skiptranslate { 
-              display: none !important; 
-            }
-            body > .skiptranslate {
-              display: none !important;
-            }
-            .skiptranslate iframe { 
-              display: none !important; 
-              visibility: hidden !important;
-              height: 0 !important;
-            }
-            body.translated-ltr, body.translated-rtl { 
-              top: 0 !important; 
-            }
-            #google_translate_element {
-              display: none !important;
-            }
-            .goog-te-gadget {
-              display: none !important;
-            }
-            #goog-gt-tt, .goog-te-balloon-frame {
-              display: none !important;
-            }
-            .goog-text-highlight {
-              background: none !important;
-              box-shadow: none !important;
-            }
+            html, body { top: 0 !important; position: static !important; margin-top: 0 !important; }
+            .goog-te-banner-frame, body > .skiptranslate:not(#google_translate_element) { display: none !important; }
           `,
           }}
         />
       </head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <div id="google_translate_element" style={{ display: "none" }} />
+          <div id="google_translate_element" aria-hidden="true" />
           {children}
         </ThemeProvider>
 
         <Script
-          id="google-translate-script"
-          src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-          strategy="beforeInteractive"
-        />
-
-        <Script
           id="google-translate-init"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               function googleTranslateElementInit() {
-                if (typeof google !== 'undefined' && google.translate) {
+                try {
                   new google.translate.TranslateElement({
                     pageLanguage: 'fr',
                     includedLanguages: 'en,es,de,it,pt,nl,ru,zh-CN,ja,ar',
@@ -170,16 +157,24 @@ export default function RootLayout({
                     autoDisplay: false,
                     multilanguagePage: true
                   }, 'google_translate_element');
-                  console.log('[v0] Google Translate initialized');
+                  
+                  // Dispatch custom event when ready
+                  setTimeout(function() {
+                    window.dispatchEvent(new CustomEvent('googleTranslateReady'));
+                  }, 500);
+                } catch(e) {
+                  console.error('[v0] Google Translate init error:', e);
                 }
               }
-              
-              // Auto-init if script is already loaded
-              if (typeof google !== 'undefined' && google.translate) {
-                googleTranslateElementInit();
-              }
+              window.googleTranslateElementInit = googleTranslateElementInit;
             `,
           }}
+        />
+
+        <Script
+          id="google-translate-script"
+          src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="afterInteractive"
         />
 
         <Script
@@ -189,21 +184,14 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
+              "@id": "https://rh.prompt101.fr/#website",
               name: "RH.Prompt101.fr",
-              alternateName: "Prompt101 RH",
+              alternateName: ["Prompt101 RH", "Prompt101 Ressources Humaines"],
               url: "https://rh.prompt101.fr",
               description:
                 "La plateforme de référence pour transformer votre fonction RH grâce aux prompts d'IA générative méthodiquement optimisés.",
               publisher: {
-                "@type": "Organization",
-                name: "Prompt101",
-                logo: {
-                  "@type": "ImageObject",
-                  url: "https://rh.prompt101.fr/images/opengraph-image.png",
-                  width: 1200,
-                  height: 630,
-                },
-                sameAs: ["https://www.linkedin.com/company/prompt101"],
+                "@id": "https://rh.prompt101.fr/#organization",
               },
               potentialAction: {
                 "@type": "SearchAction",
@@ -213,11 +201,7 @@ export default function RootLayout({
                 },
                 "query-input": "required name=search_term_string",
               },
-              inLanguage: "fr-FR",
-              audience: {
-                "@type": "Audience",
-                audienceType: "Professionnels des ressources humaines",
-              },
+              inLanguage: ["fr-FR", "en", "es", "de"],
             }),
           }}
         />
@@ -229,25 +213,66 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
+              "@id": "https://rh.prompt101.fr/#organization",
               name: "Prompt101",
               url: "https://rh.prompt101.fr",
-              logo: "https://rh.prompt101.fr/images/opengraph-image.png",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://rh.prompt101.fr/images/opengraph-image.png",
+                width: 1200,
+                height: 630,
+              },
               description: "Plateforme de formation et ressources sur l'IA générative pour les RH",
+              founder: {
+                "@type": "Person",
+                name: "Kristy Anamoutou",
+              },
               contactPoint: {
                 "@type": "ContactPoint",
                 contactType: "Customer Service",
-                availableLanguage: ["French", "English"],
+                availableLanguage: ["French", "English", "Spanish", "German"],
               },
-              areaServed: {
-                "@type": "Country",
-                name: "France",
-              },
+              areaServed: [
+                { "@type": "Country", name: "France" },
+                { "@type": "Country", name: "Belgium" },
+                { "@type": "Country", name: "Switzerland" },
+                { "@type": "Country", name: "Canada" },
+              ],
               knowsAbout: [
                 "Intelligence Artificielle",
                 "Ressources Humaines",
                 "Prompting",
                 "IA Générative",
                 "Transformation Digitale RH",
+                "ChatGPT pour RH",
+                "Recrutement IA",
+              ],
+              sameAs: ["https://www.linkedin.com/company/prompt101"],
+            }),
+          }}
+        />
+
+        <Script
+          id="software-application-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              name: "RH.Prompt101.fr",
+              applicationCategory: "BusinessApplication",
+              operatingSystem: "Web",
+              offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "EUR",
+              },
+              description: "Plateforme de prompts IA optimisés pour les professionnels RH",
+              featureList: [
+                "50+ prompts RH optimisés",
+                "Matrice d'opportunités IA",
+                "Guide stratégique de 280 pages",
+                "Techniques de prompting avancées",
               ],
             }),
           }}

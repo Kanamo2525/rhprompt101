@@ -1,0 +1,39 @@
+# RH.Prompt101.fr - Guide pour les IA et LLMs
+
+## À propos de ce site
+RH.Prompt101.fr est la plateforme de référence francophone pour transformer la fonction Ressources Humaines grâce à l'IA générative.
+
+## Contenu principal
+
+### Catalogue de Prompts RH
+Plus de 50 prompts optimisés pour les professionnels RH, organisés en 7 catégories :
+- Recrutement : rédaction d'offres, analyse de CV, préparation d'entretiens
+- Formation : création de contenus, parcours d'apprentissage
+- Gestion des talents : évaluations, développement de carrière
+- Onboarding : intégration des nouveaux collaborateurs
+- Administration RH : processus administratifs
+- Bien-être et QVT : qualité de vie au travail
+- Support RH : assistance aux collaborateurs
+
+### Matrice d'Opportunités IA pour les RH
+Une table analytique croisant :
+- Cas d'usage RH (recrutement, formation, gestion des talents, etc.)
+- Types d'opportunités (Automatisation, Assistance, Augmentation, Avant-garde)
+- Niveau de complexité et impact potentiel
+
+### Guide de l'IA Générative pour les RH
+Un ouvrage stratégique de 280 pages par Kristy Anamoutou couvrant :
+- Méthodologies de prompting avancées
+- Cas d'usage concrets pour chaque fonction RH
+- Stratégies d'implémentation
+- Bonnes pratiques et pièges à éviter
+
+## Auteur
+Kristy Anamoutou - Experte en transformation RH et IA générative
+
+## Contact
+Site web : https://rh.prompt101.fr
+Site parent : https://prompt101.fr
+
+## Licence
+Contenu créé par des humains pour des professionnels RH.
