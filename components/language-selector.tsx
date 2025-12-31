@@ -19,209 +19,107 @@ const languages = [
   { code: "ar", name: "العربية", nativeName: "العربية", flag: "🇸🇦" },
 ]
 
-function cleanupGoogleTranslate() {
-  // 1. Remove all Google Translate iframes
-  const iframes = document.querySelectorAll(
-    'iframe[src*="translate.google"], iframe.goog-te-menu-frame, iframe.goog-te-banner-frame',
-  )
-  iframes.forEach((iframe) => iframe.remove())
+function changeLanguageViaCombo(langCode: string): boolean {
+  const combo = document.querySelector(".goog-te-combo") as HTMLSelectElement
+  if (!combo) return false
 
-  // 2. Remove Google Translate elements
-  const gtElements = document.querySelectorAll(
-    "#google_translate_element, .goog-te-gadget, .goog-te-banner-frame, .skiptranslate",
-  )
-  gtElements.forEach((el) => {
-    if (el.id === "google_translate_element") {
-      el.innerHTML = "" // Clear but keep the container
-    }
-  })
-
-  // 3. Remove translated classes from HTML
-  const html = document.documentElement
-  html.classList.remove("translated-ltr", "translated-rtl")
-  html.removeAttribute("lang")
-
-  // 4. Reset body styles that Google Translate may have added
-  document.body.style.removeProperty("top")
-  document.body.style.removeProperty("position")
-
-  // 5. Remove any Google Translate script tags to force reload
-  const scripts = document.querySelectorAll('script[src*="translate.google"]')
-  scripts.forEach((script) => script.remove())
-
-  // 6. Clear Google Translate global variables
-  if (typeof window !== "undefined") {
-    // @ts-ignore
-    delete window.google?.translate
-    // @ts-ignore
-    delete window.googleTranslateElementInit
-  }
-}
-
-function clearAllGoogleTranslateCookies() {
-  const hostname = window.location.hostname
-  const rootDomain = hostname.split(".").slice(-2).join(".")
-
-  const domains = [
-    "",
-    hostname,
-    `.${hostname}`,
-    hostname.replace(/^www\./, ""),
-    `.${hostname.replace(/^www\./, "")}`,
-    rootDomain,
-    `.${rootDomain}`,
-  ]
-
-  const paths = ["/", "", "/fr", "/en", "/es", "/de", "/it", "/pt", "/nl", "/ru", "/zh-CN", "/ja", "/ar"]
-  const cookieNames = ["googtrans", "googtrans-b"]
-
-  cookieNames.forEach((name) => {
-    domains.forEach((domain) => {
-      paths.forEach((path) => {
-        const domainPart = domain ? `; domain=${domain}` : ""
-        const pathPart = `; path=${path || "/"}`
-        // Set to expired date
-        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC${pathPart}${domainPart}`
-        // Also try with secure flag
-        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC${pathPart}${domainPart}; secure`
-      })
-    })
-  })
-
-  // Also try localStorage and sessionStorage cleanup
-  try {
-    const keysToRemove: string[] = []
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i)
-      if (key && (key.includes("google") || key.includes("translate"))) {
-        keysToRemove.push(key)
-      }
-    }
-    keysToRemove.forEach((key) => localStorage.removeItem(key))
-
-    const sessionKeysToRemove: string[] = []
-    for (let i = 0; i < sessionStorage.length; i++) {
-      const key = sessionStorage.key(i)
-      if (key && (key.includes("google") || key.includes("translate"))) {
-        sessionKeysToRemove.push(key)
-      }
-    }
-    sessionKeysToRemove.forEach((key) => sessionStorage.removeItem(key))
-  } catch (e) {
-    // Ignore storage access errors
-  }
-}
-
-function setGoogleTranslateCookie(langCode: string) {
-  // First clean everything
-  clearAllGoogleTranslateCookies()
-
-  if (langCode === "fr") {
-    return // Just clear cookies for French (original)
-  }
-
-  const cookieValue = `/fr/${langCode}`
-  const maxAge = 31536000 // 1 year
-  const hostname = window.location.hostname
-  const rootDomain = hostname.split(".").slice(-2).join(".")
-
-  const domains = ["", hostname, `.${hostname}`, rootDomain, `.${rootDomain}`]
-
-  // Set cookie on all possible domains
-  domains.forEach((domain) => {
-    const domainPart = domain ? `; domain=${domain}` : ""
-    document.cookie = `googtrans=${cookieValue}; path=/; max-age=${maxAge}${domainPart}; SameSite=Lax`
-  })
-}
-
-function getLanguageFromCookie(): string {
-  const match = document.cookie.match(/googtrans=\/fr\/([^;]+)/)
-  return match ? match[1] : "fr"
+  // Set value and trigger change
+  combo.value = langCode
+  combo.dispatchEvent(new Event("change", { bubbles: true }))
+  return true
 }
 
 function detectCurrentLanguage(): string {
-  // 1. Check if page is translated via class
-  const html = document.documentElement
-  const isTranslated = html.classList.contains("translated-ltr") || html.classList.contains("translated-rtl")
-
-  // 2. Check combo value
+  // Check combo value first (most reliable)
   const combo = document.querySelector(".goog-te-combo") as HTMLSelectElement
-  if (combo && combo.value && combo.value !== "fr") {
-    return combo.value
+  if (combo && combo.value) {
+    return combo.value === "" ? "fr" : combo.value
   }
 
-  // 3. Check cookie
-  const cookieLang = getLanguageFromCookie()
-  if (isTranslated && cookieLang !== "fr") {
-    return cookieLang
-  }
+  // Check cookie as fallback
+  const match = document.cookie.match(/googtrans=\/[^/]*\/([^;]+)/)
+  if (match) return match[1]
 
-  // 4. If not translated, return French
-  if (!isTranslated) {
-    return "fr"
-  }
-
-  return cookieLang
+  return "fr"
 }
 
 export function LanguageSelector() {
   const [currentLang, setCurrentLang] = useState("fr")
   const [isOpen, setIsOpen] = useState(false)
-  const [isChanging, setIsChanging] = useState(false)
   const [isReady, setIsReady] = useState(false)
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
     setIsClient(true)
 
-    // Detect initial language
-    const detected = detectCurrentLanguage()
-    setCurrentLang(detected)
+    // Wait for Google Translate to be ready
+    const checkReady = () => {
+      const combo = document.querySelector(".goog-te-combo") as HTMLSelectElement
+      if (combo) {
+        setIsReady(true)
+        setCurrentLang(detectCurrentLanguage())
+        return true
+      }
+      return false
+    }
 
-    // Mark as ready after a short delay
-    const readyTimeout = setTimeout(() => setIsReady(true), 1500)
+    // Check immediately
+    if (checkReady()) return
 
-    // Periodic sync
+    // Check periodically
     const interval = setInterval(() => {
-      const detected = detectCurrentLanguage()
-      setCurrentLang((prev) => (detected !== prev ? detected : prev))
-    }, 1000)
+      if (checkReady()) {
+        clearInterval(interval)
+      }
+    }, 500)
+
+    // Timeout after 10 seconds - mark as ready anyway
+    const timeout = setTimeout(() => {
+      setIsReady(true)
+      clearInterval(interval)
+    }, 10000)
 
     return () => {
       clearInterval(interval)
-      clearTimeout(readyTimeout)
+      clearTimeout(timeout)
     }
   }, [])
 
+  useEffect(() => {
+    if (!isClient) return
+
+    const interval = setInterval(() => {
+      const detected = detectCurrentLanguage()
+      if (detected !== currentLang) {
+        setCurrentLang(detected)
+      }
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [isClient, currentLang])
+
   const handleChangeLanguage = useCallback(
     (langCode: string) => {
-      if (langCode === currentLang || isChanging) return
-
-      setIsChanging(true)
+      if (langCode === currentLang) return
       setIsOpen(false)
 
-      // Step 1: Clean up all Google Translate state
-      cleanupGoogleTranslate()
+      const success = changeLanguageViaCombo(langCode)
 
-      // Step 2: Clear all cookies
-      clearAllGoogleTranslateCookies()
-
-      // Step 3: Set new cookie if not French
-      if (langCode !== "fr") {
-        setGoogleTranslateCookie(langCode)
+      if (success) {
+        // Update state immediately
+        setCurrentLang(langCode)
+      } else {
+        // Fallback: set cookie and reload
+        const cookieValue = langCode === "fr" ? "" : `/fr/${langCode}`
+        if (cookieValue) {
+          document.cookie = `googtrans=${cookieValue}; path=/; max-age=31536000`
+        } else {
+          document.cookie = "googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC"
+        }
+        window.location.reload()
       }
-
-      // Step 4: Force a hard reload without cache
-      // Using location.href assignment instead of reload() for cleaner state
-      setTimeout(() => {
-        // Add a cache-busting parameter to ensure fresh load
-        const url = new URL(window.location.href)
-        url.searchParams.set("_gtlang", langCode)
-        url.searchParams.set("_t", Date.now().toString())
-        window.location.href = url.toString()
-      }, 150)
     },
-    [currentLang, isChanging],
+    [currentLang],
   )
 
   const getCurrentLanguageData = () => {
@@ -229,7 +127,7 @@ export function LanguageSelector() {
   }
 
   if (!isClient) {
-    return <div className="h-10 w-32 bg-gray-100 rounded-lg animate-pulse" />
+    return <div className="h-10 w-32 bg-muted rounded-lg animate-pulse" />
   }
 
   const currentLanguageData = getCurrentLanguageData()
@@ -240,15 +138,10 @@ export function LanguageSelector() {
         <Button
           variant="outline"
           size="sm"
-          disabled={isChanging}
-          className="h-10 px-3 text-sm font-medium border-2 border-primary/30 bg-white hover:border-primary hover:bg-primary/5 transition-all duration-200 shadow-sm rounded-lg"
+          className="h-10 px-3 text-sm font-medium border-2 border-primary/30 bg-background hover:border-primary hover:bg-primary/5 transition-all duration-200 shadow-sm rounded-lg"
           aria-label={`Langue actuelle: ${currentLanguageData.name}. Cliquez pour changer de langue.`}
         >
-          {isChanging ? (
-            <Loader2 className="h-4 w-4 mr-2 animate-spin text-primary" />
-          ) : (
-            <Globe className="h-4 w-4 mr-2 text-primary" />
-          )}
+          <Globe className="h-4 w-4 mr-2 text-primary" />
           <span className="hidden sm:inline-flex items-center gap-2">
             <span className="text-lg leading-none">{currentLanguageData.flag}</span>
             <span className="font-semibold">{currentLanguageData.nativeName}</span>
@@ -259,10 +152,10 @@ export function LanguageSelector() {
 
       <DropdownMenuContent
         align="end"
-        className="w-56 bg-white border-2 border-gray-200 shadow-xl rounded-xl p-1.5 z-[9999]"
+        className="w-56 bg-background border-2 border-border shadow-xl rounded-xl p-1.5 z-[9999]"
         sideOffset={8}
       >
-        <div className="px-3 py-2 text-xs font-bold text-gray-500 uppercase tracking-wider border-b border-gray-100 mb-1">
+        <div className="px-3 py-2 text-xs font-bold text-muted-foreground uppercase tracking-wider border-b border-border mb-1">
           Choisir une langue
         </div>
 
@@ -272,11 +165,10 @@ export function LanguageSelector() {
             <DropdownMenuItem
               key={lang.code}
               onClick={() => handleChangeLanguage(lang.code)}
-              disabled={isChanging}
               className={`
                 cursor-pointer py-3 px-3 rounded-lg my-0.5 text-sm font-medium transition-all duration-150
                 flex items-center
-                ${isSelected ? "bg-primary/10 text-primary border border-primary/20" : "hover:bg-gray-100 text-gray-700"}
+                ${isSelected ? "bg-primary/10 text-primary border border-primary/20" : "hover:bg-muted text-foreground"}
               `}
             >
               <span className="mr-3 text-xl leading-none">{lang.flag}</span>
