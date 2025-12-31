@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useCallback } from "react"
-import { Globe, Check } from "lucide-react"
+import { Globe, Check, Loader2 } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 
@@ -19,116 +19,109 @@ const languages = [
   { code: "ar", label: "العربية", flag: "🇸🇦" },
 ]
 
-declare global {
-  interface Window {
-    google: {
-      translate: {
-        TranslateElement: new (options: object, elementId: string) => void
-      }
-    }
-    googleTranslateElementInit: () => void
-  }
+function TransitionOverlay({ isVisible, targetLanguage }: { isVisible: boolean; targetLanguage: string }) {
+  if (!isVisible) return null
+
+  const lang = languages.find((l) => l.code === targetLanguage) || languages[0]
+
+  return (
+    <div
+      className="fixed inset-0 z-[99999] flex items-center justify-center bg-background/95 backdrop-blur-sm transition-opacity duration-300"
+      style={{ opacity: isVisible ? 1 : 0 }}
+    >
+      <div className="flex flex-col items-center gap-4 p-8 rounded-xl bg-card shadow-lg border">
+        <Loader2 className="h-10 w-10 animate-spin text-primary" />
+        <div className="flex items-center gap-3">
+          <span className="text-3xl">{lang.flag}</span>
+          <span className="text-lg font-medium">{lang.label}</span>
+        </div>
+        <p className="text-sm text-muted-foreground">Traduction en cours...</p>
+      </div>
+    </div>
+  )
 }
 
 export function LanguageSelector() {
   const [currentLang, setCurrentLang] = useState("fr")
-  const [isReady, setIsReady] = useState(false)
-
-  const triggerTranslation = useCallback((langCode: string) => {
-    const selectElement = document.querySelector(".goog-te-combo") as HTMLSelectElement
-    if (selectElement) {
-      selectElement.value = langCode
-      selectElement.dispatchEvent(new Event("change", { bubbles: true }))
-      setCurrentLang(langCode)
-      return true
-    }
-    return false
-  }, [])
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const [targetLang, setTargetLang] = useState("fr")
 
   useEffect(() => {
-    window.googleTranslateElementInit = () => {
-      new window.google.translate.TranslateElement(
-        {
-          pageLanguage: "fr",
-          includedLanguages: "en,es,de,it,pt,nl,ru,zh-CN,ja,ar",
-          autoDisplay: false,
-          multilanguagePage: true,
-        },
-        "google_translate_element",
-      )
-
-      // Wait for the select to be ready
-      const checkReady = setInterval(() => {
-        const selectElement = document.querySelector(".goog-te-combo") as HTMLSelectElement
-        if (selectElement) {
-          setIsReady(true)
-          clearInterval(checkReady)
-
-          // Get current language from the select
-          const currentValue = selectElement.value
-          if (currentValue) {
-            setCurrentLang(currentValue)
-          }
-        }
-      }, 100)
-
-      // Timeout after 5 seconds
-      setTimeout(() => clearInterval(checkReady), 5000)
-    }
-
-    if (!document.getElementById("google-translate-script")) {
-      const script = document.createElement("script")
-      script.id = "google-translate-script"
-      script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-      script.async = true
-      document.body.appendChild(script)
-    }
-
-    // Get language from cookie if exists
     const match = document.cookie.match(/googtrans=\/[^/]+\/([^;]+)/)
     if (match && match[1]) {
       setCurrentLang(match[1])
     }
   }, [])
 
-  const handleLanguageChange = (langCode: string) => {
-    if (langCode === currentLang) return
+  const handleLanguageChange = useCallback(
+    (langCode: string) => {
+      if (langCode === currentLang) return
 
-    if (langCode === "fr") {
-      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
-      document.cookie =
-        "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + window.location.hostname + ";"
-      // Also clear on parent domain for subdomains
-      const parts = window.location.hostname.split(".")
-      if (parts.length > 2) {
-        const parentDomain = parts.slice(-2).join(".")
-        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." + parentDomain + ";"
-      }
-      setCurrentLang("fr")
-      window.location.reload()
-    } else {
-      if (!triggerTranslation(langCode)) {
-        // If select not ready, set cookie and reload
-        document.cookie = `googtrans=/fr/${langCode}; path=/;`
-        document.cookie = `googtrans=/fr/${langCode}; path=/; domain=${window.location.hostname};`
-        // Also set on parent domain for subdomains
-        const parts = window.location.hostname.split(".")
-        if (parts.length > 2) {
-          const parentDomain = parts.slice(-2).join(".")
-          document.cookie = `googtrans=/fr/${langCode}; path=/; domain=.${parentDomain};`
+      setTargetLang(langCode)
+      setIsTransitioning(true)
+
+      // Small delay to ensure overlay is visible before reload
+      setTimeout(() => {
+        // Try to use the Google Translate combo directly
+        const selectElement = document.querySelector(".goog-te-combo") as HTMLSelectElement
+
+        if (langCode === "fr") {
+          // Reset to original language
+          const domains = ["", window.location.hostname, "." + window.location.hostname]
+
+          const parts = window.location.hostname.split(".")
+          if (parts.length > 2) {
+            const parentDomain = parts.slice(-2).join(".")
+            domains.push("." + parentDomain)
+            domains.push(parentDomain)
+          }
+
+          domains.forEach((domain) => {
+            const domainPart = domain ? `; domain=${domain}` : ""
+            document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/${domainPart}`
+          })
+
+          setCurrentLang("fr")
+          window.location.reload()
+          return
         }
-        window.location.reload()
-      }
-    }
-  }
+
+        // For other languages
+        if (selectElement && selectElement.options.length > 1) {
+          selectElement.value = langCode
+          selectElement.dispatchEvent(new Event("change", { bubbles: true }))
+          setCurrentLang(langCode)
+          setTimeout(() => setIsTransitioning(false), 500)
+        } else {
+          // Fallback: set cookie and reload
+          const cookieValue = `/fr/${langCode}`
+          const domains = ["", window.location.hostname]
+
+          const parts = window.location.hostname.split(".")
+          if (parts.length > 2) {
+            const parentDomain = parts.slice(-2).join(".")
+            domains.push("." + parentDomain)
+          }
+
+          domains.forEach((domain) => {
+            const domainPart = domain ? `; domain=${domain}` : ""
+            document.cookie = `googtrans=${cookieValue}; path=/${domainPart}`
+          })
+
+          setCurrentLang(langCode)
+          window.location.reload()
+        }
+      }, 100)
+    },
+    [currentLang],
+  )
 
   const currentLanguage = languages.find((l) => l.code === currentLang) || languages[0]
 
   return (
     <>
-      <div id="google_translate_element" className="fixed opacity-0 pointer-events-none -z-50 top-0 left-0" />
+      <TransitionOverlay isVisible={isTransitioning} targetLanguage={targetLang} />
 
-      {/* Custom dropdown */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
@@ -160,37 +153,6 @@ export function LanguageSelector() {
           ))}
         </DropdownMenuContent>
       </DropdownMenu>
-
-      <style jsx global>{`
-        .goog-te-banner-frame,
-        .skiptranslate,
-        #goog-gt-tt,
-        .goog-te-balloon-frame,
-        .goog-te-menu-frame,
-        .goog-te-gadget,
-        .goog-te-spinner-pos,
-        .goog-tooltip,
-        .goog-tooltip:hover,
-        .goog-te-ftab-float {
-          display: none !important;
-          visibility: hidden !important;
-        }
-        body {
-          top: 0 !important;
-          position: static !important;
-        }
-        .goog-text-highlight {
-          background: none !important;
-          box-shadow: none !important;
-        }
-        #google_translate_element {
-          height: 0 !important;
-          overflow: hidden !important;
-        }
-        .VIpgJd-ZVi9od-ORHb-OEVmcd {
-          display: none !important;
-        }
-      `}</style>
     </>
   )
 }
