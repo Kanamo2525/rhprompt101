@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Globe, Check, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -19,179 +19,207 @@ const languages = [
   { code: "ar", name: "العربية", nativeName: "العربية", flag: "🇸🇦" },
 ]
 
+function cleanupGoogleTranslate() {
+  // 1. Remove all Google Translate iframes
+  const iframes = document.querySelectorAll(
+    'iframe[src*="translate.google"], iframe.goog-te-menu-frame, iframe.goog-te-banner-frame',
+  )
+  iframes.forEach((iframe) => iframe.remove())
+
+  // 2. Remove Google Translate elements
+  const gtElements = document.querySelectorAll(
+    "#google_translate_element, .goog-te-gadget, .goog-te-banner-frame, .skiptranslate",
+  )
+  gtElements.forEach((el) => {
+    if (el.id === "google_translate_element") {
+      el.innerHTML = "" // Clear but keep the container
+    }
+  })
+
+  // 3. Remove translated classes from HTML
+  const html = document.documentElement
+  html.classList.remove("translated-ltr", "translated-rtl")
+  html.removeAttribute("lang")
+
+  // 4. Reset body styles that Google Translate may have added
+  document.body.style.removeProperty("top")
+  document.body.style.removeProperty("position")
+
+  // 5. Remove any Google Translate script tags to force reload
+  const scripts = document.querySelectorAll('script[src*="translate.google"]')
+  scripts.forEach((script) => script.remove())
+
+  // 6. Clear Google Translate global variables
+  if (typeof window !== "undefined") {
+    // @ts-ignore
+    delete window.google?.translate
+    // @ts-ignore
+    delete window.googleTranslateElementInit
+  }
+}
+
+function clearAllGoogleTranslateCookies() {
+  const hostname = window.location.hostname
+  const rootDomain = hostname.split(".").slice(-2).join(".")
+
+  const domains = [
+    "",
+    hostname,
+    `.${hostname}`,
+    hostname.replace(/^www\./, ""),
+    `.${hostname.replace(/^www\./, "")}`,
+    rootDomain,
+    `.${rootDomain}`,
+  ]
+
+  const paths = ["/", "", "/fr", "/en", "/es", "/de", "/it", "/pt", "/nl", "/ru", "/zh-CN", "/ja", "/ar"]
+  const cookieNames = ["googtrans", "googtrans-b"]
+
+  cookieNames.forEach((name) => {
+    domains.forEach((domain) => {
+      paths.forEach((path) => {
+        const domainPart = domain ? `; domain=${domain}` : ""
+        const pathPart = `; path=${path || "/"}`
+        // Set to expired date
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC${pathPart}${domainPart}`
+        // Also try with secure flag
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC${pathPart}${domainPart}; secure`
+      })
+    })
+  })
+
+  // Also try localStorage and sessionStorage cleanup
+  try {
+    const keysToRemove: string[] = []
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i)
+      if (key && (key.includes("google") || key.includes("translate"))) {
+        keysToRemove.push(key)
+      }
+    }
+    keysToRemove.forEach((key) => localStorage.removeItem(key))
+
+    const sessionKeysToRemove: string[] = []
+    for (let i = 0; i < sessionStorage.length; i++) {
+      const key = sessionStorage.key(i)
+      if (key && (key.includes("google") || key.includes("translate"))) {
+        sessionKeysToRemove.push(key)
+      }
+    }
+    sessionKeysToRemove.forEach((key) => sessionStorage.removeItem(key))
+  } catch (e) {
+    // Ignore storage access errors
+  }
+}
+
+function setGoogleTranslateCookie(langCode: string) {
+  // First clean everything
+  clearAllGoogleTranslateCookies()
+
+  if (langCode === "fr") {
+    return // Just clear cookies for French (original)
+  }
+
+  const cookieValue = `/fr/${langCode}`
+  const maxAge = 31536000 // 1 year
+  const hostname = window.location.hostname
+  const rootDomain = hostname.split(".").slice(-2).join(".")
+
+  const domains = ["", hostname, `.${hostname}`, rootDomain, `.${rootDomain}`]
+
+  // Set cookie on all possible domains
+  domains.forEach((domain) => {
+    const domainPart = domain ? `; domain=${domain}` : ""
+    document.cookie = `googtrans=${cookieValue}; path=/; max-age=${maxAge}${domainPart}; SameSite=Lax`
+  })
+}
+
+function getLanguageFromCookie(): string {
+  const match = document.cookie.match(/googtrans=\/fr\/([^;]+)/)
+  return match ? match[1] : "fr"
+}
+
+function detectCurrentLanguage(): string {
+  // 1. Check if page is translated via class
+  const html = document.documentElement
+  const isTranslated = html.classList.contains("translated-ltr") || html.classList.contains("translated-rtl")
+
+  // 2. Check combo value
+  const combo = document.querySelector(".goog-te-combo") as HTMLSelectElement
+  if (combo && combo.value && combo.value !== "fr") {
+    return combo.value
+  }
+
+  // 3. Check cookie
+  const cookieLang = getLanguageFromCookie()
+  if (isTranslated && cookieLang !== "fr") {
+    return cookieLang
+  }
+
+  // 4. If not translated, return French
+  if (!isTranslated) {
+    return "fr"
+  }
+
+  return cookieLang
+}
+
 export function LanguageSelector() {
   const [currentLang, setCurrentLang] = useState("fr")
   const [isOpen, setIsOpen] = useState(false)
   const [isChanging, setIsChanging] = useState(false)
   const [isReady, setIsReady] = useState(false)
   const [isClient, setIsClient] = useState(false)
-  const checkIntervalRef = useRef<NodeJS.Timeout | null>(null)
-
-  const detectCurrentLanguage = useCallback(() => {
-    // First try to read from the Google Translate combo
-    const combo = document.querySelector(".goog-te-combo") as HTMLSelectElement
-    if (combo && combo.value) {
-      return combo.value
-    }
-
-    // Then check the cookie
-    const match = document.cookie.match(/googtrans=\/[^/]*\/([^;]+)/)
-    if (match && match[1]) {
-      return match[1]
-    }
-
-    // Check if page has been translated
-    const html = document.documentElement
-    if (html.classList.contains("translated-ltr") || html.classList.contains("translated-rtl")) {
-      // Try to get from combo again after a small delay
-      if (combo && combo.value) {
-        return combo.value
-      }
-    }
-
-    return "fr"
-  }, [])
-
-  const waitForGoogleTranslate = useCallback((): Promise<HTMLSelectElement | null> => {
-    return new Promise((resolve) => {
-      let attempts = 0
-      const maxAttempts = 50 // 10 seconds max
-
-      const check = () => {
-        attempts++
-        const combo = document.querySelector(".goog-te-combo") as HTMLSelectElement
-
-        // Check if combo exists AND has options loaded
-        if (combo && combo.options && combo.options.length > 1) {
-          resolve(combo)
-          return
-        }
-
-        if (attempts < maxAttempts) {
-          setTimeout(check, 200)
-        } else {
-          resolve(null)
-        }
-      }
-
-      check()
-    })
-  }, [])
 
   useEffect(() => {
     setIsClient(true)
 
-    const init = async () => {
-      // Detect initial language
-      setCurrentLang(detectCurrentLanguage())
+    // Detect initial language
+    const detected = detectCurrentLanguage()
+    setCurrentLang(detected)
 
-      // Wait for Google Translate to be ready
-      const combo = await waitForGoogleTranslate()
-      if (combo) {
-        setIsReady(true)
-        setCurrentLang(combo.value || "fr")
+    // Mark as ready after a short delay
+    const readyTimeout = setTimeout(() => setIsReady(true), 1500)
 
-        // Monitor for external changes to the combo
-        const observer = new MutationObserver(() => {
-          const newLang = detectCurrentLanguage()
-          setCurrentLang(newLang || "fr")
-        })
-
-        observer.observe(combo, { attributes: true, attributeFilter: ["value"] })
-
-        return () => observer.disconnect()
-      }
-    }
-
-    init()
-
-    // Periodic check for language changes
-    checkIntervalRef.current = setInterval(() => {
+    // Periodic sync
+    const interval = setInterval(() => {
       const detected = detectCurrentLanguage()
       setCurrentLang((prev) => (detected !== prev ? detected : prev))
-    }, 2000)
+    }, 1000)
 
     return () => {
-      if (checkIntervalRef.current) {
-        clearInterval(checkIntervalRef.current)
-      }
+      clearInterval(interval)
+      clearTimeout(readyTimeout)
     }
-  }, [detectCurrentLanguage, waitForGoogleTranslate])
+  }, [])
 
   const handleChangeLanguage = useCallback(
-    async (langCode: string) => {
+    (langCode: string) => {
       if (langCode === currentLang || isChanging) return
 
       setIsChanging(true)
       setIsOpen(false)
 
-      try {
-        // If reverting to French (original), restore original page
-        if (langCode === "fr") {
-          // Find and click the "Show original" option or reset
-          const combo = document.querySelector(".goog-te-combo") as HTMLSelectElement
-          if (combo) {
-            // Setting to empty string restores original
-            combo.value = ""
-            combo.dispatchEvent(new Event("change", { bubbles: true }))
-          }
+      // Step 1: Clean up all Google Translate state
+      cleanupGoogleTranslate()
 
-          // Clear cookies
-          document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
-          document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`
-          document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${window.location.hostname}`
+      // Step 2: Clear all cookies
+      clearAllGoogleTranslateCookies()
 
-          setCurrentLang("fr")
-          setIsChanging(false)
-
-          // If the page doesn't revert, reload
-          setTimeout(() => {
-            const html = document.documentElement
-            if (html.classList.contains("translated-ltr") || html.classList.contains("translated-rtl")) {
-              window.location.reload()
-            }
-          }, 1000)
-
-          return
-        }
-
-        // For other languages, use the Google Translate combo
-        const combo = document.querySelector(".goog-te-combo") as HTMLSelectElement
-
-        if (combo) {
-          // Set the value and trigger change event
-          combo.value = langCode
-          combo.dispatchEvent(new Event("change", { bubbles: true }))
-
-          // Update local state
-          setCurrentLang(langCode)
-
-          // Wait a bit then check if translation was applied
-          setTimeout(() => {
-            const html = document.documentElement
-            const isTranslated = html.classList.contains("translated-ltr") || html.classList.contains("translated-rtl")
-
-            if (!isTranslated) {
-              // Fallback: set cookie and reload
-              const cookieValue = `/fr/${langCode}`
-              document.cookie = `googtrans=${cookieValue}; path=/; max-age=31536000`
-              document.cookie = `googtrans=${cookieValue}; path=/; domain=${window.location.hostname}; max-age=31536000`
-              window.location.reload()
-            }
-
-            setIsChanging(false)
-          }, 1500)
-        } else {
-          // Combo not found, use cookie method and reload
-          const cookieValue = `/fr/${langCode}`
-          document.cookie = `googtrans=${cookieValue}; path=/; max-age=31536000`
-          document.cookie = `googtrans=${cookieValue}; path=/; domain=${window.location.hostname}; max-age=31536000`
-          window.location.reload()
-        }
-      } catch (error) {
-        console.error("[v0] Translation error:", error)
-        setIsChanging(false)
+      // Step 3: Set new cookie if not French
+      if (langCode !== "fr") {
+        setGoogleTranslateCookie(langCode)
       }
+
+      // Step 4: Force a hard reload without cache
+      // Using location.href assignment instead of reload() for cleaner state
+      setTimeout(() => {
+        // Add a cache-busting parameter to ensure fresh load
+        const url = new URL(window.location.href)
+        url.searchParams.set("_gtlang", langCode)
+        url.searchParams.set("_t", Date.now().toString())
+        window.location.href = url.toString()
+      }, 150)
     },
     [currentLang, isChanging],
   )
